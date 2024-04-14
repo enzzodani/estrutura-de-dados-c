@@ -1,19 +1,3 @@
-/*
- * Elabore um programa na linguagem C para receber a temperatura máxima de cada um dos dias de um mês de um ano e exibir as seguintes informações: a) o(s) dia(s) que teve(tiveram) a maior temperatura máxima registrada e qual foi essa temperatura; b) a média da temperatura máxima no mês. O algoritmo deve receber inicialmente o ano que será considerado, o mês dento do ano que será considerado e finalmente cada um dos dias com a respectiva temperatura máxima registrada. (++)
-
- 
-
-Considerações sobre as entradas e saídas e respectivas formatações:
-
-·       O ano de referência deve ter valor inteiro, maior ou igual a 2000 e menor do que 2024. (feita)
-
-·       (feita)O mês de referência informado deve ser valor inteiro maior do que zero e menor do que 12. Assim o número 1 se refere a janeiro, o 2 se refere a fevereiro e assim sucessivamente.
-
-·       A temperatura de máxima informada para cada dia do mês de referência deve ser valor inteiro maior do que -100 e menor do que 100
-
-·       A temperatura máxima média deve ser valor real com precisão de uma casa decimal
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -74,6 +58,24 @@ void maiorDia(int *v, int tam, int maiorTemp, int *maiorDias){
   }
 }
 
+void imprimeDias(int *v, int tam) {
+  for (int i = 0; i < tam; i++) {
+    printf("%d ", v[i]);
+  }
+}
+
+float achaMedia(int *v, int tam){
+  float media;
+  float soma = 0;
+
+  for (int i = 0; i < tam; i++) {
+    soma = soma + v[i];
+  }
+  media = soma / tam;
+  
+  return media;
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -115,6 +117,13 @@ int main(int argc, char *argv[])
   int *maioresDias = malloc(numMaiorDias * sizeof(int));
   
   maiorDia(temperaturas, tamanhoArray, maiorTemperatura, maioresDias);
-  
+ 
+  //Impressão do Resultado
+  printf("A maior temperatura maxima do mes foi de %d e aconteceu nos dias: ", maiorTemperatura);
+  imprimeDias(maioresDias,numMaiorDias);
+  printf("\n");
+
+  printf("A temperatura maxima media no mes foi de: %.1f graus Celsius", achaMedia(temperaturas, tamanhoArray));
+
   return 0;
 }
