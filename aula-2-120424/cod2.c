@@ -5,9 +5,9 @@
 
 Considerações sobre as entradas e saídas e respectivas formatações:
 
-·       O ano de referência deve ter valor inteiro, maior ou igual a 2000 e menor do que 2024.
+·       O ano de referência deve ter valor inteiro, maior ou igual a 2000 e menor do que 2024. (feita)
 
-·       O mês de referência informado deve ser valor inteiro maior do que zero e menor do que 12. Assim o número 1 se refere a janeiro, o 2 se refere a fevereiro e assim sucessivamente.
+·       (feita)O mês de referência informado deve ser valor inteiro maior do que zero e menor do que 12. Assim o número 1 se refere a janeiro, o 2 se refere a fevereiro e assim sucessivamente.
 
 ·       A temperatura de máxima informada para cada dia do mês de referência deve ser valor inteiro maior do que -100 e menor do que 100
 
@@ -15,13 +15,27 @@ Considerações sobre as entradas e saídas e respectivas formatações:
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void recebeTemperatura(int *v, int tam){
   printf("Temperaturas medidas (em graus Celsius):\n");
+  
   int *ponteiroArray = v;
+  int verificador = -101;
+
   for (int i = 0; i < tam; i++) {
-    printf("Dia %d: ", i+1);
-    scanf("%d", ponteiroArray);
+    do { 
+    //Coleta de Temperaturas
+      printf("Dia %d: ", i+1);
+        scanf("%d", &verificador);
+    //Verificação de Temperatura 
+    if (verificador < -100 || verificador > 100) {
+      printf("Temperatura deve ser maior ou igual a -100 graus e menor ou igual a 100 graus\n");
+      }
+    } while (verificador < -100 || verificador > 100);
+    
+    *(ponteiroArray) = verificador;
+
     ponteiroArray++;
     printf("\n");
   }
@@ -35,13 +49,13 @@ int achaTemperatura(int *v, int tam){
     if (maior < *(ponteiroArray + 1)) {
       maior = *(ponteiroArray +1);
     }
-  return maior;
   }
+  return maior;
 }
 
 int* maiorDia(int *v, int tam, int maiorTemp){
   int *ponteiroArray = v;
-  int maiorDias[29];
+  int maiorDias[];
 
   for (int i = 0; i<tam; i++) {
   
@@ -52,21 +66,39 @@ int* maiorDia(int *v, int tam, int maiorTemp){
 int main(int argc, char *argv[])
 {
 
-  int ano, mes;
+  int ano = 0;
+  int mes = 0;
   int temperaturas[29];
+  int maioresDias[];
 
   int tamamhoArray = sizeof(temperaturas)/sizeof(temperaturas[0]);
-// Coleta do ano
 
+  do {
+
+// Coleta do ano
   printf("Entre com o ano da medicao das temperaturas: ");
     scanf("%d", &ano);
+  printf("\n");
+
+//Verificação do ano
+  if (ano < 2000 || ano>2023){
+    printf("Ano deve ser maior ou igual a 2000 e menor ou igual a 2024\n");
+    }
+  } while (ano < 2000 || ano > 2023);
+
+  do {
+//Coleta do Mês
   printf("Entre com o mes da medicao das temperaturas: ");
     scanf("%d", &mes);
 
-  printf("");
+//Verificação do mês
+  if (mes <= 0 || mes > 12){
+    printf("Mes deve ser maior do que zero e menor ou igual a 12\n");
+    }
+  } while (mes <= 0 || mes > 12);
 
-  recebeTemperatura(temperaturas, tamamhoArray);
-  int maiorTemperatura = achaTemperatura(temperaturas, tamamhoArray);
+//  recebeTemperatura(temperaturas, tamamhoArray);
+ // int maiorTemperatura = achaTemperatura(temperaturas, tamamhoArray);
 
   return 0;
 }
