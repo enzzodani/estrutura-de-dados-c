@@ -52,14 +52,26 @@ int achaTemperatura(int *v, int tam){
   return maior;
 }
 
-int* maiorDia(int *v, int tam, int maiorTemp){
-  int *ponteiroArray = v;
-  int maiorDias[];
+int quantidadeDias(int *v, int tam, int maiorTemp){
+  int quantidade = 0;
+
+  for (int i = 0; i < tam; i++) {
+    if(v[i] == maiorTemp) {
+      quantidade++;
+    }
+  }
+  return quantidade;
+}
+
+void maiorDia(int *v, int tam, int maiorTemp, int *maiorDias){
+  int contador = 0;
 
   for (int i = 0; i<tam; i++) {
-  
+    if (v[i] == maiorTemp) {
+      maiorDias[contador] = i+1;
+      contador++;
+    } 
   }
-  return maiorDias;
 }
 
 int main(int argc, char *argv[])
@@ -68,9 +80,8 @@ int main(int argc, char *argv[])
   int ano = 0;
   int mes = 0;
   int temperaturas[29];
-  int maioresDias[];
-
-  int tamamhoArray = sizeof(temperaturas)/sizeof(temperaturas[0]);
+  
+  int tamanhoArray = sizeof(temperaturas)/sizeof(temperaturas[0]);
 
   do {
 
@@ -96,8 +107,14 @@ int main(int argc, char *argv[])
     }
   } while (mes <= 0 || mes > 12);
 
-//  recebeTemperatura(temperaturas, tamamhoArray);
- // int maiorTemperatura = achaTemperatura(temperaturas, tamamhoArray);
+  recebeTemperatura(temperaturas, tamanhoArray);
+  int maiorTemperatura = achaTemperatura(temperaturas, tamanhoArray);
 
+  int numMaiorDias = quantidadeDias(temperaturas, tamanhoArray, maiorTemperatura);
+
+  int *maioresDias = malloc(numMaiorDias * sizeof(int));
+  
+  maiorDia(temperaturas, tamanhoArray, maiorTemperatura, maioresDias);
+  
   return 0;
 }
