@@ -42,12 +42,11 @@ void recebeTemperatura(int *v, int tam){
 }
 
 int achaTemperatura(int *v, int tam){
-  int *ponteiroArray = v;
-  int maior = *ponteiroArray;
+  int maior = v[0];
 
-  for (int i = 0; i<tam; i++) {
-    if (maior < *(ponteiroArray + 1)) {
-      maior = *(ponteiroArray +1);
+  for (int i = 1; i<tam; i++) {
+    if (maior < v[i]) {
+      maior = v[i];
     }
   }
   return maior;
