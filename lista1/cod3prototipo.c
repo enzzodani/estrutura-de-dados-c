@@ -11,10 +11,22 @@ Considerações sobre as entradas e saídas e respectivas formatações:
  */
 #include <stdio.h>
 
+void recebeVetor();
+
 int main(int argc, char *argv[])
 {
+  int numUm;
+  int numDois;
 
- int vetor1[] 
+  //Coleta do Vetor 1 
+  printf("Entre com o numero de elementos do vetor 1: ");
+    scanf("%d", &numUm);
+
+  int *vetorUm = malloc(numUm * sizeof(int)); 
+  
+  
 
   return 0;
 }
+
+void recebeVetor();
