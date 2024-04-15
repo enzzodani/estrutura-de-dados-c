@@ -152,6 +152,10 @@ printf("\n");
 
   printf("A temperatura maxima media no mes foi de: %.1f graus Celsius", achaMedia(temperaturas, numDias));
 
+  //Liberação da meória alocada
+  free(temperaturas);
+  free(maioresDias);
+
   return 0;
 }
 
