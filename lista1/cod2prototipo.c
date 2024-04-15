@@ -6,8 +6,9 @@ void recebeTemperatura(int *v, int tam){
   
   int *ponteiroArray = v;
   int verificador = -101;
+  int i;
 
-  for (int i = 0; i < tam; i++) {
+  for (i = 0; i < tam; i++) {
     do { 
     //Coleta de Temperaturas
       printf("Dia %d: ", i+1);
@@ -27,8 +28,9 @@ void recebeTemperatura(int *v, int tam){
 
 int achaTemperatura(int *v, int tam){
   int maior = v[0];
+  int i;
 
-  for (int i = 1; i<tam; i++) {
+  for (i = 1; i<tam; i++) {
     if (maior < v[i]) {
       maior = v[i];
     }
@@ -38,8 +40,9 @@ int achaTemperatura(int *v, int tam){
 
 int quantidadeDias(int *v, int tam, int maiorTemp){
   int quantidade = 0;
+  int i;
 
-  for (int i = 0; i < tam; i++) {
+  for (i = 0; i < tam; i++) {
     if(v[i] == maiorTemp) {
       quantidade++;
     }
@@ -49,8 +52,9 @@ int quantidadeDias(int *v, int tam, int maiorTemp){
 
 void maiorDia(int *v, int tam, int maiorTemp, int *maiorDias){
   int contador = 0;
+  int i;
 
-  for (int i = 0; i<tam; i++) {
+  for (i = 0; i<tam; i++) {
     if (v[i] == maiorTemp) {
       maiorDias[contador] = i+1;
       contador++;
@@ -59,7 +63,9 @@ void maiorDia(int *v, int tam, int maiorTemp, int *maiorDias){
 }
 
 void imprimeDias(int *v, int tam) {
-  for (int i = 0; i < tam; i++) {
+  int i;
+
+  for (i = 0; i < tam; i++) {
     printf("%d ", v[i]);
   }
 }
@@ -67,8 +73,9 @@ void imprimeDias(int *v, int tam) {
 float achaMedia(int *v, int tam){
   float media;
   float soma = 0;
-
-  for (int i = 0; i < tam; i++) {
+  int i;
+    
+  for (i = 0; i < tam; i++) {
     soma = soma + v[i];
   }
   media = soma / tam;
