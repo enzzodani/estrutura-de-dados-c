@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 //Declaração de Função
-void recebeNota();
+void recebeNota(struct *vetor, int tamanho);
 
 float notaCaso1(struct dadosAluno aluno);
 
@@ -44,13 +44,20 @@ int main(int argc, char *argv[])
     printf("Entre com o numero de alunos da turma: ");
       scanf("%d", &numeroDeAlunos);
     printf("\n");
-  }
+  }  
 
-  
+  struct dadosAluno *alunos = malloc(numeroDeAlunos * sizeof(struct dadosAluno))
 
-  struct dadosAluno *alunos = malloc(sizeof())
+
+
+  //Liberação da memória
+  free(alunos);
 
   return 0;
 }
 
 //Definição de Funções
+
+void recebeNota(struct *vetor, int tamanho) {
+
+}
