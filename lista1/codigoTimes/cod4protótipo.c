@@ -6,19 +6,18 @@ void limpaVetor(int *vetor, int size) {
     }
 }
 
-long Fat(int n)
+int fat(int n)
 {
-  long fat = 1;
+  int fat = 1;
   
   for(int i = n; i > 1; i--)
   {
      fat *= i;
   }
-
-  
   return fat;
 }
 
+//Declaração dos struct
 struct time {
   int vitoria;
   int derrota;
@@ -26,17 +25,16 @@ struct time {
 };
 
 struct partida {
-  int timeMandante;
-  int timeVisitante;
-  unsigned int diferencaGol;
+  int golMandante;
+  int golVisitante;
+  int diferencaGol;
 };
-
 
 int main()
 {
   //Declaração de variáveis
-    int nTimes, golsMandante, golsVisitante, maiorNumVit, maiorNumDer, maiorNumEmp, maiorDifGols;
-    
+    int nTimes;
+  
     printf("Entre com o numero de times participantes:");
       scanf("%d", &nTimes);
     
@@ -52,6 +50,8 @@ int main()
         
         scanf("%d", &nTimes);
     }
+    
+    struct time *times = malloc(nTimes * sizeof(strcut time));
     
     int vetorVitTimes[nTimes+1];
     
@@ -304,12 +304,6 @@ int main()
             printf("time%d x time%d, ", timeMandanteDifGols[i], timeVisitanteDifGols[i]);
         }
     }
-    
-    
-    
-    
-    
-    
     
     return 0;
 }
