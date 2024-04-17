@@ -6,25 +6,10 @@ void limpaVetor(int *vetor, int size) {
     }
 }
 
-//Funçã fatorial
-int fat(int n)
-{
-  int fat = 1;
-  
-  for(int i = n; i > 1; i--)
-  {
-     fat *= i;
-  }
-  return fat;
-}
-
 //Função partidas
 int calculaPartidas(int n) {
-  int numerador = fat(n);
-  int denominador = n-2;
+ int calculo = n * (n-1); 
 
-  int calculo = numerador / fat(denominador);
-  
   return calculo;
 }
 

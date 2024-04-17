@@ -1,28 +1,34 @@
 #include <stdio.h>
 
-int main() {
+int main(int argc, char *argv[])
+{
     
     int studentNumber = 0;
     int i, j, k; 
     
+  //Recebe o numero de alunos
     printf("Entre com o numero de alunos da turma: ");
     scanf("%d", &studentNumber);
     
+  //Verifica o número de alunos
     while(studentNumber <= 0 || studentNumber > 50) {
         printf("\nO numero de alunos na turma deve ser maior do que zero e menor ou igual a 50\n\n");
         printf("Entre com o numero de alunos da turma: ");
         scanf("%d", &studentNumber);
         }
     
+    //declara os vetores de notas
     float p1[studentNumber], p2[studentNumber], p3[studentNumber], p4[studentNumber];
     float final[studentNumber], notas[4], varAux;
     
+    //Recebe a nota dos alunos
     for (i = 0; i < studentNumber; i++) {
         
         printf("\n");
         printf("Notas aluno %d: ", i + 1); 
         scanf("%f %f %f %f", &p1[i], &p2[i], &p3[i], &p4[i]);
         
+      //Verifica 
         while (p1[i] < 0 || p1[i] > 10 || p2[i] < 0 || p2[i] > 10 || p3[i] < 0 || p3[i] > 10 || p4[i] < 0 || p4[i] > 10) {
             printf("\nTodas as notas do aluno devem ser maiores ou iguais a zero e menores ou iguais a 10\n\n");
             printf("Notas aluno %d: ", i + 1); 
@@ -40,7 +46,7 @@ int main() {
             }
         }
        
-       
+      //Verifica casos
         if(notas[2] == notas[3]) {
             
             if(notas[0] == notas[1]) {
