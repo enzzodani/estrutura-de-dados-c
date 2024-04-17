@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void limpaVetor(int *vetor, int size) {
     for (int i = 0; i < size; i++) {
@@ -12,6 +13,18 @@ int calculaPartidas(int n) {
 
   return calculo;
 }
+
+//Função recebePartidas
+void *recebePartidas() {
+  
+
+}
+
+//Função para achar a Maior Diferença 
+
+//Função para quantidade de maiorDiferença 
+
+//Função recebeTimesPartidas
 
 //Declaração dos struct
 struct time {
@@ -52,72 +65,14 @@ int main(int argc, char *argv[])
 
     struct time *times = malloc(nTimes * sizeof(struct time));
     struct partida *partidas = malloc(nPartidas * sizeof(struct partida));
- 
-    int nTimeMaisVit[nTimes+1];
     
-    nTimeMaisVit[0] = 0;
+  //Definindo o bloco
+  int tamanhoBloco = nTimes - 1;
+   
+  //Recebe partidas
     
-    int nTimeMaisDer[nTimes+1];
-    
-    int nTimeMaisEmp[nTimes+1];
-    
-    int timeMandanteDifGols[(Fat(nTimes)/Fat(nTimes-2))+1];
-    
-    int timeVisitanteDifGols[(Fat(nTimes)/Fat(nTimes-2))+1];
 
-    limpaVetor(vetorVitTimes ,nTimes+1);
-    limpaVetor(vetorDerTimes ,nTimes+1);
-    limpaVetor(vetorEmpTimes ,nTimes+1);
-    limpaVetor(nTimeMaisVit ,nTimes+1);
-    limpaVetor(nTimeMaisDer ,nTimes+1);
-    limpaVetor(nTimeMaisEmp ,nTimes+1);
-    limpaVetor(timeMandanteDifGols , (Fat(nTimes)/Fat(nTimes-2))+1);
-    limpaVetor(timeVisitanteDifGols , (Fat(nTimes)/Fat(nTimes-2))+1);
-    limpaVetor(vetorDifGols, (Fat(nTimes)/Fat(nTimes-2))+1);
-    
-    //Recebe partidas
-    for(int i=1; i<=nTimes; i++)
-    {
-        for(int j=1; j<=nTimes; j++)
-        {
-            if(i!=j)
-            {
-               printf("Placar time%d x time%d:", i, j);
-               
-               scanf("%d %d", &golsMandante, &golsVisitante);
-               
-               if(golsMandante>golsVisitante)
-               {
-                   vetorVitTimes[i]++;
-                   vetorDerTimes[j]++;
-                   vetorDifGols[((i-1)*nTimes)+j] = golsMandante-golsVisitante;
-                   
-               }
-               
-               else if(golsVisitante>golsMandante)
-               {
-                   vetorVitTimes[j]++;
-                   vetorDerTimes[i]++;
-                   vetorDifGols[((i-1)*nTimes)+j] = golsVisitante-golsMandante;
-               }
-               
-               else
-               {
-                   vetorEmpTimes[i]++;
-                   vetorEmpTimes[j]++;
-                   vetorDifGols[((i-1)*nTimes)+j] = 0;
-               }
-               
-               
-               
-               
-            }
-            
-            
-        }
-    } 
-    
-    //procurando qual o maior numero de vitorias e qual time detem esse valor
+  //procurando qual o maior numero de vitorias e qual time detem esse valor
     maiorNumVit = vetorVitTimes[1];
     nTimeMaisVit[1] = 1;
     
