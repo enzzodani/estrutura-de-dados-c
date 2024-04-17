@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
   printf("\n");
 
 //Verificação do ano
-  if (ano < 2000 || ano>2023){
+  if (ano <= 2000 || ano>2023){
     printf("Ano deve ser maior ou igual a 2000 e menor ou igual a 2024\n\n");
     printf("Entre com o ano da medicao das temperaturas: ");
       scanf("%d", &ano);
