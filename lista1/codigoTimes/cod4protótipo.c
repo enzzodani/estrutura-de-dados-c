@@ -41,7 +41,7 @@ struct partida {
   int diferencaGol;
 };
 
-int main()
+int main(int argc, char *argv[])
 {
   //Declaração de variáveis
     int nTimes;
@@ -63,7 +63,7 @@ int main()
     }
   
   //Definindo o numero de partidas 
-  int nPartidas = 
+    int nPartidas = calculaPartidas(nTimes);
 
     struct time *times = malloc(nTimes * sizeof(struct time));
     struct partida *partidas = malloc(nPartidas * sizeof(struct partida));
@@ -98,6 +98,7 @@ int main()
     limpaVetor(timeVisitanteDifGols , (Fat(nTimes)/Fat(nTimes-2))+1);
     limpaVetor(vetorDifGols, (Fat(nTimes)/Fat(nTimes-2))+1);
     
+    //Recebe partidas
     for(int i=1; i<=nTimes; i++)
     {
         for(int j=1; j<=nTimes; j++)
@@ -137,8 +138,7 @@ int main()
             
             
         }
-    }
-    
+    } 
     
     //procurando qual o maior numero de vitorias e qual time detem esse valor
     maiorNumVit = vetorVitTimes[1];
