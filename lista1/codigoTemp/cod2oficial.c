@@ -92,18 +92,18 @@ int main(int argc, char *argv[])
 
 
 // Coleta do ano
-  printf("Entre com o ano da medicao das temperaturas: ");
-    scanf("%d", &ano);
-  printf("\n");
-
-//Verificação do ano
-  if (ano <= 2000 || ano>2023){
-    printf("Ano deve ser maior ou igual a 2000 e menor ou igual a 2024\n\n");
+  do{
     printf("Entre com o ano da medicao das temperaturas: ");
       scanf("%d", &ano);
     printf("\n");
-    }
 
+  //Verificação do ano
+    if (ano <= 2000 || ano>2023){
+      printf("Ano deve ser maior ou igual a 2000 e menor ou igual a 2024\n\n");
+      }
+  } while(ano <= 2000 || ano >= 2024)
+
+do{
 //Coleta do Mês
   printf("Entre com o mes da medicao das temperaturas: ");
     scanf("%d", &mes);
@@ -112,10 +112,8 @@ printf("\n");
 //Verificação do mês
   if (mes <= 0 || mes > 12){
     printf("Mes deve ser maior do que zero e menor ou igual a 12\n\n");
-      printf("Entre com o mes da medicao das temperaturas: ");
-    scanf("%d", &mes);
-    printf("\n");
     }
+} while(mes<1 || mes > 12)
 
   //Definição de dias no mês 
   switch(mes) {
