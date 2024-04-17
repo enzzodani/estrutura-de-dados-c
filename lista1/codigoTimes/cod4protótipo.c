@@ -6,6 +6,7 @@ void limpaVetor(int *vetor, int size) {
     }
 }
 
+//Funçã fatorial
 int fat(int n)
 {
   int fat = 1;
@@ -15,6 +16,16 @@ int fat(int n)
      fat *= i;
   }
   return fat;
+}
+
+//Função partidas
+int calculaPartidas(int n) {
+  int numerador = fat(n);
+  int denominador = n-2;
+
+  int calculo = numerador / fat(denominador);
+  
+  return calculo;
 }
 
 //Declaração dos struct
@@ -50,9 +61,13 @@ int main()
         
         scanf("%d", &nTimes);
     }
-    
-    struct time *times = malloc(nTimes * sizeof(strcut time));
-    
+  
+  //Definindo o numero de partidas 
+  int nPartidas = 
+
+    struct time *times = malloc(nTimes * sizeof(struct time));
+    struct partida *partidas = malloc(nPartidas * sizeof(struct partida));
+
     int vetorVitTimes[nTimes+1];
     
     int vetorDerTimes[nTimes+1];
