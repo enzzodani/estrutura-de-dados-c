@@ -52,15 +52,7 @@ int main(int argc, char *argv[])
 
     struct time *times = malloc(nTimes * sizeof(struct time));
     struct partida *partidas = malloc(nPartidas * sizeof(struct partida));
-
-    int vetorVitTimes[nTimes+1];
-    
-    int vetorDerTimes[nTimes+1];
-    
-    int vetorEmpTimes[nTimes+1];
-    
-    int vetorDifGols[(Fat(nTimes)/Fat(nTimes-2))+1];
-    
+ 
     int nTimeMaisVit[nTimes+1];
     
     nTimeMaisVit[0] = 0;
