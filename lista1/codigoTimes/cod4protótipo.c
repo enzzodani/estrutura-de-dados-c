@@ -1,5 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+// Contadores (C89)
+int i, j;
+
+//Declaração dos struct
+struct time {
+  int vitorias;
+  int derrotas;
+  int empates;
+};
+
+struct partida {
+  int golsMandante;
+  int golsVisitante;
+  int diferencaGols;
+};
 
 void limpaVetor(int *vetor, int size) {
     for (int i = 0; i < size; i++) {
@@ -7,25 +24,74 @@ void limpaVetor(int *vetor, int size) {
     }
 }
 
-//Função partidas
-int calculaPartidas(int n) {
- int calculo = n * (n-1); 
-
-  return calculo;
+// Utilidade Modulo
+int modulo(int num) {
+	if(num < 0) {
+		num *= -1;
+	}
+	return num;
 }
 
-//Função recebePartidas
-void *recebePartidas(struct partida *p, int tam) {
-  int i, j;
-  for (i =0; i < tam; i++) {
-    for (j = 0; j<tam; j++) {
-      if (i != j) {
-        printf("Placar time%d x time%d: s s\n", i+1, j+1);
-         scanf("%d",);
-      }
-    }
-  }
+//Função partidas
+int calculaPartidas(int n) {
+	int calculo = n * (n-1); 
+	return calculo;
+}
 
+// Função recebePartidas (perigoso!)
+void recebePartidas(int nTimes, struct time *times, struct partida *partidas) {
+	// Time i é o mandante e o Time j é o visitante
+	for (i = 0; i < nTimes; i++) {
+		for (j = 0; j < nTimes; j++) {
+			if (i == j) {continue;}
+			int golsMandante, golsVisitante, diferencaGols;
+			while (1) {
+				printf("\nPlacar time%d x time%d: ", i+1, j+1);
+				scanf("%d %d", &golsMandante, &golsVisitante);
+				
+				if (golsMandante >= 0 && golsVisitante >= 0) {
+					break;
+				}
+				printf("\nNumero de gols de cada time no placar deve ser maior ou igual a zero\n");
+			}
+			diferencaGols = golsMandante - golsVisitante;
+			if (diferencaGols > 0) {
+				times[i].vitorias++;
+				times[j].derrotas++;
+			} else if (diferencaGols == 0) {
+				times[i].empates++;
+				times[j].empates++;
+			} else {
+				times[i].derrotas++;
+				times[j].vitorias++;
+			}
+
+			partidas[4*i+j].golsMandante = golsMandante;
+			partidas[4*i+j].golsVisitante = golsVisitante;
+			partidas[4*i+j].diferencaGols = modulo(diferencaGols);
+		}
+	}
+}
+
+
+// Recebe um vetor de índices do vetor de partidas e retorna os times participantes nessas partidas  
+int *achaTimes(int *vetor, int tamVetor, int tamBloco) {
+	int i, timeMandante, timeVisitante;
+	int *timesParticipantes = (int*)malloc(2*tamVetor*sizeof(int));
+
+	for (i = 0; i < tamVetor; i++) {
+		timeMandante = (int)floor(vetor[i]/tamBloco);
+		timeVisitante = vetor[i] % tamBloco;
+
+		if (timeVisitante == timeMandante) {
+			timeVisitante++;
+		}
+
+		timesParticipantes[2*i] = timeMandante;
+		timesParticipantes[2*i+1] = timeVisitante;
+	}
+
+	return timesParticipantes;
 }
 
 //Função para achar a Maior Diferença 
@@ -34,55 +100,39 @@ void *recebePartidas(struct partida *p, int tam) {
 
 //Função recebeTimesPartidas
 
-//Declaração dos struct
-struct time {
-  int vitoria;
-  int derrota;
-  int empate;
-};
-
-struct partida {
-  int golMandante;
-  int golVisitante;
-  int diferencaGol;
-};
-
 int main(int argc, char *argv[])
 {
   //Declaração de variáveis
-    int nTimes;
-  
-    printf("Entre com o numero de times participantes:");
-      scanf("%d", &nTimes);
-    
-    while(nTimes<2)
-    {
-        printf("\n");
-        
-        printf("Numero de times particiantes deve ser maior ou igual a 2");
-        
-        printf("\n\n");
-        
-        printf("Entre com o numero de times participantes:");
-        
-        scanf("%d", &nTimes);
-    }
+	int nTimes;
+
+	// Loop para tratamento da entrada
+	while(1)
+	{	
+		printf("Entre com o numero de times participantes:");
+		scanf("%d", &nTimes);
+	
+		if (nTimes > 1) {		
+			break;
+		}
+		printf("\nNumero de times particiantes deve ser maior ou igual a 2\n\n");
+	}
   
   //Definindo o numero de partidas 
-    int nPartidas = calculaPartidas(nTimes);
+	int nPartidas = calculaPartidas(nTimes);
 
-    struct time *times = malloc(nTimes * sizeof(struct time));
-    struct partida *partidas = malloc(nPartidas * sizeof(struct partida));
+	struct time *times = malloc(nTimes * sizeof(struct time));
+	struct partida *partidas = malloc(nPartidas * sizeof(struct partida));
     
   //Definindo o bloco
   int tamanhoBloco = nTimes - 1;
    
   //Recebe partidas
-    
+  recebePartidas(nTimes, times, partidas);
 
+	/*
   //procurando qual o maior numero de vitorias e qual time detem esse valor
-    maiorNumVit = vetorVitTimes[1];
-    nTimeMaisVit[1] = 1;
+	maiorNumVit = vetorVitTimes[1];
+	nTimeMaisVit[1] = 1;
     
     for(int j=2; j<nTimes+1; j++)
     {
@@ -106,7 +156,6 @@ int main(int argc, char *argv[])
     }
     
     printf("Time(s) com mais vitorias: ");
-    
     
     //tratamento do vetor nTimeMaisVit para ver qual o numero do time mais vitorioso
     
@@ -259,6 +308,6 @@ int main(int argc, char *argv[])
             printf("time%d x time%d, ", timeMandanteDifGols[i], timeVisitanteDifGols[i]);
         }
     }
-    
+    */
     return 0;
 }
