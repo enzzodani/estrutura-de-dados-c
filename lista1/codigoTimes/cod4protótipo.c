@@ -73,6 +73,7 @@ void recebePartidas(int nTimes, struct time *times, struct partida *partidas) {
 	}
 }
 
+
 // Recebe um vetor de índices do vetor de partidas e retorna os times participantes nessas partidas  
 int *achaTimes(int *vetor, int tamVetor, int tamBloco) {
 	int i, timeMandante, timeVisitante;
