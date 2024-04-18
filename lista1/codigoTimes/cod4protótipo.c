@@ -15,8 +15,16 @@ int calculaPartidas(int n) {
 }
 
 //Função recebePartidas
-void *recebePartidas() {
-  
+void *recebePartidas(struct partida *p, int tam) {
+  int i, j;
+  for (i =0; i < tam; i++) {
+    for (j = 0; j<tam; j++) {
+      if (i != j) {
+        printf("Placar time%d x time%d: s s\n", i+1, j+1);
+         scanf("%d",);
+      }
+    }
+  }
 
 }
 
