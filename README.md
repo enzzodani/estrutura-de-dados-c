@@ -11,19 +11,18 @@ Repositório para códigos da matéria de Estrutura de Dados 1 da turma 2023/1.
 - [ ] Terminar a parte de Maior diferença no código 4 da lista 1
 - [ ] Terminar a parte da função timesNaPartida no código 4 da lista 1
 ## Estrutura de Diretório
-
-´´´
+```
 └── listaX
 ├── exercicio1
 ├── exercicio2
 ├── ...
 └── exercicioN
-
+```
 ## Colaboradores
 - Enzo Daniel (@enzzodani)
 - Itamar (@Itamar-Rocha)
-- Fernando (@)
-- Pedro (@)
+- Fernando (@fernandomaltez)
+- Pedro (@pedrocsf)
 - Rafael (@)
-- Vinícius (@)
-- Gabryel (@)
+- Vinícius (@viniciusdjo)
+- Gabryel (@Gabryel-Borges)
