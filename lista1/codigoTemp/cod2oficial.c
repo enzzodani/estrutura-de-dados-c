@@ -98,10 +98,10 @@ int main(int argc, char *argv[])
     printf("\n");
 
   //Verificação do ano
-    if (ano <= 2000 || ano>2023){
+    if (ano <= 2000 || ano>2024){
       printf("Ano deve ser maior ou igual a 2000 e menor ou igual a 2024\n\n");
       }
-  } while(ano <= 2000 || ano >= 2024)
+  } while(ano <= 2000 || ano > 2024);
 
 do{
 //Coleta do Mês
@@ -110,10 +110,10 @@ do{
 printf("\n");
     
 //Verificação do mês
-  if (mes <= 0 || mes > 12){
+  if (mes < 0 || mes > 12){
     printf("Mes deve ser maior do que zero e menor ou igual a 12\n\n");
     }
-} while(mes<1 || mes > 12)
+} while(mes<1 || mes > 12);
 
   //Definição de dias no mês 
   switch(mes) {
@@ -124,14 +124,12 @@ printf("\n");
           numDias = 30;
           break;
       case 2:
-          if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
+          if (ano % 4 == 0) {
             numDias = 29;
           } else {
             numDias = 28;
           }
           break;
-      default:
-          printf("Mês inválido!\n");
     }
 
   int *temperaturas = malloc(numDias * sizeof(int));
