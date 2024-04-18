@@ -14,9 +14,12 @@ Repositório para códigos da matéria de Estrutura de Dados 1 da turma 2023/1.
 ```
 └── listaX
   ├── exercicio1
+    ├──codigo1.c
   ├── exercicio2
+    ├──codigo2.c
   ├── ...
   └── exercicioN
+    ├──codigoN.c
 ```
 ## Colaboradores
 - Enzo Daniel (@enzzodani)
