@@ -13,10 +13,10 @@ Repositório para códigos da matéria de Estrutura de Dados 1 da turma 2023/1.
 ## Estrutura de Diretório
 ```
 └── listaX
-├── exercicio1
-├── exercicio2
-├── ...
-└── exercicioN
+  ├── exercicio1
+  ├── exercicio2
+  ├── ...
+  └── exercicioN
 ```
 ## Colaboradores
 - Enzo Daniel (@enzzodani)
