@@ -18,12 +18,6 @@ struct partida {
   int diferencaGols;
 };
 
-void limpaVetor(int *vetor, int size) {
-    for (int i = 0; i < size; i++) {
-        vetor[i] = 0;
-    }
-}
-
 // Utilidade Modulo
 int modulo(int num) {
 	if(num < 0) {
@@ -40,19 +34,20 @@ int calculaPartidas(int n) {
 
 // Função recebePartidas (perigoso!)
 void recebePartidas(int nTimes, struct time *times, struct partida *partidas) {
+
 	// Time i é o mandante e o Time j é o visitante
 	for (i = 0; i < nTimes; i++) {
 		for (j = 0; j < nTimes; j++) {
 			if (i == j) {continue;}
 			int golsMandante, golsVisitante, diferencaGols;
 			while (1) {
-				printf("\nPlacar time%d x time%d: ", i+1, j+1);
+				printf("\n\nPlacar time%d x time%d: ", i+1, j+1);
 				scanf("%d %d", &golsMandante, &golsVisitante);
 				
 				if (golsMandante >= 0 && golsVisitante >= 0) {
 					break;
 				}
-				printf("\nNumero de gols de cada time no placar deve ser maior ou igual a zero\n");
+				printf("\n\nNumero de gols de cada time no placar deve ser maior ou igual a zero");
 			}
 			diferencaGols = golsMandante - golsVisitante;
 			if (diferencaGols > 0) {
@@ -109,7 +104,7 @@ int achaMaiorDiff(struct partida *vetorPartidas, int tamanho) {
 int qtdMaiorDiff(struct partida *vetorPartidas, int tamanho, int maiorDiff) {
   int contador = 0;
   for (i = 0; i < tamanho; i++) {
-      if (vetorPartidas[i] == maiorDiff) {
+      if (vetorPartidas[i].diferencaGols == maiorDiff) {
       contador++;
     }
   }
@@ -120,7 +115,7 @@ int qtdMaiorDiff(struct partida *vetorPartidas, int tamanho, int maiorDiff) {
 int achaMaiorVitoria(struct time *vetorTime, int tamanho) {
   int maiorVit = vetorTime[0].vitorias;
 
-  for (i = 1; i<tam; i++) {
+  for (i = 1; i < tamanho; i++) {
     if (vetorTime[i].vitorias > maiorVit) {
       maiorVit = vetorTime[i].vitorias;
     }
@@ -132,13 +127,13 @@ int achaMaiorVitoria(struct time *vetorTime, int tamanho) {
 void imprimeTimeVitorioso(struct time *vetorTime, int tamanho, int maior) {
   
   //Imprimir times com mais vitorias  
-    printf("Time(s) com mais vitorias: ");
+    printf("\n\nTime(s) com mais vitorias: ");
     
-    for(j=0; j<tamanho; j++)
+    for(i = 0; i < tamanho; i++)
     {
-        if(vetorTimes.vitorias == maior)
+        if(vetorTime[i].vitorias == maior)
         {
-            printf("%d ", j+1);
+            printf("%d ", i+1);
         }
     }
     
@@ -149,7 +144,7 @@ void imprimeTimeVitorioso(struct time *vetorTime, int tamanho, int maior) {
 int achaMaiorDerrota(struct time *vetorTime, int tamanho) {
   int maiorDer = vetorTime[0].derrotas;
 
-  for (i = 1; i<tam; i++) {
+  for (i = 1; i < tamanho; i++) {
     if (vetorTime[i].derrotas > maiorDer) {
       maiorDer = vetorTime[i].derrotas;
     }
@@ -161,13 +156,13 @@ int achaMaiorDerrota(struct time *vetorTime, int tamanho) {
 void imprimeTimePerdedor(struct time *vetorTime, int tamanho, int maior) {
 
   //Imprimir times com mais derrotas  
-    printf("Time(s) com mais derrotas: ");
+    printf("\nTime(s) com mais derrotas: ");
     
-    for(j=0; j<tamanho; j++)
+    for(i=0; i<tamanho; i++)
     {
-        if(vetorTimes.derrotas == maior)
+        if(vetorTime[i].derrotas == maior)
         {
-            printf("%d ", j+1);
+            printf("%d ", i+1);
         }
     }
     
@@ -176,11 +171,11 @@ void imprimeTimePerdedor(struct time *vetorTime, int tamanho, int maior) {
 
 //Função para achar a Maior Vitorias 
 int achaMaiorEmp(struct time *vetorTime, int tamanho) {
-  int maior = vetorTime[0].empates;
+  int maiorEmp = vetorTime[0].empates;
 
-  for (i = 1; i<tam; i++) {
-    if (vetorTime[i].empates > maior) {
-      maiorVit = vetorTime[i].empates;
+  for (i = 1; i < tamanho; i++) {
+    if (vetorTime[i].empates > maiorEmp) {
+      maiorEmp = vetorTime[i].empates;
     }
   }
   return maiorEmp;
@@ -190,17 +185,43 @@ int achaMaiorEmp(struct time *vetorTime, int tamanho) {
 void imprimeTimeEmpate(struct time *vetorTime, int tamanho, int maior) {
 
   //Imprimir times com mais empates  
-    printf("Time(s) com mais empates: ");
+    printf("\nTime(s) com mais empates: ");
     
-    for(j=0; j<tamanho; j++)
+    for(i=0; i<tamanho; i++)
     {
-        if(vetorTimes.empates == maior)
+        if(vetorTime[i].empates == maior)
         {
-            printf("%d ", j+1);
+            printf("%d ", i+1);
         }
     }
     
     printf("com %d empates\n", maior);
+}
+
+int *achaIndicesPartidasMaiorDiff(struct partida *partidas, int tamanho, int maiorDiff) {
+	int quantidadePartidas = 0;
+	int *vetorIndices = (int *)malloc(tamanho*sizeof(int));
+
+	for (i = 0; i < tamanho; i++) {
+		if(partidas[i].diferencaGols == maiorDiff){
+			vetorIndices[quantidadePartidas] = i;
+			quantidadePartidas++;
+		}
+	}
+
+	return realloc(vetorIndices, quantidadePartidas*sizeof(int));
+}
+
+// Acho que tem um memory leak pesado aqui
+void imprimePartidasMaiorDiff(struct partida *partidas, int tamanho, int tamBloco) {
+	int maiorDiff = achaMaiorDiff(partidas, tamanho);
+	int *partidasIndices = achaIndicesPartidasMaiorDiff(partidas, tamanho, maiorDiff);
+	int *times = achaTimes(partidasIndices, sizeof(partidasIndices)/sizeof(partidasIndices[0]), tamBloco);
+	
+	printf("\nMaior diferenca de gols foi de %d gols nos jogos:", maiorDiff);
+	for (i = 0; i < 2*(sizeof(times)/sizeof(times[0])); i += 2) {
+		printf(" time%d x time%d;", times[i]+1, times[i+1]+1);
+	}
 }
 
 int main(int argc, char *argv[])
@@ -217,7 +238,7 @@ int main(int argc, char *argv[])
 		if (nTimes > 1) {		
 			break;
 		}
-		printf("\nNumero de times particiantes deve ser maior ou igual a 2\n\n");
+		printf("\n\nNumero de times particiantes deve ser maior ou igual a 2\n\n");
 	}
   
   //Definindo o numero de partida 
@@ -241,8 +262,10 @@ int main(int argc, char *argv[])
   imprimeTimeVitorioso(times, nTimes, maiorVit);
   imprimeTimePerdedor(times, nTimes, maiorDer);
   imprimeTimeEmpate(times, nTimes, maiorEmp);
+	imprimePartidasMaiorDiff(partidas, nPartidas, tamanhoBloco);
     
     //Imprimir maior diferença de gols
+		/*
     printf("Maior diferenca de gols foi de %d gols nos jogos: ", maiorDifGols);
     
     for(int i=1; i<= (Fat(nTimes)/Fat(nTimes-2)); i++)
@@ -252,6 +275,7 @@ int main(int argc, char *argv[])
             printf("time%d x time%d, ", timeMandanteDifGols[i], timeVisitanteDifGols[i]);
         }
     }
+		*/
 
   //Free alocation dynamic memory
   free(times);
