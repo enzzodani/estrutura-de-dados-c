@@ -106,7 +106,15 @@ int achaMaiorDiferença(struct partidas *vetorPartidas, int tamanho) {
   return maiorDiferença;
 }
 //Função para quantidade de maiorDiferença 
-
+int qtdMaiorDiferença (struct partidas *vetorPartidas, int tamanho, int maiorDiff) {
+  contador = 0;
+  for (i = 0; i < tamanho; i++) {
+      if (vetorPartidas[i] == maiorDiff) {
+      contador++;
+    }
+  }
+  return contador;
+}
 
 int main(int argc, char *argv[])
 {
