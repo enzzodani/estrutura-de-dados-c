@@ -95,10 +95,18 @@ int *achaTimes(int *vetor, int tamVetor, int tamBloco) {
 }
 
 //Função para achar a Maior Diferença 
+int achaMaiorDiferença(struct partidas *vetorPartidas, int tamanho) {
+  int maiorDiferença = vetorPartidas[0];
 
+  for (i = 1; i<tam; i++) {
+    if (vetorPartidas[i] > maiorDiferença) {
+      maiorDiferença = vetorPartidas[i];
+    }
+  }
+  return maiorDiferença;
+}
 //Função para quantidade de maiorDiferença 
 
-//Função recebeTimesPartidas
 
 int main(int argc, char *argv[])
 {
