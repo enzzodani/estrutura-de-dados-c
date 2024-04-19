@@ -132,7 +132,7 @@ int achaMaiorVitoria(struct time *vetorTime, int tamanho) {
 int qtdMaiorVit(struct time *vetorTime, int tamanho, int maiorVit) {
   contador = 0;
   for (i = 0; i < tamanho; i++) {
-      if (vetorTime[i] == maiorVit) {
+      if (vetorTime[i].derrotas == maiorVit) {
       contador++;
     }
   }
@@ -145,9 +145,55 @@ void imprimeTimeVitorioso() {
   
 }
 
+//Função para achar a Maior Derrota  
+int achaMaiorDerrota(struct time *vetorTime, int tamanho) {
+  int maiorDer = vetorTime[0].derrotas;
+
+  for (i = 1; i<tam; i++) {
+    if (vetorTime[i].derrotas > maiorDer) {
+      maiorDer = vetorTime[i].derrotas;
+    }
+  }
+  return maiorDer;
+}
+
+//Função para quantidade de maiorDiferença 
+int qtdMaiorDer(struct time *vetorTime, int tamanho, int maiorDer) {
+  contador = 0;
+  for (i = 0; i < tamanho; i++) {
+      if (vetorTime[i].derrotas == maiorDer) {
+      contador++;
+    }
+  }
+  return contador;
+}
+
 //Função imprime time com mais derrotas
 void imprimeTimePerdedor() {
 
+}
+
+//Função para achar a Maior Vitorias 
+int achaMaiorEmp(struct time *vetorTime, int tamanho) {
+  int maior = vetorTime[0].empates;
+
+  for (i = 1; i<tam; i++) {
+    if (vetorTime[i].empates > maior) {
+      maiorVit = vetorTime[i].empates;
+    }
+  }
+  return maiorEmp;
+}
+
+//Função para quantidade de maiorDiferença 
+int qtdMaiorEmp(struct time *vetorTime, int tamanho, int maiorEmp) {
+  contador = 0;
+  for (i = 0; i < tamanho; i++) {
+      if (vetorTime[i].empates == maiorEmp) {
+      contador++;
+    }
+  }
+  return contador;
 }
 
 //Função para imprimir time com mais empates
