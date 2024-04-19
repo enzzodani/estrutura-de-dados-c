@@ -232,19 +232,15 @@ int main(int argc, char *argv[])
   //Recebe partidas
   recebePartidas(nTimes, times, partidas);
 
-    
-    //Imprimit times com mais empates 
-    printf("Time(s) com mais empates: ");
-    
-    for(int j=1; j<nTimes+1; j++)
-    {
-        if(nTimeMaisEmp[j]!=0)
-        {
-            printf("%d ", nTimeMaisEmp[j]);
-        }
-    }
-    
-    printf("com %d empates\n", maiorNumEmp);
+  //Maiores
+  maiorVit = achaMaiorVitoria(times, nTimes);
+  maiorDer = achaMaiorDerrota(times, nTimes);
+  maiorEmp = achaMaiorEmp(times, nTimes);
+
+   //Impressão 
+  imprimeTimeVitorioso(times, nTimes, maiorVit);
+  imprimeTimePerdedor(times, nTimes, maiorDer);
+  imprimeTimeEmpate(times, nTimes, maiorEmp);
     
     //Imprimir maior diferença de gols
     printf("Maior diferenca de gols foi de %d gols nos jogos: ", maiorDifGols);
