@@ -66,9 +66,9 @@ void recebePartidas(int nTimes, struct time *times, struct partida *partidas) {
 				times[j].vitorias++;
 			}
 
-			partidas[4*i+j].golsMandante = golsMandante;
-			partidas[4*i+j].golsVisitante = golsVisitante;
-			partidas[4*i+j].diferencaGols = modulo(diferencaGols);
+			partidas[(nTimes-1)*i+j].golsMandante = golsMandante;
+			partidas[(nTimes-1)*i+j].golsVisitante = golsVisitante;
+			partidas[(nTimes-1)*i+j].diferencaGols = modulo(diferencaGols);
 		}
 	}
 }
@@ -95,10 +95,10 @@ int *achaTimes(int *vetor, int tamVetor, int tamBloco) {
 }
 
 //Função para achar a Maior Diferença 
-int achaMaiorDiff(struct partidas *vetorPartidas, int tamanho) {
+int achaMaiorDiff(struct partida *vetorPartidas, int tamanho) {
   int maiorDiff = vetorPartidas[0].diferencaGols;
 
-  for (i = 1; i<tam; i++) {
+  for (i = 1; i<tamanho; i++) {
     if (vetorPartidas[i].diferencaGols > maiorDiff) {
       maiorDiff = vetorPartidas[i].diferencaGols;
     }
@@ -106,8 +106,8 @@ int achaMaiorDiff(struct partidas *vetorPartidas, int tamanho) {
   return maiorDiff;
 }
 //Função para quantidade de maiorDiferença 
-int qtdMaiorDiff(struct partidas *vetorPartidas, int tamanho, int maiorDiff) {
-  contador = 0;
+int qtdMaiorDiff(struct partida *vetorPartidas, int tamanho, int maiorDiff) {
+  int contador = 0;
   for (i = 0; i < tamanho; i++) {
       if (vetorPartidas[i] == maiorDiff) {
       contador++;
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 		printf("\nNumero de times particiantes deve ser maior ou igual a 2\n\n");
 	}
   
-  //Definindo o numero de partidas 
+  //Definindo o numero de partida 
 	int nPartidas = calculaPartidas(nTimes);
 
 	struct time *times = malloc(nTimes * sizeof(struct time));
