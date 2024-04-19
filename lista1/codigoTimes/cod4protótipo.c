@@ -171,7 +171,7 @@ void imprimeTimePerdedor(struct time *vetorTime, int tamanho, int maior) {
         }
     }
     
-    printf("com %d derrotas\n", maiorDer);
+    printf("com %d derrotas\n", maior);
 }
 
 //Função para achar a Maior Vitorias 
@@ -187,8 +187,20 @@ int achaMaiorEmp(struct time *vetorTime, int tamanho) {
 }
 
 //Função para imprimir time com mais empates
-void imprimeTimeEmpate() {
+void imprimeTimeEmpate(struct time *vetorTime, int tamanho, int maior) {
 
+  //Imprimir times com mais empates  
+    printf("Time(s) com mais empates: ");
+    
+    for(j=0; j<tamanho; j++)
+    {
+        if(vetorTimes.empates == maior)
+        {
+            printf("%d ", j+1);
+        }
+    }
+    
+    printf("com %d empates\n", maior);
 }
 
 int main(int argc, char *argv[])
