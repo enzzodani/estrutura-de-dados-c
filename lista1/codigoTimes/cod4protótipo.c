@@ -116,6 +116,45 @@ int qtdMaiorDiff(struct partidas *vetorPartidas, int tamanho, int maiorDiff) {
   return contador;
 }
 
+//Função para achar a Maior Vitorias 
+int achaMaiorVitoria(struct time *vetorTime, int tamanho) {
+  int maiorVit = vetorTime[0].vitorias;
+
+  for (i = 1; i<tam; i++) {
+    if (vetorTime[i].vitorias > maiorVit) {
+      maiorVit = vetorTime[i].vitorias;
+    }
+  }
+  return maiorVit;
+}
+
+//Função para quantidade de maiorDiferença 
+int qtdMaiorVit(struct time *vetorTime, int tamanho, int maiorVit) {
+  contador = 0;
+  for (i = 0; i < tamanho; i++) {
+      if (vetorTime[i] == maiorVit) {
+      contador++;
+    }
+  }
+  return contador;
+}
+// Função para achar time mais Vitorioso 
+
+//Função para imprimir maior vitorias
+void imprimeTimeVitorioso() {
+  
+}
+
+//Função imprime time com mais derrotas
+void imprimeTimePerdedor() {
+
+}
+
+//Função para imprimir time com mais empates
+void imprimeTimeEmpate() {
+
+}
+
 int main(int argc, char *argv[])
 {
   //Declaração de variáveis
@@ -181,6 +220,14 @@ int main(int argc, char *argv[])
             printf("time%d x time%d, ", timeMandanteDifGols[i], timeVisitanteDifGols[i]);
         }
     }
-    */
+
     return 0;
+  /*Time(s) com mais vitorias: 1 com 5 vitorias
+
+Time(s) com mais derrotas: 4 com 4 derrotas
+
+Time(s) com mais empates: 2 com 4 empates
+
+Maior diferenca de gols foi de 3 gols nos jogos: time2 x time1; time3 x time2;
+   */
 }
