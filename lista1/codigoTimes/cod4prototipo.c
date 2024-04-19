@@ -78,7 +78,9 @@ int *achaTimes(int *vetor, int tamVetor, int tamBloco) {
 		timeMandante = (int)floor(vetor[i]/tamBloco);
 		timeVisitante = vetor[i] % tamBloco;
 
-		if (timeVisitante == timeMandante) {
+		if (timeMandante == 0) {
+			timeVisitante++;
+		} else if (timeVisitante == timeMandante) {
 			timeVisitante++;
 		}
 
@@ -200,26 +202,26 @@ void imprimeTimeEmpate(struct time *vetorTime, int tamanho, int maior) {
 
 int *achaIndicesPartidasMaiorDiff(struct partida *partidas, int tamanho, int maiorDiff) {
 	int quantidadePartidas = 0;
-	int *vetorIndices = (int *)malloc(tamanho*sizeof(int));
-
+	int *vetorIndices = (int *)malloc((tamanho+1)*sizeof(int));
+	
 	for (i = 0; i < tamanho; i++) {
 		if(partidas[i].diferencaGols == maiorDiff){
 			vetorIndices[quantidadePartidas] = i;
 			quantidadePartidas++;
 		}
 	}
-
-	return realloc(vetorIndices, quantidadePartidas*sizeof(int));
+	vetorIndices[tamanho] = quantidadePartidas;
+	return vetorIndices;
 }
 
 // Acho que tem um memory leak pesado aqui
 void imprimePartidasMaiorDiff(struct partida *partidas, int tamanho, int tamBloco) {
 	int maiorDiff = achaMaiorDiff(partidas, tamanho);
 	int *partidasIndices = achaIndicesPartidasMaiorDiff(partidas, tamanho, maiorDiff);
-	int *times = achaTimes(partidasIndices, sizeof(partidasIndices)/sizeof(partidasIndices[0]), tamBloco);
+	int *times = achaTimes(partidasIndices, partidasIndices[tamanho], tamBloco);
 	
 	printf("\nMaior diferenca de gols foi de %d gols nos jogos:", maiorDiff);
-	for (i = 0; i < 2*(sizeof(times)/sizeof(times[0])); i += 2) {
+	for (i = 0; i < 2*partidasIndices[tamanho]; i += 2) {
 		printf(" time%d x time%d;", times[i]+1, times[i+1]+1);
 	}
 }
