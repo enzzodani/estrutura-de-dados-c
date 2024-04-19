@@ -41,13 +41,13 @@ void recebePartidas(int nTimes, struct time *times, struct partida *partidas) {
 			if (i == j) {continue;}
 			int golsMandante, golsVisitante, diferencaGols;
 			while (1) {
-				printf("\n\nPlacar time%d x time%d: ", i+1, j+1);
+				printf("\nPlacar time%d x time%d: ", i+1, j+1);
 				scanf("%d %d", &golsMandante, &golsVisitante);
 				
 				if (golsMandante >= 0 && golsVisitante >= 0) {
 					break;
 				}
-				printf("\n\nNumero de gols de cada time no placar deve ser maior ou igual a zero");
+				printf("\nNumero de gols de cada time no placar deve ser maior ou igual a zero\n");
 			}
 			diferencaGols = golsMandante - golsVisitante;
 			if (diferencaGols > 0) {
@@ -240,7 +240,7 @@ int main(int argc, char *argv[])
 		if (nTimes > 1) {		
 			break;
 		}
-		printf("\n\nNumero de times particiantes deve ser maior ou igual a 2\n\n");
+		printf("\nNumero de times participantes deve ser maior ou igual a 2\n\n");
 	}
   
   //Definindo o numero de partida 
