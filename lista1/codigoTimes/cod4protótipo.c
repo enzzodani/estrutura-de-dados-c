@@ -95,18 +95,18 @@ int *achaTimes(int *vetor, int tamVetor, int tamBloco) {
 }
 
 //Função para achar a Maior Diferença 
-int achaMaiorDiferença(struct partidas *vetorPartidas, int tamanho) {
-  int maiorDiferença = vetorPartidas[0];
+int achaMaiorDiff(struct partidas *vetorPartidas, int tamanho) {
+  int maiorDiff = vetorPartidas[0].diferencaGols;
 
   for (i = 1; i<tam; i++) {
-    if (vetorPartidas[i] > maiorDiferença) {
-      maiorDiferença = vetorPartidas[i];
+    if (vetorPartidas[i].diferencaGols > maiorDiff) {
+      maiorDiff = vetorPartidas[i].diferencaGols;
     }
   }
-  return maiorDiferença;
+  return maiorDiff;
 }
 //Função para quantidade de maiorDiferença 
-int qtdMaiorDiferença (struct partidas *vetorPartidas, int tamanho, int maiorDiff) {
+int qtdMaiorDiff(struct partidas *vetorPartidas, int tamanho, int maiorDiff) {
   contador = 0;
   for (i = 0; i < tamanho; i++) {
       if (vetorPartidas[i] == maiorDiff) {
@@ -145,75 +145,6 @@ int main(int argc, char *argv[])
   //Recebe partidas
   recebePartidas(nTimes, times, partidas);
 
-	/*
-  //procurando qual o maior numero de vitorias e qual time detem esse valor
-	maiorNumVit = vetorVitTimes[1];
-	nTimeMaisVit[1] = 1;
-    
-    for(int j=2; j<nTimes+1; j++)
-    {
-        if(maiorNumVit<vetorVitTimes[j])
-        {
-            nTimeMaisVit[1] = 0;
-            maiorNumVit = vetorVitTimes[j];
-            
-            nTimeMaisVit[j] = j;
-        }
-        else if (maiorNumVit==vetorVitTimes[j]){
-            maiorNumVit = vetorVitTimes[j];
-            
-            nTimeMaisVit[j] = j;
-        }
-        
-        else
-        {
-            nTimeMaisVit[j] = 0;
-        }
-    }
-    
-    printf("Time(s) com mais vitorias: ");
-    
-    //tratamento do vetor nTimeMaisVit para ver qual o numero do time mais vitorioso
-    
-    for(int j=1; j<nTimes+1; j++)
-    {
-        if(nTimeMaisVit[j]!=0)
-        {
-            printf("%d ", nTimeMaisVit[j]);
-        }
-    }
-    
-    printf("com %d vitorias\n", maiorNumVit);
-    
-    //a partir desse ponto ja temos a mensagem final sobre o time mais vitorioso assim como a sua quantidade de vitorias
-    
-    //agora devemos fazer o mesmo para as derrotas
-    
-    
-    //vendo qual o maior numero de derrotas
-    maiorNumDer = vetorDerTimes[1];
-    nTimeMaisDer[1] = 1;
-    
-    for(int j=2; j<nTimes+1; j++)
-    {
-        if(maiorNumDer<vetorDerTimes[j])
-        {
-            nTimeMaisDer[1] = 0;
-            maiorNumDer = vetorDerTimes[j];
-            
-            nTimeMaisDer[j] = j;
-        }
-        else if (maiorNumDer==vetorDerTimes[j]){
-            maiorNumDer = vetorDerTimes[j];
-            
-            nTimeMaisDer[j] = j;
-        }
-        
-        else
-        {
-            nTimeMaisDer[j] = 0;
-        }
-    }
     
     printf("Time(s) com mais derrotas: ");
     
@@ -232,30 +163,6 @@ int main(int argc, char *argv[])
     
     
     
-    maiorNumEmp = vetorEmpTimes[1];
-    nTimeMaisEmp[1] = 1;
-    
-    for(int i = 2; i<nTimes+1; i++)
-    {
-        if(maiorNumEmp<vetorEmpTimes[i])
-        {
-            nTimeMaisEmp[1] = 0;
-            maiorNumEmp = vetorEmpTimes[i];
-            
-            nTimeMaisEmp[i] = i;
-        }
-        else if (maiorNumEmp==vetorEmpTimes[i]){
-            maiorNumEmp = vetorEmpTimes[i];
-            
-            nTimeMaisEmp[i] = i;
-        }
-        
-        else
-        {
-            nTimeMaisEmp[i] = 0;
-        }
-    }
-    
     
     printf("Time(s) com mais empates: ");
     
@@ -268,52 +175,6 @@ int main(int argc, char *argv[])
     }
     
     printf("com %d empates\n", maiorNumEmp);
-    
-    
-    
-    
-    
-    
-    maiorDifGols = vetorDifGols[1];
-    
-    for(int i=1; i<=nTimes; i++)
-    {
-        for(int j=1; j<=nTimes; j++)
-        {
-            if(i!=1 || j!=1)
-            {
-                if(maiorDifGols<vetorDifGols[((i-1)*nTimes)+j])
-                {
-                   maiorDifGols = vetorDifGols[((i-1)*nTimes)+j];
-                   
-                }
-            }
-        }
-    }
-    
-    for(int i=1; i<=nTimes; i++)
-    {
-        for(int j=1; j<=nTimes; j++)
-        {
-            if(i!=1 || j!=1)
-            {
-                if(maiorDifGols==vetorDifGols[((i-1)*nTimes)+j])
-                {
-                   timeMandanteDifGols[((i-1)*nTimes)+j-1] = i;
-                   
-                   timeVisitanteDifGols[((i-1)*nTimes)+j-1] = j;
-                }
-                else
-                {
-                    timeMandanteDifGols[((i-1)*nTimes)+j-1] = 0;
-                    
-                    timeVisitanteDifGols[((i-1)*nTimes)+j-1] = 0;
-                }
-                
-                
-            }
-        }
-    }
     
     printf("Maior diferenca de gols foi de %d gols nos jogos: ", maiorDifGols);
     
