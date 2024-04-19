@@ -253,6 +253,11 @@ int main(int argc, char *argv[])
         }
     }
 
+  //Free alocation dynamic memory
+  free(times);
+  free(partidas);
+
+
     return 0;
   /*Time(s) com mais vitorias: 1 com 5 vitorias
 
