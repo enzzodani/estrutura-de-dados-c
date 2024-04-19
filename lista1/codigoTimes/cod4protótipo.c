@@ -233,9 +233,9 @@ int main(int argc, char *argv[])
   recebePartidas(nTimes, times, partidas);
 
   //Maiores
-  maiorVit = achaMaiorVitoria(times, nTimes);
-  maiorDer = achaMaiorDerrota(times, nTimes);
-  maiorEmp = achaMaiorEmp(times, nTimes);
+  int maiorVit = achaMaiorVitoria(times, nTimes);
+  int maiorDer = achaMaiorDerrota(times, nTimes);
+  int maiorEmp = achaMaiorEmp(times, nTimes);
 
    //Impressão 
   imprimeTimeVitorioso(times, nTimes, maiorVit);
