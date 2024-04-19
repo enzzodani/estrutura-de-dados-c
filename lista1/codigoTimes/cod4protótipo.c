@@ -128,21 +128,21 @@ int achaMaiorVitoria(struct time *vetorTime, int tamanho) {
   return maiorVit;
 }
 
-//Função para quantidade de maiorDiferença 
-int qtdMaiorVit(struct time *vetorTime, int tamanho, int maiorVit) {
-  contador = 0;
-  for (i = 0; i < tamanho; i++) {
-      if (vetorTime[i].derrotas == maiorVit) {
-      contador++;
-    }
-  }
-  return contador;
-}
-// Função para achar time mais Vitorioso 
-
 //Função para imprimir maior vitorias
-void imprimeTimeVitorioso() {
+void imprimeTimeVitorioso(struct time *vetorTime, int tamanho, int maior) {
   
+  //Imprimir times com mais vitorias  
+    printf("Time(s) com mais vitorias: ");
+    
+    for(j=0; j<tamanho; j++)
+    {
+        if(vetorTimes.vitorias == maior)
+        {
+            printf("%d ", j+1);
+        }
+    }
+    
+    printf("com %d vitorias\n", maior);
 }
 
 //Função para achar a Maior Derrota  
@@ -157,20 +157,21 @@ int achaMaiorDerrota(struct time *vetorTime, int tamanho) {
   return maiorDer;
 }
 
-//Função para quantidade de maiorDiferença 
-int qtdMaiorDer(struct time *vetorTime, int tamanho, int maiorDer) {
-  contador = 0;
-  for (i = 0; i < tamanho; i++) {
-      if (vetorTime[i].derrotas == maiorDer) {
-      contador++;
-    }
-  }
-  return contador;
-}
-
 //Função imprime time com mais derrotas
-void imprimeTimePerdedor() {
+void imprimeTimePerdedor(struct time *vetorTime, int tamanho, int maior) {
 
+  //Imprimir times com mais derrotas  
+    printf("Time(s) com mais derrotas: ");
+    
+    for(j=0; j<tamanho; j++)
+    {
+        if(vetorTimes.derrotas == maior)
+        {
+            printf("%d ", j+1);
+        }
+    }
+    
+    printf("com %d derrotas\n", maiorDer);
 }
 
 //Função para achar a Maior Vitorias 
@@ -183,17 +184,6 @@ int achaMaiorEmp(struct time *vetorTime, int tamanho) {
     }
   }
   return maiorEmp;
-}
-
-//Função para quantidade de maiorDiferença 
-int qtdMaiorEmp(struct time *vetorTime, int tamanho, int maiorEmp) {
-  contador = 0;
-  for (i = 0; i < tamanho; i++) {
-      if (vetorTime[i].empates == maiorEmp) {
-      contador++;
-    }
-  }
-  return contador;
 }
 
 //Função para imprimir time com mais empates
@@ -230,18 +220,6 @@ int main(int argc, char *argv[])
   //Recebe partidas
   recebePartidas(nTimes, times, partidas);
 
-  //Imprimir times com mais derrotas  
-    printf("Time(s) com mais derrotas: ");
-    
-    for(int j=1; j<nTimes+1; j++)
-    {
-        if(nTimeMaisDer[j]!=0)
-        {
-            printf("%d ", nTimeMaisDer[j]);
-        }
-    }
-    
-    printf("com %d derrotas\n", maiorNumDer);
     
     //Imprimit times com mais empates 
     printf("Time(s) com mais empates: ");
