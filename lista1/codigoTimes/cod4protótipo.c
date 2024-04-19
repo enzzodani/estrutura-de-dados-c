@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
   //Recebe partidas
   recebePartidas(nTimes, times, partidas);
 
-    
+  //Imprimir times com mais derrotas  
     printf("Time(s) com mais derrotas: ");
     
     for(int j=1; j<nTimes+1; j++)
@@ -158,12 +158,7 @@ int main(int argc, char *argv[])
     
     printf("com %d derrotas\n", maiorNumDer);
     
-    //a partir desse ponto as mensagens de vitoria e derrota ja estao feitas
-    //resta agora fazer a mensagem de empate
-    
-    
-    
-    
+    //Imprimit times com mais empates 
     printf("Time(s) com mais empates: ");
     
     for(int j=1; j<nTimes+1; j++)
@@ -176,6 +171,7 @@ int main(int argc, char *argv[])
     
     printf("com %d empates\n", maiorNumEmp);
     
+    //Imprimir maior diferença de gols
     printf("Maior diferenca de gols foi de %d gols nos jogos: ", maiorDifGols);
     
     for(int i=1; i<= (Fat(nTimes)/Fat(nTimes-2)); i++)
