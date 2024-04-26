@@ -9,3 +9,26 @@ struct data{
   unsigned int mes;
   unsigned int ano;
 };
+
+Data* criaData(unsigned int dia, unsigned int mes, unsigned int ano) {
+  Data *d = (Data *) malloc(sizeof(Data));
+
+  if (d != NULL) {
+    d -> dia = dia;
+    d -> mes = mes;
+    d -> ano = ano;
+  }
+  return (d);
+}
+
+void liberaData(Data *d) {
+  if(d != NULL) {
+    free(d);
+  }
+
+Data* somaDiasData(Data d, unsigned int dias){
+    Data *novoDia = (Data *) malloc(sizeof(Data));
+  }
+  
+
+}
