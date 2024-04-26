@@ -27,8 +27,30 @@ void liberaData(Data *d) {
   }
 
 Data* somaDiasData(Data d, unsigned int dias){
-    Data *novoDia = (Data *) malloc(sizeof(Data));
+  Data *novoDia = (Data *) malloc(sizeof(Data));
   }
   
+Data *subtrairDiasData(Data d, unsigned int dias) {
+  Data *novoDia = (Data *) malloc(sizeof(Data));
+  }
 
+void atribuirData(Data *d, unsigned int dia, unsigned int mes, unsigned int ano) {
+    
+    d -> dia = dia;
+    d -> mes = mes;
+    d -> ano = ano;
+ 
+  }
+
+unsigned int obtemDiaData(Data d) {
+  return d.dia;
+  }
+
+unsigned int obtemMesData(Data d) {
+  return d.mes;
 }
+
+unsigned int obtemAnoData(Data d) {
+  return d.ano;
+  }
+
