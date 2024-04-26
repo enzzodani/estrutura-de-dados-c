@@ -23,7 +23,7 @@ unsigned int obtemMesData(Data d);
 
 unsigned int obtemAnoData(Data d);
 
-nsigned int bissextoData(Data d);
+unsigned int bissextoData(Data d);
 
 int comparaData(Data d1, Data d2);
 
