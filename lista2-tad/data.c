@@ -77,8 +77,26 @@ struct data{ //Declaração do struct data
 
   //Função que retorna -1 se a d1 < d2, 0 se d1=d2, e 1 se d1>d2
   int comparaData(Data d1, Data d2) {
+    int diferencaAnos = d1.ano - d2.ano;
+    int diferencaMeses = d1.mes - d2.mes;
+    int diferencaDias = d1.dia - d1.dia;
 
+    if(diferencaAnos < 0) {
+      return -1;
+    }else if (diferencaAnos > 0) {
+      return 1; 
+    }else if (diferencaMeses < 0) {
+      return -1;
+    }else if (diferencaMeses > 0) {
+      return 1;
+    }else if (diferencaDias < 0) {
+      return -1;
+    }else if (diferencaDias > 0) {
+      return 1;
+    }else {
+      return 0;
     }
+  }
 
   //Função que retorna o número de dias entre as datas
   unsigned int numeroDiasData(Data d1, Data d2) {
