@@ -79,7 +79,7 @@ struct data{ //Declaração do struct data
   int comparaData(Data d1, Data d2) {
     int diferencaAnos = d1.ano - d2.ano;
     int diferencaMeses = d1.mes - d2.mes;
-    int diferencaDias = d1.dia - d1.dia;
+    int diferencaDias = d1.dia - d2.dia;
 
     if(diferencaAnos < 0) {
       return -1;
