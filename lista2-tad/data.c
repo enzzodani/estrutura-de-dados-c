@@ -68,7 +68,11 @@ struct data{ //Declaração do struct data
 
   //Função que identifica se a data pertence à um ano bissexto
   unsigned int bissextoData(Data d) {
-    
+    unsigned int verificador = d.ano;
+     if ((verificador % 4 == 0 && verificador % 100 != 0) || (verificador % 400 == 0)) {
+      return 1;
+      }
+    return 0;
     }
 
   //Função que retorna -1 se a d1 < d2, 0 se d1=d2, e 1 se d1>d2
