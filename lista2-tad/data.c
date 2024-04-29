@@ -13,7 +13,7 @@ struct data{ //Declaração do struct data
 };
 
 //Funções auxiliares
-  unsigned int diasNoMes(Data *d) {
+  unsigned int diasNoMes(Data d) {
 
     unsigned int quantidadeDias = 0;
     
@@ -80,13 +80,13 @@ struct data{ //Declaração do struct data
     novoDia -> mes = d.mes;
     novoDia -> ano = d.ano;
 
-    verificadorDiasnoMes = diasNoMes(novoDia);
+    int verificadorDiasnoMes = diasNoMes(novoDia);
 
     do {
       if (novoDia -> dia > verificadorDiasnoMes) {
         novoDia -> dia -= verificadorDiasnoMes;
         (novoDia -> mes)++;
-        verificadorDiasnoMes = diasNoMes(*novoDia);
+        verificadorDiasnoMes = diasNoMes(novoDia);
       }
     } while (novoDia -> dia > verificadorDiasnoMes);
 
@@ -109,6 +109,25 @@ struct data{ //Declaração do struct data
         printf("Erro: Falha na alocação de memória.\n");
         return NULL;
     }
+   
+    int verificadorDias = d.dia - dias;
+
+    do {
+      if (verificadorDias <= 0) {
+        d.mes -= 1;
+        if (d.mes == 0) {
+          d.mes = 12;
+          d.ano--;
+        }
+        int verificadorDiasnoMes = diasNoMes(d);
+        
+        verificadorDias += verificadorDiasnoMes; 
+      }
+    } while (verificadorDias <= 0);
+
+    novoDia -> dia = verificadorDias;
+    novoDia -> mes = d.mes;
+    novoDia -> ano = d.ano;
 
     return novoDia; 
 
@@ -125,17 +144,17 @@ struct data{ //Declaração do struct data
 
   //Função que obtém o dia da data
   unsigned int obtemDiaData(Data d) {
-    return d->dia;
+    return d.dia;
     }
 
   //Função que obtém o mes da Data
   unsigned int obtemMesData(Data d) {
-    return d->mes;
+    return d.mes;
   }
 
   //Função que obtém o ano da Data
   unsigned int obtemAnoData(Data d) {
-    return d->ano;
+    return d.ano;
     }
 
   //Função que identifica se a data pertence à um ano bissexto
