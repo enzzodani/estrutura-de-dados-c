@@ -12,7 +12,7 @@
   typedef struct data Data;
 
 //Declaração das funções auxiliares
-  unsigned int diaNoMes();
+  unsigned int diaNoMes(Data d);
 
 //Declaração das funções principais
   Data* criaData(unsigned int dia, unsigned int mes, unsigned int ano);
