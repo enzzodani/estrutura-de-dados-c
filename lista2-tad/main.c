@@ -1,19 +1,73 @@
 #include <stdio.h>
 
+//Constantes importantes
+#define MENU_INICIAL 13;
+#define CRIAR_DATA 1;
+#define LIBERAR_DATA 2;
+#define SOMAR 3;
+#define SUBTRAIR 4;
+#define ATRIBUIR 5;
+#define DIA 6;
+#define MES 7;
+#define ANO 8;
+#define BISSEXTO 9;
+#define COMPARAR 10;
+#define ENTRE_DIAS 11;
+#define IMPRIMIR 12;
+#define SAIR 0;
+
+//Variáveis globais
+unsigned int procedimento;
+
+// Declaração de Funções
 void menuInicial();
 void limparBufferDeEntrada();
 
 int main(int argc, char *argv[])
 {
-  
-  
+  	// Procedimento inicial
+	procedimento = MENU_INICIAL;
 
+	// Loop principal
+	while(1){
+		limparSaida();
+		switch(procedimento){
+			case MENU_INICIAL:
+				menuInicial();
+				break;
+			case CRIAR_DATA:
+				break;
+			case LIBERAR_DATA:
+				break;
+			case SOMAR:
+				break;
+      case SUBTRAIR:
+        break;
+      case ATRIBUIR:
+        break;
+      case DIA:
+        break;
+      case MES:
+        break;
+      case ANO:
+        break;
+      case BISSEXTO:
+        break;
+      case COMPARAR:
+        break;
+      case ENTRE_DIAS:
+        break;
+      case IMPRIMIR:
+        break;
+			case SAIR:
+				return 0;
+			default:
+				procedimento = MENU_INICIAL;
+	 
   return 0;
 }
 
 void menuInicial(){
-  char procedimento;
-
 	printf("PROGRAMA DE DATAS\n\n");
   printf("1 - Criar Data\n");
   printf("2 - Liberar Data\n");
@@ -28,7 +82,7 @@ void menuInicial(){
   printf("11 - Pegar o numero de dias entre 2 datas\n");
   printf("12 - Imprimir uma data\n");
   printf("0 - Sair do programa\n");
-	scanf("%c", &procedimento);
+	scanf("%d", &procedimento);
 	limparBufferDeEntrada();
 }
 
