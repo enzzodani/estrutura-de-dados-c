@@ -8,30 +8,35 @@
 #include <math.h>
 #include <stdbool.h>
 
-typedef struct data Data;
+//Declaração da struct Data 
+  typedef struct data Data;
 
-Data* criaData(unsigned int dia, unsigned int mes, unsigned int ano);
+//Declaração das funções auxiliares
+  unsigned int diaNoMes();
 
-void liberaData(Data *d);
+//Declaração das funções principais
+  Data* criaData(unsigned int dia, unsigned int mes, unsigned int ano);
 
-Data *somaDiasData(Data d, unsigned int dias);
+  void liberaData(Data *d);
 
-Data *subtrairDiasData(Data d, unsigned int dias);
+  Data *somaDiasData(Data d, unsigned int dias);
 
-void atribuirData(Data *d, unsigned int dia, unsigned int mes, unsigned int ano);
+  Data *subtrairDiasData(Data d, unsigned int dias);
 
-unsigned int obtemDiaData(Data d);
+  void atribuirData(Data *d, unsigned int dia, unsigned int mes, unsigned int ano);
 
-unsigned int obtemMesData(Data d);
+  unsigned int obtemDiaData(Data d);
 
-unsigned int obtemAnoData(Data d);
+  unsigned int obtemMesData(Data d);
 
-unsigned int bissextoData(Data d);
+  unsigned int obtemAnoData(Data d);
 
-int comparaData(Data d1, Data d2);
+  unsigned int bissextoData(Data d);
 
-unsigned int numeroDiasDatas(Data d1, Data d2);
+  int comparaData(Data d1, Data d2);
 
-char* imprimeData(Data d, char *formato);
+  unsigned int numeroDiasDatas(Data d1, Data d2);
+
+  char* imprimeData(Data d, char *formato);
 
 #endif //data.h

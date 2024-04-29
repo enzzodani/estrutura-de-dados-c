@@ -13,7 +13,38 @@ struct data{ //Declaração do struct data
 };
 
 //Funções auxiliares
+  unsigned int diasNoMes(Data *d) {
 
+    unsigned int quantidadeDias = 0;
+    
+    switch(d.mes) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            quantidadeDias = 31;
+            break;
+           
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            quantidadeDias = 30;
+            break;
+           
+        case 2:
+            if ((ano % 4) == 0) {
+                quantidadeDias = 29;
+            } else {
+                quantidadeDias = 28;
+            }
+            break;
+    }
+  return quantidadeDias;
+}
 //Funções principais
 
   //Função que cria uma data dinâmicamente
