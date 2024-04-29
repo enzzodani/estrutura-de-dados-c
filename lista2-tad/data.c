@@ -1,3 +1,5 @@
+// data.c - Implementação das funções da biblioteca
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -35,7 +37,17 @@ struct data{ //Declaração do struct data
   //Função que soma dias em uma data e retorna uma nova data
   Data* somaDiasData(Data d, unsigned int dias){
     Data *novoDia = (Data *) malloc(sizeof(Data));
+    
+    if (novoDia != NULL) {
+
+    novoDia -> dia = (d -> dia) + dias; 
+    novoDia -> mes = d -> mes;
+    novoDia -> ano = d -> ano;
+
     }
+
+    
+  }
 
   //Função que subtrai dias em uma data e retorna uma nova data
   Data *subtrairDiasData(Data d, unsigned int dias) {
