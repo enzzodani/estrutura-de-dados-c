@@ -36,14 +36,19 @@ int main(int argc, char *argv[])
 				menuInicial();
 				break;
 			case CRIAR_DATA:
+        criaDataMenu();
 				break;
 			case LIBERAR_DATA:
+        liberaDataMenu();
 				break;
 			case SOMAR:
+        somaDataMenu();
 				break;
       case SUBTRAIR:
+        subtrairDataMenu();
         break;
       case ATRIBUIR:
+        
         break;
       case DIA:
         break;
@@ -86,7 +91,12 @@ void menuInicial(){
 	limparBufferDeEntrada();
 }
 
-void limparBufferDeEntrada(void){
+void limparBufferDeEntrada(){
 	char lixo;
 	while((lixo = getchar()) != '\n' && lixo != EOF){continue;}
+}
+
+void limparSaida(){
+	fflush(stdout);
+	printf("\e[1;1H\e[2J");
 }
