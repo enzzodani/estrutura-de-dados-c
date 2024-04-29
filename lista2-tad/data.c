@@ -103,6 +103,15 @@ struct data{ //Declaração do struct data
   //Função que subtrai dias em uma data e retorna uma nova data
   Data *subtrairDiasData(Data d, unsigned int dias) {
     Data *novoDia = (Data *) malloc(sizeof(Data));
+
+       if (novoDia == NULL) {
+        // Tratamento de erro: falha na alocação de memória
+        printf("Erro: Falha na alocação de memória.\n");
+        return NULL;
+    }
+
+    return novoDia; 
+
     }
 
   //Função que atribui uma nova data à uma data passada e caso falhe, transforma a data passada em NULL
