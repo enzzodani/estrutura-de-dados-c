@@ -36,7 +36,7 @@ struct data{ //Declaração do struct data
             break;
            
         case 2:
-            if ((ano % 4) == 0) {
+          if ((d.ano % 4 == 0 && d.ano % 100 != 0) || (d.ano % 400 == 0)) {
                 quantidadeDias = 29;
             } else {
                 quantidadeDias = 28;
@@ -45,6 +45,7 @@ struct data{ //Declaração do struct data
     }
   return quantidadeDias;
 }
+
 //Funções principais
 
   //Função que cria uma data dinâmicamente
@@ -68,16 +69,35 @@ struct data{ //Declaração do struct data
   //Função que soma dias em uma data e retorna uma nova data
   Data* somaDiasData(Data d, unsigned int dias){
     Data *novoDia = (Data *) malloc(sizeof(Data));
-    
-    if (novoDia != NULL) {
 
-    novoDia -> dia = (d -> dia) + dias; 
-    novoDia -> mes = d -> mes;
-    novoDia -> ano = d -> ano;
-
+       if (novoDia == NULL) {
+        // Tratamento de erro: falha na alocação de memória
+        printf("Erro: Falha na alocação de memória.\n");
+        return NULL;
     }
 
-    
+    novoDia -> dia = (d.dia) + dias; 
+    novoDia -> mes = d.mes;
+    novoDia -> ano = d.ano;
+
+    verificadorDiasnoMes = diasNoMes(novoDia);
+
+    do {
+      if (novoDia -> dia > verificadorDiasnoMes) {
+        novoDia -> dia -= verificadorDiasnoMes;
+        (novoDia -> mes)++;
+        verificadorDiasnoMes = diasNoMes(*novoDia);
+      }
+    } while (novoDia -> dia > verificadorDiasnoMes);
+
+    do {
+      if (novoDia -> mes > 12) {
+        novoDia -> mes -= 12;
+        (novoDia -> ano)++;
+      }
+    } while (novoDia -> mes > 12);
+
+    return novoDia; 
   }
 
   //Função que subtrai dias em uma data e retorna uma nova data
@@ -96,17 +116,17 @@ struct data{ //Declaração do struct data
 
   //Função que obtém o dia da data
   unsigned int obtemDiaData(Data d) {
-    return d.dia;
+    return d->dia;
     }
 
   //Função que obtém o mes da Data
   unsigned int obtemMesData(Data d) {
-    return d.mes;
+    return d->mes;
   }
 
   //Função que obtém o ano da Data
   unsigned int obtemAnoData(Data d) {
-    return d.ano;
+    return d->ano;
     }
 
   //Função que identifica se a data pertence à um ano bissexto
