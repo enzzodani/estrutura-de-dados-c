@@ -29,6 +29,7 @@ Data *datasGlobal[MAX_DATAS]; // Array Global de ponteiros para Data
   //Funções auxiliares
     void limparBufferDeEntrada();//Limpa o buffer de entrada
     void limparSaida(); //Limpa a saída (semelhante ao system(clear))
+    void imprimiLoppDatas(); //Imprime o array global de datas
   //Funções menu 
     void menuInicial(); //chama o menu inicial
     void criaDataMenu(); //chama o menu de criação de data
@@ -154,12 +155,7 @@ void menuLiberaData() {
   if (verificador == 0) { //O verificador so vai ser igual a 0 se todas as posições forem NULL, ou seja, não existe datas
     printf("Nao existe datas criadas com exito.\n");
   } else {
-    for (int i = 0; i < MAX_DATAS; i++) { //Imprime as datas do array datasGlobal
-      if (datasGlobal[i] != NULL) {
-        printf("Data %d: ", i+1);
-        imprimeData(**datasGlobal[i], 'ddmmaaaa');
-        printf("\n");
-      }
+      imprimiLoppDatas();
     }
     int escolhido;
     printf("Liberar Data ");
@@ -177,6 +173,47 @@ void menuLiberaData() {
       }
   }
 }
+
+void somaDataMenu() {
+
+}
+
+void subtrairDataMenu() {
+
+}
+
+void atribuirDataMenu() {
+
+}
+
+void obtemDiaMenu() {
+  
+}
+
+void obtemMesMenu() {
+
+}
+
+void obtemAnoMenu() {
+
+}
+
+void bissextoMenu() {
+
+}
+
+void compararMenu() {
+
+}
+
+void entreDiasMenu() {
+
+}
+
+void imprimirMenu() {
+
+}
+
 //Funções Auxiliares - Definição
 void limparBufferDeEntrada(){ //Lida com buffers relacionados a char 
 	char lixo;
@@ -186,4 +223,13 @@ void limparBufferDeEntrada(){ //Lida com buffers relacionados a char
 void limparSaida(){ //Limpa compleetamente a saída 
 	fflush(stdout);
 	printf("\e[1;1H\e[2J");
+}
+
+void imprimiLoppDatas() {
+    for (int i = 0; i < MAX_DATAS; i++) { //Imprime as datas do array datasGlobal
+      if (datasGlobal[i] != NULL) {
+        printf("Data %d: ", i+1);
+        imprimeData(**datasGlobal[i], 'ddmmaaaa');
+        printf("\n");
+      }
 }
