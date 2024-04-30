@@ -1,44 +1,48 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 //Constantes importantes
-#define MAX_DATAS 10;
-#define MENU_INICIAL 13;
-#define CRIAR_DATA 1;
-#define LIBERAR_DATA 2;
-#define SOMAR 3;
-#define SUBTRAIR 4;
-#define ATRIBUIR 5;
-#define DIA 6;
-#define MES 7;
-#define ANO 8;
-#define BISSEXTO 9;
-#define COMPARAR 10;
-#define ENTRE_DIAS 11;
-#define IMPRIMIR 12;
-#define SAIR 0;
+  //Define o numero maximo de elementos no array de datas
+  #define MAX_DATAS 10;
+  
+  //Definem os numeros para menus
+  #define MENU_INICIAL 13;
+  #define CRIAR_DATA 1;
+  #define LIBERAR_DATA 2;
+  #define SOMAR 3;
+  #define SUBTRAIR 4;
+  #define ATRIBUIR 5;
+  #define DIA 6;
+  #define MES 7;
+  #define ANO 8;
+  #define BISSEXTO 9;
+  #define COMPARAR 10;
+  #define ENTRE_DIAS 11;
+  #define IMPRIMIR 12;
+  #define SAIR 0;
 
 //Variáveis globais
-unsigned int procedimento;
-Data *datasGlobal[MAX_DATAS]; // Array de ponteiros para Data 
+unsigned int procedimento; //Variavel para escolha de menu 
+Data *datasGlobal[MAX_DATAS]; // Array Global de ponteiros para Data 
 
 // Declaração de Funções
   //Funções auxiliares
-    void limparBufferDeEntrada();
-    void limparSaida();
+    void limparBufferDeEntrada();//Limpa o buffer de entrada
+    void limparSaida(); //Limpa a saída (semelhante ao system(clear))
   //Funções menu 
-    void menuInicial();
-    void criaDataMenu();
-    void liberaDataMenu();
-    void somaDataMenu();
-    void subtrairDataMenu();
-    void atribuirDataMenu();
-    void obtemDiaMenu();
-    void obtemMesMenu();
-    void obtemAnoMenu();
-    void bissextoMenu();
-    void compararMenu();
-    void entreDiasMenu();
-    void imprimirMenu();
+    void menuInicial(); //chama o menu inicial
+    void criaDataMenu(); //chama o menu de criação de data
+    void liberaDataMenu(); //chama o menu de liberação de data
+    void somaDataMenu(); //chamda o menu de soma de dias
+    void subtrairDataMenu(); //chama o menu de subtração de dias
+    void atribuirDataMenu(); //chma o menu de atribuição de data
+    void obtemDiaMenu(); //chama o menu de obtenção de dia
+    void obtemMesMenu(); //chama o menu de obtenção de mes 
+    void obtemAnoMenu(); //chama o menu de obtenção de ano
+    void bissextoMenu(); //chama o menu de verificador de data bissexta
+    void compararMenu(); //chama o menu de compração de datas
+    void entreDiasMenu(); //chama o menu de calcular dias entre datas 
+    void imprimirMenu(); //chama o menu de impressão de uma data 
 
 int main(int argc, char *argv[])
 {
@@ -47,7 +51,7 @@ int main(int argc, char *argv[])
 
 	// Loop principal
 	while(1){
-		limparSaida();
+		limparSaida(); //Limpa a saída para o menu inicial
 		switch(procedimento){
 			case MENU_INICIAL:
 				menuInicial();
@@ -88,7 +92,7 @@ int main(int argc, char *argv[])
       case IMPRIMIR:
         imprimirMenu();
         break;
-			case SAIR:
+			case SAIR: //Fecha o programa 
 				return 0;
 			default:
 				procedimento = MENU_INICIAL;
@@ -113,7 +117,6 @@ void menuInicial(){
   printf("12 - Imprimir uma data\n");
   printf("0 - Sair do programa\n");
 	scanf("%d", &procedimento);
-	limparBufferDeEntrada();
 }
 
 void criaDataMenu() {
@@ -121,8 +124,8 @@ void criaDataMenu() {
   // Encontrar posição disponível no array
   int posicao = -1;
   for (int i = 0; i < MAX_DATAS; i++) {
-      if (datasGlobal[i] == NULL) {
-          posicao = i;
+      if (datasGlobal[i] == NULL) { //Se a posição do elemento é NULL, significa que tem espaço livre nessa posição
+          posicao = i; //guarda a posição que tem o espaço livre
           break;
       }
   }
@@ -130,9 +133,9 @@ void criaDataMenu() {
   printf("Digite o dia, mês e ano separados por espaço: ");
   scanf("%d %d %d", &dia, &mes, &ano);
 
-  if (posicao != -1) {  
+  if (posicao != -1) { //Se a posição é diferente de -1, então temos espaço livre para guardar essa nova data  
     criaData(dia, mes, ano);
-  } else {
+  } else { //Todas as posições estão cheias
     printf("Não há espaço disponível para armazenar mais datas.\n");
   }
 }
@@ -142,15 +145,15 @@ void menuLiberaData() {
   int posicao = -1;
   int verificador = 0;
   for (int i = 0; i < MAX_DATAS; i++) {
-    if (datasGlobal[i] != NULL) {
-      verificador++;
+    if (datasGlobal[i] != NULL) { //Se a posição é diferente de NULL, então significa que existe data nessa posição
+      verificador++; //O contador é adicionado para cada data encontrada
     }
   }
 
-  if (verificador == 0) {
+  if (verificador == 0) { //O verificador so vai ser igual a 0 se todas as posições forem NULL, ou seja, não existe datas
     printf("Nao existe datas criadas com exito.\n");
   } else {
-    for (int i = 0; i < MAX_DATAS; i++) {
+    for (int i = 0; i < MAX_DATAS; i++) { //Imprime as datas do array datasGlobal
       if (datasGlobal[i] != NULL) {
         printf("Data %d: ", i+1);
         imprimeData(**datasGlobal[i], 'ddmmaaaa');
@@ -162,9 +165,11 @@ void menuLiberaData() {
     scanf("%d", &escolhido);
 
     // Validar a entrada do usuário
+    // verifica se escolhido está entre o range correto
+    // verifica também se a data existe 
       if (escolhido >= 1 && escolhido <= MAX_DATAS && datasGlobal[escolhido - 1] != NULL) {
           liberaData(datasGlobal[escolhido - 1]); //Libera a data
-          datasGlobal[escolhido - 1] = NULL; // Libera um espaço
+          datasGlobal[escolhido - 1] = NULL; // Libera um espaço para adicionar nova data futuramente
           printf("Data liberada com sucesso.\n");
       } else {
           printf("Escolha inválida ou data não existe.\n");
@@ -172,12 +177,12 @@ void menuLiberaData() {
   }
 }
 //Funções Auxiliares - Definição
-void limparBufferDeEntrada(){
+void limparBufferDeEntrada(){ //Lida com buffers relacionados a char 
 	char lixo;
 	while((lixo = getchar()) != '\n' && lixo != EOF){continue;}
 }
 
-void limparSaida(){
+void limparSaida(){ //Limpa compleetamente a saída 
 	fflush(stdout);
 	printf("\e[1;1H\e[2J");
 }
