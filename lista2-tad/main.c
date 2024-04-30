@@ -4,7 +4,7 @@
 // Lista ligada
 // Root
 typedef struct root {
-  Node *p;
+  Node *primeiro;
 } Root;
 
 // Node
@@ -37,7 +37,8 @@ typedef struct node {
 unsigned int procedimento; //Variavel para escolha de menu 
 Data *datasGlobal[MAX_DATAS]; // Array Global de ponteiros para Data 
 unsigned int contadorData = 0;
-Root root = {.p=NULL};
+Root root = {.primeiro=NULL};
+Node **futuroNode = &root.primeiro;
 
 // Declaração de Funções
   //Funções auxiliares
@@ -213,16 +214,12 @@ void limparSaida(){ //Limpa compleetamente a saída
 	printf("\e[1;1H\e[2J");
 }
 
-void colocaData(unsigned int dia, unsigned int mes, unsigned intano){
-  Node *temp = &root;
-  for(int i = 0; i < contadorData; i++){
-    temp = temp->proximo;
-  }
-  temp->proximo = malloc(sizeof(Node));
-  if (temp->proximo != NULL){
-    temp = temp->proximo;
-    temp->d = criaData(dia, mes, ano);
-    temp->proximo = NULL;
+void colocaData(unsigned int dia, unsigned int mes, unsigned int ano){
+  *futuroNode = (Node *)malloc(sizeof(Node));
+  if (*futuroNode != NULL){
+    (*futuroNode)->d = criaData(dia, mes, ano);
+    (*futuroNode)->proximo = NULL;
+    futuroNode = &((*futuroNode)->proximo);
   } else {
     printf("Erro: memoria insuficiente\n");
   }
