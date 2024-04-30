@@ -51,11 +51,14 @@ struct data{ //Declaração do struct data
   //Função que cria uma data dinâmicamente
   Data* criaData(unsigned int dia, unsigned int mes, unsigned int ano) {
     Data *d = (Data *) malloc(sizeof(Data));
-
+  
     if (d != NULL) {
-      d -> dia = dia;
-      d -> mes = mes;
-      d -> ano = ano;
+        d -> dia = dia;
+        d -> mes = mes;
+        d -> ano = ano;
+        printf("Data criada com sucesso.\n");
+    } else {
+        printf("Erro ao criar a data.\n");
     }
     return (d);
   }

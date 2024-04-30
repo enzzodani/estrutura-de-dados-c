@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 //Constantes importantes
+#define MAX_DATAS 10;
 #define MENU_INICIAL 13;
 #define CRIAR_DATA 1;
 #define LIBERAR_DATA 2;
@@ -18,10 +19,26 @@
 
 //Variáveis globais
 unsigned int procedimento;
+Data *datas[MAX_DATAS]; // Array de ponteiros para Data 
 
 // Declaração de Funções
-void menuInicial();
-void limparBufferDeEntrada();
+  //Funções auxiliares
+    void limparBufferDeEntrada();
+    void limparSaida();
+  //Funções menu 
+    void menuInicial();
+    void criaDataMenu();
+    void liberaDataMenu();
+    void somaDataMenu();
+    void subtrairDataMenu();
+    void atribuirDataMenu();
+    void obtemDiaMenu();
+    void obtemMesMenu();
+    void obtemAnoMenu();
+    void bissextoMenu();
+    void compararMenu();
+    void entreDiasMenu();
+    void imprimirMenu();
 
 int main(int argc, char *argv[])
 {
@@ -48,21 +65,28 @@ int main(int argc, char *argv[])
         subtrairDataMenu();
         break;
       case ATRIBUIR:
-        
+        atribuirDataMenu();  
         break;
       case DIA:
+        obtemDiaMenu();
         break;
       case MES:
+        obtemMesMenu();
         break;
       case ANO:
+        obtemAnoMenu();
         break;
       case BISSEXTO:
+        bissextoMenu();
         break;
       case COMPARAR:
+        compararMenu();
         break;
       case ENTRE_DIAS:
+        entreDiasMenu();
         break;
       case IMPRIMIR:
+        imprimirMenu();
         break;
 			case SAIR:
 				return 0;
@@ -72,6 +96,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
+//Funções de Menu - Definição 
 void menuInicial(){
 	printf("PROGRAMA DE DATAS\n\n");
   printf("1 - Criar Data\n");
@@ -91,6 +116,28 @@ void menuInicial(){
 	limparBufferDeEntrada();
 }
 
+void criaDataMenu() {
+  unsigned int dia, mes, ano;
+  // Encontrar posição disponível no array
+  int posicao = -1;
+  for (int i = 0; i < MAX_DATAS; i++) {
+      if (datas[i] == NULL) {
+          posicao = i;
+          break;
+      }
+  }
+  
+  printf("Digite o dia, mês e ano separados por espaço: ");
+  scanf("%d %d %d", &dia, &mes, &ano);
+
+  if (posicao != -1) {  
+    criaData(dia, mes, ano);
+  } else {
+    printf("Não há espaço disponível para armazenar mais datas.\n");
+  }
+}
+
+//Funções Auxiliares - Definição
 void limparBufferDeEntrada(){
 	char lixo;
 	while((lixo = getchar()) != '\n' && lixo != EOF){continue;}
