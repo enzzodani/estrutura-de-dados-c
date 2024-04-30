@@ -248,6 +248,7 @@ void tiraData(unsigned int indice) {
   } else {
     free(atual);
     anterior -> proximo = NULL;
+    futuroNode = &(anterior->proximo);
   }
   contadorData--;
 }
