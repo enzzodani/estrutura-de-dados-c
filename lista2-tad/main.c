@@ -10,7 +10,7 @@ typedef struct root {
 // Node
 typedef struct node {
   Data *d;
-  Node *p;
+  Node *proximo;
 } Node;
 
 //Constantes importantes
@@ -43,7 +43,8 @@ Root root = {.p=NULL};
   //Funções auxiliares
     void limparBufferDeEntrada();//Limpa o buffer de entrada
     void limparSaida();//Limpa a saída (semelhante ao system(clear))
-    void ColocaData(unsigned int dia, unsigned int mes, unsigned int ano);
+    void colocaData(unsigned int dia, unsigned int mes, unsigned int ano);
+    void tiraData();
     void imprimiLoppDatas(); //Imprime o array global de datas
   //Funções menu 
     void menuInicial(); //chama o menu inicial
@@ -158,35 +159,7 @@ void criaDataMenu() {
 }
 
 void menuLiberaData() {
- //Verificar se o array esta vazio
-  int posicao = -1;
-  int verificador = 0;
-  for (int i = 0; i < MAX_DATAS; i++) {
-    if (datasGlobal[i] != NULL) { //Se a posição é diferente de NULL, então significa que existe data nessa posição
-      verificador++; //O contador é adicionado para cada data encontrada
-    }
-  }
 
-  if (verificador == 0) { //O verificador so vai ser igual a 0 se todas as posições forem NULL, ou seja, não existe datas
-    printf("Nao existe datas criadas com exito.\n");
-  } else {
-      imprimiLoppDatas();
-    }
-    int escolhido;
-    printf("Liberar Data ");
-    scanf("%d", &escolhido);
-
-    // Validar a entrada do usuário
-    // verifica se escolhido está entre o range correto
-    // verifica também se a data existe 
-      if (escolhido >= 1 && escolhido <= MAX_DATAS && datasGlobal[escolhido - 1] != NULL) {
-          liberaData(datasGlobal[escolhido - 1]); //Libera a data
-          datasGlobal[escolhido - 1] = NULL; // Libera um espaço para adicionar nova data futuramente
-          printf("Data liberada com sucesso.\n");
-      } else {
-          printf("Escolha inválida ou data não existe.\n");
-      }
-  }
 }
 
 void somaDataMenu() {
@@ -243,23 +216,45 @@ void limparSaida(){ //Limpa compleetamente a saída
 void colocaData(unsigned int dia, unsigned int mes, unsigned intano){
   Node *temp = &root;
   for(int i = 0; i < contadorData; i++){
-    temp = temp->p;
+    temp = temp->proximo;
   }
-  temp->p = malloc(sizeof(Node));
-  if (temp->p != NULL){
-    temp = temp->p;
+  temp->proximo = malloc(sizeof(Node));
+  if (temp->proximo != NULL){
+    temp = temp->proximo;
     temp->d = criaData(dia, mes, ano);
-    temp->p = NULL;
+    temp->proximo = NULL;
   } else {
     printf("Erro: memoria insuficiente\n");
   }
 }
 
+void tiraData(unsigned int indice) {
+  Node *atual = root -> proximo;
+  Node *anterior;
+
+  int i = 0;
+
+  for (i = 0; i < indice; i++) {
+    anterior = atual;
+    atual = atual -> proximo;
+  }
+
+  liberaData(atual->d);
+
+  if (indice == 0) {
+    root -> proximo = atual -> proximo;
+    free(atual);
+  }
+  else if (indice <= contadorData) {
+    anterior -> proximo = atual -> proximo;
+    free(atual);
+  } else {
+    free(atual);
+    anterior -> proximo = NULL;
+  }
+  contadorData--;
+}
+
 void imprimiLoppDatas() {
-    for (int i = 0; i < MAX_DATAS; i++) { //Imprime as datas do array datasGlobal
-      if (datasGlobal[i] != NULL) {
-        printf("Data %d: ", i+1);
-        imprimeData(**datasGlobal[i], 'ddmmaaaa');
-        printf("\n");
-      }
+
 }
