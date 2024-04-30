@@ -52,49 +52,50 @@ int main(int argc, char *argv[])
 	// Loop principal
 	while(1){
 		limparSaida(); //Limpa a saída para o menu inicial
+		
 		switch(procedimento){
 			case MENU_INICIAL:
 				menuInicial();
-				break;
+			break;
 			case CRIAR_DATA:
-        criaDataMenu();
-				break;
+        			criaDataMenu();
+			break;
 			case LIBERAR_DATA:
-        liberaDataMenu();
-				break;
+        			liberaDataMenu();
+			break;
 			case SOMAR:
-        somaDataMenu();
-				break;
-      case SUBTRAIR:
-        subtrairDataMenu();
-        break;
-      case ATRIBUIR:
-        atribuirDataMenu();  
-        break;
-      case DIA:
-        obtemDiaMenu();
-        break;
-      case MES:
-        obtemMesMenu();
-        break;
-      case ANO:
-        obtemAnoMenu();
-        break;
-      case BISSEXTO:
-        bissextoMenu();
-        break;
-      case COMPARAR:
-        compararMenu();
-        break;
-      case ENTRE_DIAS:
-        entreDiasMenu();
-        break;
-      case IMPRIMIR:
-        imprimirMenu();
-        break;
-			case SAIR: //Fecha o programa 
+			        somaDataMenu();
+			break;
+		        case SUBTRAIR:
+        			subtrairDataMenu();
+        		break;
+      			case ATRIBUIR:
+   				atribuirDataMenu();  
+        		break;
+		      	case DIA:
+			        obtemDiaMenu();
+		        break;
+      			case MES:
+			        obtemMesMenu();
+        		break;
+      			case ANO:
+        			obtemAnoMenu();
+        		break;
+      			case BISSEXTO:
+        			bissextoMenu();
+		        break;
+      			case COMPARAR:
+        			compararMenu();
+        		break;
+      			case ENTRE_DIAS:
+        			entreDiasMenu();
+        		break;
+      			case IMPRIMIR:
+        			imprimirMenu();
+			break;
+      			case SAIR: //Fecha o programa 
 				return 0;
-			default:
+      			default:
 				procedimento = MENU_INICIAL;
 	 
   return 0;
@@ -102,7 +103,7 @@ int main(int argc, char *argv[])
 
 //Funções de Menu - Definição 
 void menuInicial(){
-	printf("PROGRAMA DE DATAS\n\n");
+printf("PROGRAMA DE DATAS\n\n");
   printf("1 - Criar Data\n");
   printf("2 - Liberar Data\n");
   printf("3 - Somar dias a Data\n");
