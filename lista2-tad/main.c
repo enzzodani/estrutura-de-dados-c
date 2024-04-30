@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Lista ligada
+// Root
+typedef struct root {
+  Node *p;
+} Root;
+
+// Node
+typedef struct node {
+  Data *d;
+  Node *p;
+} Node;
+
 //Constantes importantes
   //Define o numero maximo de elementos no array de datas
   #define MAX_DATAS 10;
@@ -24,11 +36,14 @@
 //Variáveis globais
 unsigned int procedimento; //Variavel para escolha de menu 
 Data *datasGlobal[MAX_DATAS]; // Array Global de ponteiros para Data 
+unsigned int contadorData = 0;
+Root root = {.p=NULL};
 
 // Declaração de Funções
   //Funções auxiliares
     void limparBufferDeEntrada();//Limpa o buffer de entrada
-    void limparSaida(); //Limpa a saída (semelhante ao system(clear))
+    void limparSaida();//Limpa a saída (semelhante ao system(clear))
+    void ColocaData(unsigned int dia, unsigned int mes, unsigned int ano);
     void imprimiLoppDatas(); //Imprime o array global de datas
   //Funções menu 
     void menuInicial(); //chama o menu inicial
@@ -55,23 +70,23 @@ int main(int argc, char *argv[])
 		limparSaida(); //Limpa a saída para o menu inicial
 		
 		switch(procedimento){
-			case MENU_INICIAL:
-				menuInicial();
-			break;
-			case CRIAR_DATA:
-        			criaDataMenu();
-			break;
-			case LIBERAR_DATA:
-        			liberaDataMenu();
-			break;
-			case SOMAR:
-			        somaDataMenu();
-			break;
+            case MENU_INICIAL:
+              menuInicial();
+            break;
+            case CRIAR_DATA:
+              criaDataMenu();
+            break;
+            case LIBERAR_DATA:
+              liberaDataMenu();
+            break;
+            case SOMAR:
+              somaDataMenu();
+            break;
 		        case SUBTRAIR:
         			subtrairDataMenu();
         		break;
       			case ATRIBUIR:
-   				atribuirDataMenu();  
+   				    atribuirDataMenu();  
         		break;
 		      	case DIA:
 			        obtemDiaMenu();
@@ -223,6 +238,21 @@ void limparBufferDeEntrada(){ //Lida com buffers relacionados a char
 void limparSaida(){ //Limpa compleetamente a saída 
 	fflush(stdout);
 	printf("\e[1;1H\e[2J");
+}
+
+void colocaData(unsigned int dia, unsigned int mes, unsigned intano){
+  Node *temp = &root;
+  for(int i = 0; i < contadorData; i++){
+    temp = temp->p;
+  }
+  temp->p = malloc(sizeof(Node));
+  if (temp->p != NULL){
+    temp = temp->p;
+    temp->d = criaData(dia, mes, ano);
+    temp->p = NULL;
+  } else {
+    printf("Erro: memoria insuficiente\n");
+  }
 }
 
 void imprimiLoppDatas() {
