@@ -13,7 +13,7 @@ struct data{ //Declaração do struct data
 };
 
 //Funções auxiliares
-  unsigned int diasNoMes(Data d) {
+  unsigned int diasNoMes(Data d) { //Retorna a quantidade de dias no mês da data passada como parâmetro
 
     unsigned int quantidadeDias = 0;
     
@@ -36,7 +36,7 @@ struct data{ //Declaração do struct data
             break;
            
         case 2:
-          if ((d.ano % 4 == 0 && d.ano % 100 != 0) || (d.ano % 400 == 0)) {
+          if ((d.ano % 4 == 0 && d.ano % 100 != 0) || (d.ano % 400 == 0)) { //Verificação de ano bissexto 
                 quantidadeDias = 29;
             } else {
                 quantidadeDias = 28;
@@ -79,26 +79,26 @@ struct data{ //Declaração do struct data
         return NULL;
     }
 
-    novoDia -> dia = (d.dia) + dias; 
+    novoDia -> dia = (d.dia) + dias; //Faz a soma de novos dias
     novoDia -> mes = d.mes;
     novoDia -> ano = d.ano;
 
-    int verificadorDiasnoMes = diasNoMes(novoDia);
+    int verificadorDiasnoMes = diasNoMes(novoDia); //verifica quantos dias tem no mes 
 
     do {
       if (novoDia -> dia > verificadorDiasnoMes) {
-        novoDia -> dia -= verificadorDiasnoMes;
-        (novoDia -> mes)++;
-        verificadorDiasnoMes = diasNoMes(novoDia);
+        novoDia -> dia -= verificadorDiasnoMes; // Ajeita a dia caso seja maior que o numero de dias no mes
+        (novoDia -> mes)++; // incrementa 1 mes para caso o dia passe dos dias do mes
+        verificadorDiasnoMes = diasNoMes(novoDia); //atualiza a quantidade de dias do mes, visto que o mes foi incrmentado
       }
-    } while (novoDia -> dia > verificadorDiasnoMes);
+    } while (novoDia -> dia > verificadorDiasnoMes); //O loop se repete ate que o dia seja uma quantidade possível, ou seja, menor que os dias do mes 
 
     do {
-      if (novoDia -> mes > 12) {
-        novoDia -> mes -= 12;
-        (novoDia -> ano)++;
+      if (novoDia -> mes > 12) { //verifica se a quanridade de meses faz sentido dentro do ano
+        novoDia -> mes -= 12; // ajeita a quantidade de meses no ano
+        (novoDia -> ano)++; //incrmenta 1 ano
       }
-    } while (novoDia -> mes > 12);
+    } while (novoDia -> mes > 12); //faz isso enquanto os meses forem maior que 12
 
     return novoDia; 
   }
