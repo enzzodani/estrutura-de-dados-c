@@ -19,7 +19,7 @@
 
 //Variáveis globais
 unsigned int procedimento;
-Data *datas[MAX_DATAS]; // Array de ponteiros para Data 
+Data *datasGlobal[MAX_DATAS]; // Array de ponteiros para Data 
 
 // Declaração de Funções
   //Funções auxiliares
@@ -121,7 +121,7 @@ void criaDataMenu() {
   // Encontrar posição disponível no array
   int posicao = -1;
   for (int i = 0; i < MAX_DATAS; i++) {
-      if (datas[i] == NULL) {
+      if (datasGlobal[i] == NULL) {
           posicao = i;
           break;
       }
@@ -137,6 +137,40 @@ void criaDataMenu() {
   }
 }
 
+void menuLiberaData() {
+ //Verificar se o array esta vazio
+  int posicao = -1;
+  int verificador = 0;
+  for (int i = 0; i < MAX_DATAS; i++) {
+    if (datasGlobal[i] != NULL) {
+      verificador++;
+    }
+  }
+
+  if (verificador == 0) {
+    printf("Nao existe datas criadas com exito.\n");
+  } else {
+    for (int i = 0; i < MAX_DATAS; i++) {
+      if (datasGlobal[i] != NULL) {
+        printf("Data %d: ", i+1);
+        imprimeData(**datasGlobal[i], 'ddmmaaaa');
+        printf("\n");
+      }
+    }
+    int escolhido;
+    printf("Liberar Data ");
+    scanf("%d", &escolhido);
+
+    // Validar a entrada do usuário
+      if (escolhido >= 1 && escolhido <= MAX_DATAS && datasGlobal[escolhido - 1] != NULL) {
+          liberaData(datasGlobal[escolhido - 1]); //Libera a data
+          datasGlobal[escolhido - 1] = NULL; // Libera um espaço
+          printf("Data liberada com sucesso.\n");
+      } else {
+          printf("Escolha inválida ou data não existe.\n");
+      }
+  }
+}
 //Funções Auxiliares - Definição
 void limparBufferDeEntrada(){
 	char lixo;
