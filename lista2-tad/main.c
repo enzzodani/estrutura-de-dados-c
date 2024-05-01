@@ -1,41 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "data.h"
 
 // Lista ligada
+// Node
+typedef struct node Node;
+struct node {
+  Data *d;
+  Node *proximo;
+};
+
 // Root
 typedef struct root {
   Node *primeiro;
 } Root;
 
-// Node
-typedef struct node {
-  Data *d;
-  Node *proximo;
-} Node;
-
 //Constantes importantes
   //Define o numero maximo de elementos no array de datas
-  #define MAX_DATAS 10;
+  #define MAX_DATAS 10
   
   //Definem os numeros para menus
-  #define MENU_INICIAL 13;
-  #define CRIAR_DATA 1;
-  #define LIBERAR_DATA 2;
-  #define SOMAR 3;
-  #define SUBTRAIR 4;
-  #define ATRIBUIR 5;
-  #define DIA 6;
-  #define MES 7;
-  #define ANO 8;
-  #define BISSEXTO 9;
-  #define COMPARAR 10;
-  #define ENTRE_DIAS 11;
-  #define IMPRIMIR 12;
-  #define SAIR 0;
+  #define MENU_INICIAL 13
+  #define CRIAR_DATA 1
+  #define LIBERAR_DATA 2
+  #define SOMAR 3
+  #define SUBTRAIR 4
+  #define ATRIBUIR 5
+  #define DIA 6
+  #define MES 7
+  #define ANO 8
+  #define BISSEXTO 9
+  #define COMPARAR 10
+  #define ENTRE_DIAS 11
+  #define IMPRIMIR 12
+  #define SAIR 0
 
 //Variáveis globais
 unsigned int procedimento; //Variavel para escolha de menu 
-Data *datasGlobal[MAX_DATAS]; // Array Global de ponteiros para Data 
 unsigned int contadorData = 0;
 Root root = {.primeiro=NULL};
 Node **futuroNode = &root.primeiro;
@@ -140,23 +141,11 @@ printf("PROGRAMA DE DATAS\n\n");
 
 void criaDataMenu() {
   unsigned int dia, mes, ano;
-  // Encontrar posição disponível no array
-  int posicao = -1;
-  for (int i = 0; i < MAX_DATAS; i++) {
-      if (datasGlobal[i] == NULL) { //Se a posição do elemento é NULL, significa que tem espaço livre nessa posição
-          posicao = i; //guarda a posição que tem o espaço livre
-          break;
-      }
-  }
   
   printf("Digite o dia, mês e ano separados por espaço: ");
   scanf("%d %d %d", &dia, &mes, &ano);
 
-  if (posicao != -1) { //Se a posição é diferente de -1, então temos espaço livre para guardar essa nova data  
-    criaData(dia, mes, ano);
-  } else { //Todas as posições estão cheias
-    printf("Não há espaço disponível para armazenar mais datas.\n");
-  }
+	//TODO: re-implementar
 }
 
 void menuLiberaData() {
@@ -226,7 +215,7 @@ void colocaData(unsigned int dia, unsigned int mes, unsigned int ano){
 }
 
 void tiraData(unsigned int indice) {
-  Node *atual = root -> proximo;
+  Node *atual = root.primeiro;
   Node *anterior;
 
   int i = 0;
@@ -239,7 +228,7 @@ void tiraData(unsigned int indice) {
   liberaData(atual->d);
 
   if (indice == 0) {
-    root -> proximo = atual -> proximo;
+    root.primeiro = atual -> proximo;
     free(atual);
   }
   else if (indice <= contadorData) {
