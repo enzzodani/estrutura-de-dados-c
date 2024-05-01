@@ -145,7 +145,7 @@ void criaDataMenu() {
   printf("Digite o dia, mês e ano separados por espaço: ");
   scanf("%d %d %d", &dia, &mes, &ano);
 
-	//TODO: re-implementar
+  colocaData(dia, mes, ano);
 }
 
 void menuLiberaData() {
@@ -209,6 +209,7 @@ void colocaData(unsigned int dia, unsigned int mes, unsigned int ano){
     (*futuroNode)->d = criaData(dia, mes, ano);
     (*futuroNode)->proximo = NULL;
     futuroNode = &((*futuroNode)->proximo);
+    printf("Data adicionada com sucesso\n");
   } else {
     printf("Erro: memoria insuficiente\n");
   }
