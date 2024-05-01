@@ -140,23 +140,11 @@ printf("PROGRAMA DE DATAS\n\n");
 
 void criaDataMenu() {
   unsigned int dia, mes, ano;
-  // Encontrar posição disponível no array
-  int posicao = -1;
-  for (int i = 0; i < MAX_DATAS; i++) {
-      if (datasGlobal[i] == NULL) { //Se a posição do elemento é NULL, significa que tem espaço livre nessa posição
-          posicao = i; //guarda a posição que tem o espaço livre
-          break;
-      }
-  }
   
   printf("Digite o dia, mês e ano separados por espaço: ");
   scanf("%d %d %d", &dia, &mes, &ano);
 
-  if (posicao != -1) { //Se a posição é diferente de -1, então temos espaço livre para guardar essa nova data  
-    criaData(dia, mes, ano);
-  } else { //Todas as posições estão cheias
-    printf("Não há espaço disponível para armazenar mais datas.\n");
-  }
+  colocaData(dia, mes, ano);
 }
 
 void menuLiberaData() {
@@ -220,6 +208,7 @@ void colocaData(unsigned int dia, unsigned int mes, unsigned int ano){
     (*futuroNode)->d = criaData(dia, mes, ano);
     (*futuroNode)->proximo = NULL;
     futuroNode = &((*futuroNode)->proximo);
+    printf("Data adicionada com sucesso\n");
   } else {
     printf("Erro: memoria insuficiente\n");
   }
