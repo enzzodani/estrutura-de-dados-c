@@ -7,12 +7,6 @@
 #include <string.h>
 #include "data.h"
 
-struct data{ //Declaração do struct data
-  unsigned int dia;
-  unsigned int mes;
-  unsigned int ano;
-};
-
 //Funções auxiliares
 	unsigned int diasNoMes(Data d) { //Retorna a quantidade de dias no mês da data passada como parâmetro
 
@@ -204,7 +198,7 @@ struct data{ //Declaração do struct data
     }
 
   //Função que imprime a data passada em uma formatação especifica
-    char imprimeData(Data d, char *formato)
+    char *imprimeData(Data d, char *formato)
     {
         char *dataFormatada = malloc(sizeof(char) * 11);
         if (dataFormatada == NULL)

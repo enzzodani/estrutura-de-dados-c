@@ -3,13 +3,12 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <stdbool.h>
-
 //Declaração da struct Data 
-  typedef struct data Data;
+  typedef struct data {
+		int unsigned dia;
+		int unsigned mes;
+		int unsigned ano;
+	} Data;
 
 //Declaração das funções auxiliares
   unsigned int diaNoMes(Data d);

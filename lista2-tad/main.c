@@ -16,28 +16,28 @@
 	} Root;
 
 //Constantes importantes
-  //Define o numero maximo de elementos no array de datas
-  #define MAX_DATAS 10
 	
 	//Define cores UwU
 	#define KMAG "\x1B[35m"
 	#define RESET "\033[0m"
   
   //Definem os numeros para menus
-  #define MENU_INICIAL 13
-  #define CRIAR_DATA 1
-  #define LIBERAR_DATA 2
-  #define SOMAR 3
-  #define SUBTRAIR 4
-  #define ATRIBUIR 5
-  #define DIA 6
-  #define MES 7
-  #define ANO 8
-  #define BISSEXTO 9
-  #define COMPARAR 10
-  #define ENTRE_DIAS 11
-  #define IMPRIMIR 12
-  #define SAIR 0
+	enum {
+		SAIR,
+		CRIAR_DATA,
+		LIBERAR_DATA,
+		SOMAR,
+		SUBTRAIR,
+		ATRIBUIR,
+		DIA,
+		MES,
+		ANO,
+		BISSEXTO,
+		COMPARAR,
+		ENTRE_DIAS,
+		IMPRIMIR,
+		MENU_INICIAL
+	};
 
 //Variáveis globais
 	unsigned int procedimento; //Variavel para escolha de menu 
@@ -81,17 +81,17 @@ int main(int argc, char *argv[])
 		switch(procedimento){
 			case MENU_INICIAL: menuInicial(); break;
 			case CRIAR_DATA: criaDataMenu(); break;
-			// case LIBERAR_DATA: liberaDataMenu(); break;
-			// case SOMAR: somaDataMenu(); break;
-			// case SUBTRAIR: subtrairDataMenu(); break;
-			// case ATRIBUIR: atribuirDataMenu(); break;
-			// case DIA: obtemDiaMenu(); break;
-			// case MES: obtemMesMenu(); break;
-			// case ANO: obtemAnoMenu(); break;
-			// case BISSEXTO: bissextoMenu(); break;
-			// case COMPARAR: compararMenu(); break;
-			// case ENTRE_DIAS: entreDiasMenu(); break;
-			// case IMPRIMIR: imprimirMenu(); break;
+			case LIBERAR_DATA: liberaDataMenu(); break;
+			case SOMAR: somaDataMenu(); break;
+			case SUBTRAIR: subtrairDataMenu(); break;
+			case ATRIBUIR: atribuirDataMenu(); break;
+			case DIA: obtemDiaMenu(); break;
+			case MES: obtemMesMenu(); break;
+			case ANO: obtemAnoMenu(); break;
+			case BISSEXTO: bissextoMenu(); break;
+			case COMPARAR: compararMenu(); break;
+			case ENTRE_DIAS: entreDiasMenu(); break;
+			case IMPRIMIR: imprimirMenu(); break;
 			case SAIR: return 0; // Fecha o programa
 			default: procedimento = MENU_INICIAL;
 		}
@@ -122,12 +122,14 @@ int main(int argc, char *argv[])
 		
 		fputs("Digite o dia, mês e ano separados por espaço: ", stdout);
 		scanf("%d %d %d", &dia, &mes, &ano);
-		
+
+		/*
 		if (validaData(dia, mes, ano)) {
 			colocaData(criaData(dia, mes, ano));
 		} else {
 			puts("Data inválida");
 		}
+		*/
     procedimento = MENU_INICIAL;
 	}
 
@@ -142,56 +144,149 @@ int main(int argc, char *argv[])
 		} else {
 			puts("Índice inválido");
 		}
+		procedimento = MENU_INICIAL;
 	}
 
-	// void somaDataMenu() {
-	// 	unsigned int indice;
-	// 	imprimirTodasDatas()
-	// 	fputs("Digite o índice para selecionar a data: ", stdout);
-	// 	scanf("%d", &indice);
-	//
-	// 	if (indice < contadorData) {
-	// 		printf("Digite a quantidade de dias que deseja somar à data %s:", imprimeData())	
-	// 	} else {
-	// 		puts("Índice inválido");
-	// 	}
-	// }
+	 void somaDataMenu() {
+	 	unsigned int indice;
+	 	imprimirTodasDatas();
+	 	fputs("Digite o índice para selecionar a data: ", stdout);
+	 	scanf("%d", &indice);
+	
+	 	if (indice < contadorData) {
+			unsigned int dias;
+	 		printf("Digite a quantidade de dias que deseja somar à data %s:", imprimeData(*(achaData(indice)), "ddmmaaaa"));	
+			scanf("%d", &dias);
+			colocaData(somaDiasData(*(achaData(indice)), dias));
+	 	} else {
+	 		puts("Índice inválido");
+	 	}
+    procedimento = MENU_INICIAL;
+	 }
 
-	// void subtrairDataMenu() {
-	//
-	// }
-	//
-	// void atribuirDataMenu() {
-	//
-	// }
-	//
-	// void obtemDiaMenu() {
-	// 	
-	// }
-	//
-	// void obtemMesMenu() {
-	//
-	// }
-	//
-	// void obtemAnoMenu() {
-	//
-	// }
-	//
-	// void bissextoMenu() {
-	//
-	// }
-	//
-	// void compararMenu() {
-	//
-	// }
-	//
-	// void entreDiasMenu() {
-	//
-	// }
-	//
-	// void imprimirMenu() {
-	//
-	// }
+	 void subtrairDataMenu() {
+		unsigned int indice;
+	 	imprimirTodasDatas();
+	 	fputs("Digite o índice para selecionar a data: ", stdout);
+	 	scanf("%d", &indice);
+	
+	 	if (indice < contadorData) {
+			unsigned int dias;
+	 		printf("Digite a quantidade de dias que deseja subtrair da data %s:", imprimeData(*(achaData(indice)), "ddmmaaaa"));	
+			scanf("%d", &dias);
+			colocaData(subtrairDiasData(*(achaData(indice)), dias));
+	 	} else {
+	 		puts("Índice inválido");
+	 	}
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void atribuirDataMenu() {
+		unsigned int indice, dia, mes, ano;
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar a data: ", stdout);
+		scanf("%d", &indice);
+
+		fputs("Digite o dia, mês e ano separados por espaço: ", stdout);
+		scanf("%d %d %d", &dia, &mes, &ano);
+		
+		atribuirData(achaData(indice), dia, mes, ano);
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void obtemDiaMenu() {
+	 	unsigned int indice;
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar a data: ", stdout);
+		scanf("%d", &indice);
+
+		printf("Dia da data selecionada: %d", achaData(indice)->dia);
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void obtemMesMenu() {
+	 	unsigned int indice;
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar a data: ", stdout);
+		scanf("%d", &indice);
+
+		printf("Mes da data selecionada: %d", achaData(indice)->mes);
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void obtemAnoMenu() {
+	 	unsigned int indice;
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar a data: ", stdout);
+		scanf("%d", &indice);
+
+		printf("Ano da data selecionada: %d", achaData(indice)->ano);
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void bissextoMenu() {
+		unsigned int indice;
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar a data: ", stdout);
+		scanf("%d", &indice);
+
+		if(bissextoData(*(achaData(indice)))) {
+			puts("O ano é bissexto");
+		} else {
+			puts("O ano não é bissexto");
+		}
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void compararMenu() {
+		unsigned int indice, indice2;
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar uma data: ", stdout);
+		scanf("%d", &indice);
+		limparSaida();
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar outra data: ", stdout);
+		scanf("%d", &indice2);
+
+		short resultado = comparaData(*(achaData(indice)), *(achaData(indice2)));
+		enum {
+			PRIMEIRA_MAIOR,
+			IGUAIS,
+			PRIMEIRA_MENOR
+		};
+		switch(resultado) {
+			case PRIMEIRA_MAIOR:
+				printf("A data %d é maior que a data %d\n", indice, indice2);
+				break;
+			case IGUAIS:
+				printf("A data %d é igual à data %d\n", indice, indice2);
+				break;
+			case PRIMEIRA_MENOR:
+				printf("A data %d é menor que a data %d\n", indice, indice2);
+				break;
+		}
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void entreDiasMenu() {
+	
+    procedimento = MENU_INICIAL;
+	 }
+	
+	 void imprimirMenu() {
+		unsigned int indice;
+		char formato[8];
+		imprimirTodasDatas();
+		fputs("Digite o índice para selecionar a data: ", stdout);
+		scanf("%d", &indice);
+
+		fputs("Digite a formatação da data: ", stdout);
+		limparBufferDeEntrada();
+		scanf("%s", &formato);
+
+		printf("Data nessa formatação: %s\n", imprimeData(*(achaData(indice)), "ddmmaaaa"));
+    procedimento = MENU_INICIAL;
+	 }
 
 //Funções Auxiliares - Definição
 	void limparBufferDeEntrada(){ //Lida com buffers relacionados a char 
@@ -242,20 +337,19 @@ int main(int argc, char *argv[])
 		contadorData--;
 	}
 
-	// Data *achaData(unsigned int indice) {
-	// 	Node *atual = root.primeiro;
-	// 	for (i = 0; i < indice; i++) {
-	// 		atual = atual->proximo;
-	// 	}
-	// 	at
-	// }
+	Data *achaData(unsigned int indice) {
+		Node *atual = root.primeiro;
+	 	for (i = 0; i < indice; i++) {
+	 		atual = atual->proximo;
+	 	}
+		return atual->data;
+	 }
 
 
 	void imprimirTodasDatas() {
 		puts("Datas criadas:");
 		Node *atual = root.primeiro;
 		for (i = 0; i < contadorData; i++){
-			//TODO: Suporte para diferentes formatções
 			printf("%d - %s", i+1, imprimeData(*(atual->data), "ddmmaaaa"));
 			atual = atual->proximo;
 		}
