@@ -13,38 +13,42 @@ struct data{ //Declaração do struct data
 };
 
 //Funções auxiliares
-  unsigned int diasNoMes(Data d) { //Retorna a quantidade de dias no mês da data passada como parâmetro
+	unsigned int diasNoMes(Data d) { //Retorna a quantidade de dias no mês da data passada como parâmetro
 
     unsigned int quantidadeDias = 0;
     
     switch(d.mes) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            quantidadeDias = 31;
-            break;
-           
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            quantidadeDias = 30;
-            break;
-           
-        case 2:
-          if ((d.ano % 4 == 0 && d.ano % 100 != 0) || (d.ano % 400 == 0)) { //Verificação de ano bissexto 
-                quantidadeDias = 29;
-            } else {
-                quantidadeDias = 28;
-            }
-            break;
-    }
-  return quantidadeDias;
-}
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+				quantidadeDias = 31;
+				break;
+				 
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				quantidadeDias = 30;
+				break;
+				 
+			case 2:
+				if ((d.ano % 4 == 0 && d.ano % 100 != 0) || (d.ano % 400 == 0)) { //Verificação de ano bissexto 
+					quantidadeDias = 29;
+				} else {
+					quantidadeDias = 28;
+				}
+				break;
+		}
+		return quantidadeDias;
+	}
+
+	unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano){
+		//TODO: Implementar validação de data	
+	}
 
 //Funções principais
 
@@ -68,6 +72,7 @@ struct data{ //Declaração do struct data
     if(d != NULL) {
       free(d);
     }
+	}
 
   //Função que soma dias em uma data e retorna uma nova data
   Data* somaDiasData(Data d, unsigned int dias){
@@ -83,13 +88,13 @@ struct data{ //Declaração do struct data
     novoDia -> mes = d.mes;
     novoDia -> ano = d.ano;
 
-    int verificadorDiasnoMes = diasNoMes(novoDia); //verifica quantos dias tem no mes 
+    int verificadorDiasnoMes = diasNoMes(*novoDia); //verifica quantos dias tem no mes 
 
     do {
       if (novoDia -> dia > verificadorDiasnoMes) {
         novoDia -> dia -= verificadorDiasnoMes; // Ajeita a dia caso seja maior que o numero de dias no mes
         (novoDia -> mes)++; // incrementa 1 mes para caso o dia passe dos dias do mes
-        verificadorDiasnoMes = diasNoMes(novoDia); //atualiza a quantidade de dias do mes, visto que o mes foi incrmentado
+        verificadorDiasnoMes = diasNoMes(*novoDia); //atualiza a quantidade de dias do mes, visto que o mes foi incrmentado
       }
     } while (novoDia -> dia > verificadorDiasnoMes); //O loop se repete ate que o dia seja uma quantidade possível, ou seja, menor que os dias do mes 
 
@@ -191,6 +196,8 @@ struct data{ //Declaração do struct data
       return 0;
     }
   }
+	
+	/*
 
   //Função que retorna o número de dias entre as datas
   unsigned int numeroDiasData(Data d1, Data d2) {
@@ -201,3 +208,4 @@ struct data{ //Declaração do struct data
   char* imprimeData(Data d, char *formato) {
 
     }
+		*/

@@ -13,6 +13,7 @@
 
 //Declaração das funções auxiliares
   unsigned int diaNoMes(Data d);
+	unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano);
 
 //Declaração das funções principais
   Data* criaData(unsigned int dia, unsigned int mes, unsigned int ano);
