@@ -81,17 +81,17 @@ int main(int argc, char *argv[])
 		switch(procedimento){
 			case MENU_INICIAL: menuInicial(); break;
 			case CRIAR_DATA: criaDataMenu(); break;
-			case LIBERAR_DATA: liberaDataMenu(); break;
-			case SOMAR: somaDataMenu(); break;
-			case SUBTRAIR: subtrairDataMenu(); break;
-			case ATRIBUIR: atribuirDataMenu(); break;
-			case DIA: obtemDiaMenu(); break;
-			case MES: obtemMesMenu(); break;
-			case ANO: obtemAnoMenu(); break;
-			case BISSEXTO: bissextoMenu(); break;
-			case COMPARAR: compararMenu(); break;
-			case ENTRE_DIAS: entreDiasMenu(); break;
-			case IMPRIMIR: imprimirMenu(); break;
+			// case LIBERAR_DATA: liberaDataMenu(); break;
+			// case SOMAR: somaDataMenu(); break;
+			// case SUBTRAIR: subtrairDataMenu(); break;
+			// case ATRIBUIR: atribuirDataMenu(); break;
+			// case DIA: obtemDiaMenu(); break;
+			// case MES: obtemMesMenu(); break;
+			// case ANO: obtemAnoMenu(); break;
+			// case BISSEXTO: bissextoMenu(); break;
+			// case COMPARAR: compararMenu(); break;
+			// case ENTRE_DIAS: entreDiasMenu(); break;
+			// case IMPRIMIR: imprimirMenu(); break;
 			case SAIR: return 0; // Fecha o programa
 			default: procedimento = MENU_INICIAL;
 		}
@@ -128,11 +128,12 @@ int main(int argc, char *argv[])
 		} else {
 			puts("Data inválida");
 		}
+    procedimento = MENU_INICIAL;
 	}
 
 	void liberaDataMenu() {
 		unsigned int indice;
-		imprimirTodasDatas()
+		imprimirTodasDatas();
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
 
@@ -143,54 +144,54 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	void somaDataMenu() {
-		unsigned int indice;
-		imprimirTodasDatas()
-		fputs("Digite o índice para selecionar a data: ", stdout);
-		scanf("%d", &indice);
+	// void somaDataMenu() {
+	// 	unsigned int indice;
+	// 	imprimirTodasDatas()
+	// 	fputs("Digite o índice para selecionar a data: ", stdout);
+	// 	scanf("%d", &indice);
+	//
+	// 	if (indice < contadorData) {
+	// 		printf("Digite a quantidade de dias que deseja somar à data %s:", imprimeData())	
+	// 	} else {
+	// 		puts("Índice inválido");
+	// 	}
+	// }
 
-		if (indice < contadorData) {
-			printf("Digite a quantidade de dias que deseja somar à data %s:", imprimeData())	
-		} else {
-			puts("Índice inválido");
-		}
-	}
-
-	void subtrairDataMenu() {
-
-	}
-
-	void atribuirDataMenu() {
-
-	}
-
-	void obtemDiaMenu() {
-		
-	}
-
-	void obtemMesMenu() {
-
-	}
-
-	void obtemAnoMenu() {
-
-	}
-
-	void bissextoMenu() {
-
-	}
-
-	void compararMenu() {
-
-	}
-
-	void entreDiasMenu() {
-
-	}
-
-	void imprimirMenu() {
-
-	}
+	// void subtrairDataMenu() {
+	//
+	// }
+	//
+	// void atribuirDataMenu() {
+	//
+	// }
+	//
+	// void obtemDiaMenu() {
+	// 	
+	// }
+	//
+	// void obtemMesMenu() {
+	//
+	// }
+	//
+	// void obtemAnoMenu() {
+	//
+	// }
+	//
+	// void bissextoMenu() {
+	//
+	// }
+	//
+	// void compararMenu() {
+	//
+	// }
+	//
+	// void entreDiasMenu() {
+	//
+	// }
+	//
+	// void imprimirMenu() {
+	//
+	// }
 
 //Funções Auxiliares - Definição
 	void limparBufferDeEntrada(){ //Lida com buffers relacionados a char 
@@ -241,13 +242,13 @@ int main(int argc, char *argv[])
 		contadorData--;
 	}
 
-	Data *achaData(unsigned int indice) {
-		Node *atual = root.primeiro;
-		for (i = 0; i < indice; i++) {
-			atual = atual->proximo;
-		}
-		at
-	}
+	// Data *achaData(unsigned int indice) {
+	// 	Node *atual = root.primeiro;
+	// 	for (i = 0; i < indice; i++) {
+	// 		atual = atual->proximo;
+	// 	}
+	// 	at
+	// }
 
 
 	void imprimirTodasDatas() {
@@ -255,7 +256,7 @@ int main(int argc, char *argv[])
 		Node *atual = root.primeiro;
 		for (i = 0; i < contadorData; i++){
 			//TODO: Suporte para diferentes formatções
-			printf("%d - %s", i+1, imprimeData(atual->data, "ddmmaaaa"));
+			printf("%d - %s", i+1, imprimeData(*(atual->data), "ddmmaaaa"));
 			atual = atual->proximo;
 		}
 	}

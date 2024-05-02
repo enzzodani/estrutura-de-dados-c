@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <string.h>
 #include "data.h"
 
 struct data{ //Declaração do struct data
@@ -46,9 +47,9 @@ struct data{ //Declaração do struct data
 		return quantidadeDias;
 	}
 
-	unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano){
-		//TODO: Implementar validação de data	
-	}
+	// unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano){
+	// 	//TODO: Implementar validação de data	
+	// }
 
 //Funções principais
 
@@ -197,15 +198,51 @@ struct data{ //Declaração do struct data
     }
   }
 	
-	/*
-
   //Função que retorna o número de dias entre as datas
   unsigned int numeroDiasData(Data d1, Data d2) {
     
     }
 
   //Função que imprime a data passada em uma formatação especifica
-  char* imprimeData(Data d, char *formato) {
+    char imprimeData(Data d, char *formato)
+    {
+        char *dataFormatada = malloc(sizeof(char) * 11);
+        if (dataFormatada == NULL)
+        {
+            printf("Erro ao alocar memoria\n");
+            exit(1);
+        }
 
-    }
-		*/
+        if (strcmp(formato, "ddmmaaaa") == 0)
+        {
+            sprintf(dataFormatada, "%02d/%02d/%04d", d.dia, d.mes, d.ano);
+        }
+        else if (strcmp(formato, "aaaammdd") == 0)
+        {
+            sprintf(dataFormatada, "%04d/%02d/%02d", d.ano, d.mes, d.dia);
+        }
+        else if (strcmp(formato, "aaaa") == 0)
+        {
+            sprintf(dataFormatada, "%04d", d.ano);
+        }
+        else if (strcmp(formato, "mm") == 0)
+        {
+            sprintf(dataFormatada, "%02d", d.mes);
+        }
+        else if (strcmp(formato, "dd") == 0)
+        {
+            sprintf(dataFormatada, "%02d", d.dia);
+        }
+        else if (strcmp(formato, "ddmm") == 0)
+        {
+            sprintf(dataFormatada, "%02d%02d", d.dia, d.mes);
+        }
+        else
+        {
+            printf("Formato invalido.\n");
+            free(dataFormatada);
+            return NULL;
+        }
+
+        return dataFormatada;
+    };
