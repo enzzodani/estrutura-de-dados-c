@@ -217,41 +217,50 @@
   }
 	
   //Função que retorna o número de dias entre as datas
-  unsigned int numeroDiasData(Data d1, Data d2) {
+  unsigned int numeroDiasData(Data *d1, Data *d2) {
+    const int res = comparaData(*d1, *d2); // chama a função que compara as datas para verificar se estão na ordem correta (menor data, maior data)
 
-   // Primeiro, determine a data inicial (menor) e a data final (maior)
-    Data menor = (comparaData(d1, d2) == -1) ? d1 : d2;
-    Data maior = (comparaData(d1, d2) == -1) ? d2 : d1;
-
-    unsigned int dias = 0;
-
-    // Adiciona os dias completos de anos inteiros entre as datas
-    for (int ano = menor.ano; ano < maior.ano; ano++) {  // O ano vai começar no menor e vai até 1 ano antes da data maior. Isso faz com que passemos por todos os anos inteiros entre as duas datas
-        menor.ano = ano; // Permite que a gente possa atualizar o ano e utilizar a função bissextoData
-        int diasNoAno = (bissextoData(menor) == 1) ? 366 : 365; //Verificação de ano bissexto
-        dias += diasNoAno; //Para cada ano inteiro, é somada a quantidade de dias referente à aquele ano
+    if(res == 1) { // caso o retorno seja 1, significa que d1 é maior que d2, por isso é preciso inverter a ordem dessas datas
+        Data *dAux = d1; // guarda o valor antigo da data 1, para depois podermos atribui-lo a data 2
+        d1 = d2;
+        d2 = dAux;
     }
+    
+    unsigned int count = 1;
 
-    // Adiciona os dias completos de meses inteiros do ano inicial
-    for (int mes = menor.mes; mes <= 12; mes++) {
-        if (mes == menor.mes) {
-            dias += diasNoMes(menor) - menor.dia + 1;
-        } else {
-            menor.mes = mes;
-            dias += diasNoMes(menor);
+    bissextoData(*d1); // certifica-se o ano inicial é bissexto ou não
+
+    d1->mes--; // decrementa 1 para ficar conforme a enumeração dos meses na matriz
+    d2->mes--; // decrementa 1 para ficar semelhante a d2, pois sem isso nunca seriam iguais
+    
+
+
+    while (d1->dia != d2->dia || d1->mes != d2->mes || d1->ano != d2->ano){ 
+
+        if (d1->dia >= diasNoMes(*d1)) { // verifica se não extrapolou o limite de dias do respectivo mês
+
+            if (d1->mes >= 11) { // verifica se está no último mês do ano
+                d1->ano++;  // incrementa 1 ano
+                bissextoData(*d1); // a cada passagem de ano certifica-se o ano inicial é bissexto ou não
+                d1->mes = 0; // inicia no primeiro mês do ano 
+                d1->dia = 1; // inicia no primeiro dia do mês
+            }
+            else {
+                d1->mes++; // incrementa 1 mês
+                d1->dia = 1; // inicia no primeiro dia do mês
+            }
         }
-    }
+        else {
+            d1->dia++; // incrementa 1 dia
+        }
 
-    // Subtrai os dias do último mês da data final
-    unsigned int maiorMesVerdadeiro = maior.mes;
-    for (int mes = 1; mes < maiorMesVerdadeiro; mes++) {
-        maior.mes = mes;
-        dias += diasNoMes(maior);
+        count++; // variável de controle do laço
     }
-    dias += maior.dia; // Adiciona os dias do mês da data final
+    d1->mes++; //incrementa o mês em 1 pra sair da enumeração que a matriz faz, e assim ficar na enumeração padrão dos meses
+    
+    return count-1;
 
-    return dias;
-    }
+  }
 
   //Função que imprime a data passada em uma formatação especifica
     char *imprimeData(Data d, char *formato)

@@ -185,15 +185,22 @@ int main(int argc, char *argv[])
 	 	imprimirTodasDatas();
 	 	fputs("Digite o índice para selecionar a data: ", stdout);
 	 	scanf("%d", &indice);
+		limparBufferDeEntrada();
+		indice--; // A indexagem do usuário começa em 1 e a implementado em código começa em zero
 	
 	 	if (indice < contadorData) {
 			unsigned int dias;
 	 		printf("Digite a quantidade de dias que deseja subtrair da data %s:", imprimeData(*(achaData(indice)), "ddmmaaaa"));	
 			scanf("%d", &dias);
+			limparBufferDeEntrada();
 			colocaData(subtrairDiasData(*(achaData(indice)), dias));
 	 	} else {
 	 		puts("Índice inválido");
 	 	}
+	
+	 	printf("%s\n", imprimeData(*(achaData(contadorData)), "ddmmaaaa"));
+	 	pausar();
+	 	
     procedimento = MENU_INICIAL;
 	 }
 	
@@ -293,23 +300,35 @@ int main(int argc, char *argv[])
 	 }
 	
 	 void entreDiasMenu() {
-	
+    unsigned int indice1, indice2;  
+    imprimirTodasDatas();
+    fputs("Digite o índice para selecionar uma data: ", stdout);
+    scanf("%d", &indice1);
+    fputs("Digite o índice para selecionar outra data: ", stdout);
+    scanf("%d", &indice2);
+    printf("O numero de dias entre as datas é: %d\n", numeroDiasData(achaData(indice1), achaData(indice2)));
+    limparBufferDeEntrada();
+    pausar();
+    
     procedimento = MENU_INICIAL;
 	 }
 	
 	 void imprimirMenu() {
 		unsigned int indice;
-		char formato[8];
+    unsigned short tam = 9;
+		char formato[tam];
 		imprimirTodasDatas();
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
 
 		fputs("Digite a formatação da data: ", stdout);
 		limparBufferDeEntrada();
-		fgets(formato, 8, stdin);
+		fgets(formato, tam, stdin);
+    limparBufferDeEntrada();
 		formato[strcspn(formato, "\n")] = '\0'; 
+    printf("DEBUG: %s\n", formato);
 
-		printf("Data nessa formatação: %s\n", imprimeData(*(achaData(indice)), "ddmmaaaa"));
+		printf("Data nessa formatação: %s\n", imprimeData(*(achaData(indice)), formato));
     pausar();
     procedimento = MENU_INICIAL;
 	 }

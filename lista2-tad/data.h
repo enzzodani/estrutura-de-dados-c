@@ -35,7 +35,7 @@
 
   int comparaData(Data d1, Data d2);
 
-  unsigned int numeroDiasDatas(Data d1, Data d2);
+  unsigned int numeroDiasData(Data *d1, Data *d2);
 
   char* imprimeData(Data d, char *formato);
 
