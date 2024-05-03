@@ -227,7 +227,7 @@
 
     // Adiciona os dias completos de anos inteiros entre as datas
     for (int ano = menor.ano; ano < maior.ano; ano++) {  // O ano vai começar no menor e vai até 1 ano antes da data maior. Isso faz com que passemos por todos os anos inteiros entre as duas datas
-        int menor.ano = ano; // Permite que a gente possa atualizar o ano e utilizar a função bissextoData
+        menor.ano = ano; // Permite que a gente possa atualizar o ano e utilizar a função bissextoData
         int diasNoAno = (bissextoData(menor) == 1) ? 366 : 365; //Verificação de ano bissexto
         dias += diasNoAno; //Para cada ano inteiro, é somada a quantidade de dias referente à aquele ano
     }
