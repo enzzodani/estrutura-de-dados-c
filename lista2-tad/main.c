@@ -173,6 +173,10 @@ int main(int argc, char *argv[])
 	 	} else {
 	 		puts("Índice inválido");
 	 	}
+	 	
+	 	printf("%s\n", imprimeData(*(achaData(contadorData)), "ddmmaaaa"));
+	 	pausar();
+	 	
     procedimento = MENU_INICIAL;
 	 }
 
@@ -381,7 +385,5 @@ int main(int argc, char *argv[])
   void pausar() {
     puts("Aperte enter para continuar...");
     char lixo;
-    limparBufferDeEntrada();
     scanf("%c", &lixo);
-
 }
