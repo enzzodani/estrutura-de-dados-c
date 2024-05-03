@@ -42,17 +42,17 @@
 	}
 
 	unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano){
-		//TODO: Implementar validação de data	
-  //Considere que as datas a serem aplicadas deverão estar dento do intervalo de 01/01/1900 a 31/12/2200
 
     //Verificação de ano
     if(ano > 2200 || ano < 1900){
       printf("As datas tem que estar entre 01/01/1900 e 31/12/2200\n");
+      return 1;
     }
     
     //Verificação dos meses
     if (mes > 12 || mes < 1) {
      printf("Mes invalido\n");
+     return 1;
     }
 
     //Verificação do dia 
@@ -62,7 +62,10 @@
 
     if (dia > diasValidos || dia < 1) {
       printf("Dia invalido\n");
+      return 1;
     }
+    
+    return 0;
 	}
 
 //Funções principais
