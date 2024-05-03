@@ -217,7 +217,38 @@
 	
   //Função que retorna o número de dias entre as datas
   unsigned int numeroDiasData(Data d1, Data d2) {
-    
+
+   // Primeiro, determine a data inicial (menor) e a data final (maior)
+    Data menor = (comparaData(d1, d2) == -1) ? d1 : d2;
+    Data maior = (comparaData(d1, d2) == -1) ? d2 : d1;
+
+    unsigned int dias = 0;
+
+    // Adiciona os dias completos de anos inteiros entre as datas
+    for (int ano = menor.ano; ano < maior.ano; ano++) {  
+        int diasNoano = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0) ? 366 : 365;
+        dias += diasNoAno;
+    }
+
+    // Adiciona os dias completos de meses inteiros do ano inicial
+    for (int mes = menor.mes; mes <= 12; mes++) {
+        if (mes == menor.mes) {
+            dias += diasNoMes(menor) - menor.dia + 1;
+        } else {
+            menor.mes = mes;
+            dias += diasNoMes(mes, menor.ano);
+        }
+    }
+
+    // Subtrai os dias do último mês da data final
+    unsigned int maiorMesVerdadeiro = maior.mes
+    for (int mes = 1; mes < maiorMesVerdadeiro; mes++) {
+        maior.mes = mes;
+        dias += diasNoMes(maior);
+    }
+    dias += maior.dia; // Adiciona os dias do mês da data final
+
+    return dias;
     }
 
   //Função que imprime a data passada em uma formatação especifica
