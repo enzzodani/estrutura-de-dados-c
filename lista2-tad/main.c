@@ -212,7 +212,8 @@ int main(int argc, char *argv[])
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
 
-		printf("Dia da data selecionada: %d", (achaData(indice))->dia);
+		printf("Dia da data selecionada: %d", achaData(indice)->dia);
+    pausar();
     procedimento = MENU_INICIAL;
 	 }
 	
@@ -223,6 +224,7 @@ int main(int argc, char *argv[])
 		scanf("%d", &indice);
 
 		printf("Mes da data selecionada: %d", achaData(indice)->mes);
+    pausar();
     procedimento = MENU_INICIAL;
 	 }
 	
@@ -233,6 +235,7 @@ int main(int argc, char *argv[])
 		scanf("%d", &indice);
 
 		printf("Ano da data selecionada: %d", achaData(indice)->ano);
+    pausar();
     procedimento = MENU_INICIAL;
 	 }
 	
@@ -244,8 +247,10 @@ int main(int argc, char *argv[])
 
 		if(bissextoData(*(achaData(indice)))) {
 			puts("O ano é bissexto");
+      pausar();
 		} else {
 			puts("O ano não é bissexto");
+      pausar();
 		}
     procedimento = MENU_INICIAL;
 	 }
@@ -269,12 +274,15 @@ int main(int argc, char *argv[])
 		switch(resultado) {
 			case PRIMEIRA_MAIOR:
 				printf("A data %d é maior que a data %d\n", indice, indice2);
+        pausar();
 				break;
 			case IGUAIS:
 				printf("A data %d é igual à data %d\n", indice, indice2);
+        pausar();
 				break;
 			case PRIMEIRA_MENOR:
 				printf("A data %d é menor que a data %d\n", indice, indice2);
+        pausar();
 				break;
 		}
     procedimento = MENU_INICIAL;
@@ -298,6 +306,7 @@ int main(int argc, char *argv[])
 		formato[strcspn(formato, "\n")] = '\0'; 
 
 		printf("Data nessa formatação: %s\n", imprimeData(*(achaData(indice)), "ddmmaaaa"));
+    pausar();
     procedimento = MENU_INICIAL;
 	 }
 
@@ -371,7 +380,8 @@ int main(int argc, char *argv[])
 
   void pausar() {
     puts("Aperte enter para continuar...");
-    int lixo;
-    scanf();
+    char lixo;
+    limparBufferDeEntrada();
+    scanf("%c", &lixo);
 
 }
