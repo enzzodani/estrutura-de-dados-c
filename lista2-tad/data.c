@@ -40,7 +40,8 @@
 		}
 		return quantidadeDias;
 	}
-
+  
+  //Função que retorna 1 para data invalida e 0 para data valida
 	unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano){
 
     //Verificação de ano
@@ -56,9 +57,9 @@
     }
 
     //Verificação do dia 
-    Data *provisoria = criaData(dia, mes, ano);
-    unsigned int diasValidos = diasNoMes(*provisoria);
-    free(provisoria);
+    Data *provisoria = criaData(dia, mes, ano); //Criação de uma data provisoria por conta da função diasNoMes so aceitar data inteiras
+    unsigned int diasValidos = diasNoMes(*provisoria); //diasValidos verifica se os dias passados fazem sentido (ex: 31/04/2024 nao é uma data valida)
+    free(provisoria); //Libera a provisoria, ela era apenas para pegar os intervalo de dias validos e portanto nao tem mais sentido manter ela alocada
 
     if (dia > diasValidos || dia < 1) {
       printf("Dia invalido\n");
@@ -72,9 +73,9 @@
 
   //Função que cria uma data dinâmicamente
   Data* criaData(unsigned int dia, unsigned int mes, unsigned int ano) {
-    Data *d = (Data *) malloc(sizeof(Data));
+    Data *d = (Data *) malloc(sizeof(Data)); //Criação de data nova dinâmicamente 
   
-    if (d != NULL) {
+    if (d != NULL) { //vericação de espaço de memoria
         d -> dia = dia;
         d -> mes = mes;
         d -> ano = ano;
@@ -82,19 +83,19 @@
     } else {
         printf("Erro ao criar a data.\n");
     }
-    return (d);
+    return (d); //retorna o ponteiro para a data criada 
   }
 
   //Libera a memória da data criada dinâmicamente
   void liberaData(Data *d) {
-    if(d != NULL) {
+    if(d != NULL) { //verifcação de ponteiro nulo
       free(d);
     }
 	}
 
   //Função que soma dias em uma data e retorna uma nova data
   Data* somaDiasData(Data d, unsigned int dias){
-    Data *novoDia = (Data *) malloc(sizeof(Data));
+    Data *novoDia = (Data *) malloc(sizeof(Data)); //Criação do novo dia gerado pela soma de dias à data passada 
 
        if (novoDia == NULL) {
         // Tratamento de erro: falha na alocação de memória
@@ -128,7 +129,7 @@
 
   //Função que subtrai dias em uma data e retorna uma nova data
   Data *subtrairDiasData(Data d, unsigned int dias) {
-    Data *novoDia = (Data *) malloc(sizeof(Data));
+    Data *novoDia = (Data *) malloc(sizeof(Data)); //Criação de novo dia gerado pela subtração de dias à data passada
 
        if (novoDia == NULL) {
         // Tratamento de erro: falha na alocação de memória
@@ -136,24 +137,24 @@
         return NULL;
     }
    
-    int verificadorDias = d.dia - dias;
+    int verificadorDias = d.dia - dias; 
 
     do {
-      if (verificadorDias <= 0) {
+      if (verificadorDias <= 0) { //Se os dias são negativos então significa que precisamos voltar um mês
         d.mes -= 1;
-        if (d.mes == 0) {
-          d.mes = 12;
-          d.ano--;
+        if (d.mes == 0) { //Se o mês chega em 0, significa que voltamos 1 ano
+          d.mes = 12; //O final do ano anterior começa em 12
+          d.ano--; //Decremento de 1 ano
         }
-        int verificadorDiasnoMes = diasNoMes(d);
+        int verificadorDiasnoMes = diasNoMes(d); //Verifica os dias no novo mes
         
-        verificadorDias += verificadorDiasnoMes; 
+        verificadorDias += verificadorDiasnoMes; //??? 
       }
-    } while (verificadorDias <= 0);
+    } while (verificadorDias <= 0); //Faz isso enquanto os dias não são validos
 
-    novoDia -> dia = verificadorDias;
-    novoDia -> mes = d.mes;
-    novoDia -> ano = d.ano;
+    novoDia -> dia = verificadorDias; //Recebe os dias corrigidos
+    novoDia -> mes = d.mes; //recebe os meses corrigidos
+    novoDia -> ano = d.ano; //recebe os anos corrigidos
 
     return novoDia; 
 
@@ -198,20 +199,20 @@
     int diferencaMeses = d1.mes - d2.mes;
     int diferencaDias = d1.dia - d2.dia;
 
-    if(diferencaAnos < 0) {
+    if(diferencaAnos < 0) { //Se um ano for maior que o outro, isso é suficiente para afirmar que uma data é maior que a outra
       return -1;
     }else if (diferencaAnos > 0) {
       return 1; 
-    }else if (diferencaMeses < 0) {
+    }else if (diferencaMeses < 0) { //Se as datas estão no mesmo ano, então se um mês for maior que o outro, isso é suficiente para afirmar quem é maior
       return -1;
     }else if (diferencaMeses > 0) {
       return 1;
-    }else if (diferencaDias < 0) {
+    }else if (diferencaDias < 0) {//se tanto ano quanto mes são iguais, basta apenas comparar os dias
       return -1;
     }else if (diferencaDias > 0) {
       return 1;
     }else {
-      return 0;
+      return 0; //Ambas as datas são iguais
     }
   }
 	
@@ -225,9 +226,10 @@
     unsigned int dias = 0;
 
     // Adiciona os dias completos de anos inteiros entre as datas
-    for (int ano = menor.ano; ano < maior.ano; ano++) {  
-        int diasNoAno = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0) ? 366 : 365;
-        dias += diasNoAno;
+    for (int ano = menor.ano; ano < maior.ano; ano++) {  // O ano vai começar no menor e vai até 1 ano antes da data maior. Isso faz com que passemos por todos os anos inteiros entre as duas datas
+        int menor.ano = ano; // Permite que a gente possa atualizar o ano e utilizar a função bissextoData
+        int diasNoAno = (bissextoData(menor) == 1) ? 366 : 365; //Verificação de ano bissexto
+        dias += diasNoAno; //Para cada ano inteiro, é somada a quantidade de dias referente à aquele ano
     }
 
     // Adiciona os dias completos de meses inteiros do ano inicial
