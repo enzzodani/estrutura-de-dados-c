@@ -41,9 +41,29 @@
 		return quantidadeDias;
 	}
 
-	// unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano){
-	// 	//TODO: Implementar validação de data	
-	// }
+	unsigned int validaData(unsigned int dia, unsigned int mes, unsigned int ano){
+		//TODO: Implementar validação de data	
+  //Considere que as datas a serem aplicadas deverão estar dento do intervalo de 01/01/1900 a 31/12/2200
+
+    //Verificação de ano
+    if(ano > 2200 || ano < 1900){
+      printf("As datas tem que estar entre 01/01/1900 e 31/12/2200\n");
+    }
+    
+    //Verificação dos meses
+    if (mes > 12 || mes < 1) {
+     printf("Mes invalido\n");
+    }
+
+    //Verificação do dia 
+    Data provisoria = criaData(dia, mes, ano);
+    unsigned int diasValidos = diasNoMes(provisoria);
+    free(provisoria);
+
+    if (dia > diasValidos || dia < 1) {
+      printf("Dia invalido\n");
+    }
+	}
 
 //Funções principais
 
