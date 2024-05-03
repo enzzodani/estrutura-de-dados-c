@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "data.h"
 
 // Lista ligada
@@ -123,14 +124,16 @@ int main(int argc, char *argv[])
 
     while (validade == 1) {
     
-		fputs("Digite o dia, mês e ano separados por espaço: ", stdout);
-		scanf("%d %d %d", &dia, &mes, &ano);
+			fputs("Digite o dia, mês e ano separados por espaço: ", stdout);
+			scanf("%d %d %d", &dia, &mes, &ano);
+			limparBufferDeEntrada();
 
-    //Verificação de validade de data 
-    validade = validaData(dia, mes, ano);
+			//Verificação de validade de data 
+			validade = validaData(dia, mes, ano);
     }
 
     limparSaida();
+		colocaData(criaData(dia, mes, ano));
     printf("Data criada com sucesso\n");
 
     procedimento = MENU_INICIAL;
@@ -141,6 +144,8 @@ int main(int argc, char *argv[])
 		imprimirTodasDatas();
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
+		limparBufferDeEntrada();
+		indice--; // A indexagem do usuário começa em 1 e a implementado em código começa em zero
 
 		if (indice < contadorData) {
 			tiraData(indice);
@@ -155,11 +160,14 @@ int main(int argc, char *argv[])
 	 	imprimirTodasDatas();
 	 	fputs("Digite o índice para selecionar a data: ", stdout);
 	 	scanf("%d", &indice);
+		limparBufferDeEntrada();
+		indice--; // A indexagem do usuário começa em 1 e a implementado em código começa em zero
 	
 	 	if (indice < contadorData) {
 			unsigned int dias;
 	 		printf("Digite a quantidade de dias que deseja somar à data %s:", imprimeData(*(achaData(indice)), "ddmmaaaa"));	
 			scanf("%d", &dias);
+			limparBufferDeEntrada();
 			colocaData(somaDiasData(*(achaData(indice)), dias));
 	 	} else {
 	 		puts("Índice inválido");
@@ -285,7 +293,8 @@ int main(int argc, char *argv[])
 
 		fputs("Digite a formatação da data: ", stdout);
 		limparBufferDeEntrada();
-		scanf("%s", &formato);
+		fgets(formato, 8, stdin);
+		formato[strcspn(formato, "\n")] = '\0'; 
 
 		printf("Data nessa formatação: %s\n", imprimeData(*(achaData(indice)), "ddmmaaaa"));
     procedimento = MENU_INICIAL;
@@ -308,6 +317,7 @@ int main(int argc, char *argv[])
 			(*futuroNode)->data = data;
 			(*futuroNode)->proximo = NULL;
 			futuroNode = &((*futuroNode)->proximo);
+			contadorData++;
 			puts("Data adicionada com sucesso");
 		} else {
 			puts("Erro: memoria insuficiente");
@@ -353,7 +363,7 @@ int main(int argc, char *argv[])
 		puts("Datas criadas:");
 		Node *atual = root.primeiro;
 		for (i = 0; i < contadorData; i++){
-			printf("%d - %s", i+1, imprimeData(*(atual->data), "ddmmaaaa"));
+			printf("%d - %s\n", i+1, imprimeData(*(atual->data), "ddmmaaaa"));
 			atual = atual->proximo;
 		}
 	}
