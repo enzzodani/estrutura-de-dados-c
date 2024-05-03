@@ -119,17 +119,20 @@ int main(int argc, char *argv[])
 
 	void criaDataMenu() {
 		unsigned int dia, mes, ano;
-		
+	  validade = 1;	
+
+    while (validade == 1) {
+    
 		fputs("Digite o dia, mês e ano separados por espaço: ", stdout);
 		scanf("%d %d %d", &dia, &mes, &ano);
 
-		/*
-		if (validaData(dia, mes, ano)) {
-			colocaData(criaData(dia, mes, ano));
-		} else {
-			puts("Data inválida");
-		}
-		*/
+    //Verificação de validade de data 
+    validade = validaData(dia, mes, ano);
+    }
+
+    limparSaida();
+    printf("Data criada com sucesso\n")
+
     procedimento = MENU_INICIAL;
 	}
 
