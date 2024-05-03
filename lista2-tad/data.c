@@ -56,8 +56,8 @@
     }
 
     //Verificação do dia 
-    Data provisoria = criaData(dia, mes, ano);
-    unsigned int diasValidos = diasNoMes(provisoria);
+    Data *provisoria = criaData(dia, mes, ano);
+    unsigned int diasValidos = diasNoMes(*provisoria);
     free(provisoria);
 
     if (dia > diasValidos || dia < 1) {
@@ -226,7 +226,7 @@
 
     // Adiciona os dias completos de anos inteiros entre as datas
     for (int ano = menor.ano; ano < maior.ano; ano++) {  
-        int diasNoano = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0) ? 366 : 365;
+        int diasNoAno = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0) ? 366 : 365;
         dias += diasNoAno;
     }
 
@@ -236,12 +236,12 @@
             dias += diasNoMes(menor) - menor.dia + 1;
         } else {
             menor.mes = mes;
-            dias += diasNoMes(mes, menor.ano);
+            dias += diasNoMes(menor);
         }
     }
 
     // Subtrai os dias do último mês da data final
-    unsigned int maiorMesVerdadeiro = maior.mes
+    unsigned int maiorMesVerdadeiro = maior.mes;
     for (int mes = 1; mes < maiorMesVerdadeiro; mes++) {
         maior.mes = mes;
         dias += diasNoMes(maior);

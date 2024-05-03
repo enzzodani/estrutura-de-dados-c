@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 
 	void criaDataMenu() {
 		unsigned int dia, mes, ano;
-	  validade = 1;	
+	  int validade = 1;	
 
     while (validade == 1) {
     
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
     }
 
     limparSaida();
-    printf("Data criada com sucesso\n")
+    printf("Data criada com sucesso\n");
 
     procedimento = MENU_INICIAL;
 	}
