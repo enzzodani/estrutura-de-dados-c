@@ -55,6 +55,7 @@
     void tiraData();
 		Data *achaData(unsigned int indice);
     void imprimirTodasDatas(); //Imprime a lista de datas
+    void pausar();
   //Funções menu 
     void menuInicial(); //chama o menu inicial
     void criaDataMenu(); //chama o menu de criação de data
@@ -211,7 +212,7 @@ int main(int argc, char *argv[])
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
 
-		printf("Dia da data selecionada: %d", achaData(indice)->dia);
+		printf("Dia da data selecionada: %d", (achaData(indice))->dia);
     procedimento = MENU_INICIAL;
 	 }
 	
@@ -352,7 +353,7 @@ int main(int argc, char *argv[])
 
 	Data *achaData(unsigned int indice) {
 		Node *atual = root.primeiro;
-	 	for (i = 0; i < indice; i++) {
+	 	for (i = 1; i < indice; i++) {
 	 		atual = atual->proximo;
 	 	}
 		return atual->data;
@@ -367,3 +368,10 @@ int main(int argc, char *argv[])
 			atual = atual->proximo;
 		}
 	}
+
+  void pausar() {
+    puts("Aperte enter para continuar...");
+    int lixo;
+    scanf();
+
+}

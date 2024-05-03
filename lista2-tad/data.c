@@ -10,7 +10,7 @@
 //Funções auxiliares
 	unsigned int diasNoMes(Data d) { //Retorna a quantidade de dias no mês da data passada como parâmetro
 
-    unsigned int quantidadeDias = 0;
+      unsigned int quantidadeDias = 0;
     
     switch(d.mes) {
 			case 1:
@@ -295,4 +295,4 @@
         }
 
         return dataFormatada;
-    };
+    }
