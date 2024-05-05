@@ -20,6 +20,8 @@
   void liberaData(Data *d);
 
   Data *somaDiasData(Data d, unsigned int dias);
+  
+  Data somaDiasDatas(Data d, unsigned int dias);
 
   Data *subtrairDiasData(Data d, unsigned int dias);
 
@@ -35,7 +37,7 @@
 
   int comparaData(Data d1, Data d2);
 
-  unsigned int numeroDiasData(Data *d1, Data *d2);
+  unsigned int numeroDiasData(Data d1, Data d2);
 
   char* imprimeData(Data d, char *formato);
 

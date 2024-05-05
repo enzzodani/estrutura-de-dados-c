@@ -127,6 +127,116 @@
     return novoDia; 
   }
 
+Data somaDiasDatas(Data d, unsigned int dias)
+{
+    Data *data = (Data *)malloc(sizeof(Data));
+    data->ano = d.ano;
+    int LIM_DO_MES;
+    // o if verifica se é ano bissexto
+    if ((data->ano % 4 == 0) && (data->ano % 100 != 0) && (data->ano % 400 == 0))
+    {
+        switch (data->mes)
+        {
+        case 1:
+            LIM_DO_MES = 31;
+            break;
+        case 2:
+            LIM_DO_MES = 29;
+            break;
+        case 3:
+            LIM_DO_MES = 31;
+            break;
+        case 4:
+            LIM_DO_MES = 30;
+            break;
+        case 5:
+            LIM_DO_MES = 31;
+            break;
+        case 6:
+            LIM_DO_MES = 30;
+            break;
+        case 7:
+            LIM_DO_MES = 31;
+            break;
+        case 8:
+            LIM_DO_MES = 31;
+            break;
+        case 9:
+            LIM_DO_MES = 30;
+            break;
+        case 10:
+            LIM_DO_MES = 31;
+            break;
+        case 11:
+            LIM_DO_MES = 30;
+            break;
+        case 12:
+            LIM_DO_MES = 31;
+            break;
+        default:
+            break;
+        }
+    }
+    else
+    {
+        switch (data->mes)
+        {
+        case 1:
+            LIM_DO_MES = 31;
+            break;
+        case 2:
+            LIM_DO_MES = 28;
+            break;
+        case 3:
+            LIM_DO_MES = 31;
+            break;
+        case 4:
+            LIM_DO_MES = 30;
+            break;
+        case 5:
+            LIM_DO_MES = 31;
+            break;
+        case 6:
+            LIM_DO_MES = 30;
+            break;
+        case 7:
+            LIM_DO_MES = 31;
+            break;
+        case 8:
+            LIM_DO_MES = 31;
+            break;
+        case 9:
+            LIM_DO_MES = 30;
+            break;
+        case 10:
+            LIM_DO_MES = 31;
+            break;
+        case 11:
+            LIM_DO_MES = 30;
+            break;
+        case 12:
+            LIM_DO_MES = 31;
+            break;
+        default:
+            break;
+        }
+    }
+
+    if (d.dia + dias > LIM_DO_MES)
+    {
+        data->dia = (d.dia + dias) - LIM_DO_MES;
+        data->mes = d.mes + 1;
+    }
+    else
+    {
+        data->dia = d.dia + dias;
+        data->mes = d.mes;
+    }
+
+    data->ano = d.ano;
+    return *data;
+};
+
   //Função que subtrai dias em uma data e retorna uma nova data
   Data *subtrairDiasData(Data d, unsigned int dias) {
     Data *novoDia = (Data *) malloc(sizeof(Data)); //Criação de novo dia gerado pela subtração de dias à data passada
@@ -216,52 +326,32 @@
     }
   }
 	
-  //Função que retorna o número de dias entre as datas
-  unsigned int numeroDiasData(Data *d1, Data *d2) {
-    const int res = comparaData(*d1, *d2); // chama a função que compara as datas para verificar se estão na ordem correta (menor data, maior data)
-
-    if(res == 1) { // caso o retorno seja 1, significa que d1 é maior que d2, por isso é preciso inverter a ordem dessas datas
-        Data *dAux = d1; // guarda o valor antigo da data 1, para depois podermos atribui-lo a data 2
-        d1 = d2;
-        d2 = dAux;
+ //Função que retorna o número de dias entre as datas
+ unsigned int numeroDiasData(Data d1, Data d2)
+{
+    unsigned int dias = 0;
+    if (comparaData(d1, d2) == 0)
+    {
+        return dias;
     }
-    
-    unsigned int count = 1;
-
-    bissextoData(*d1); // certifica-se o ano inicial é bissexto ou não
-
-    d1->mes--; // decrementa 1 para ficar conforme a enumeração dos meses na matriz
-    d2->mes--; // decrementa 1 para ficar semelhante a d2, pois sem isso nunca seriam iguais
-    
-
-
-    while (d1->dia != d2->dia || d1->mes != d2->mes || d1->ano != d2->ano){ 
-
-        if (d1->dia >= diasNoMes(*d1)) { // verifica se não extrapolou o limite de dias do respectivo mês
-
-            if (d1->mes >= 11) { // verifica se está no último mês do ano
-                d1->ano++;  // incrementa 1 ano
-                bissextoData(*d1); // a cada passagem de ano certifica-se o ano inicial é bissexto ou não
-                d1->mes = 0; // inicia no primeiro mês do ano 
-                d1->dia = 1; // inicia no primeiro dia do mês
-            }
-            else {
-                d1->mes++; // incrementa 1 mês
-                d1->dia = 1; // inicia no primeiro dia do mês
-            }
+    else if (comparaData(d1, d2) == 1)
+    {
+        while (comparaData(d1, d2) != 0)
+        {
+            d2 = somaDiasDatas(d2, 1);
+            dias++;
         }
-        else {
-            d1->dia++; // incrementa 1 dia
-        }
-
-        count++; // variável de controle do laço
     }
-    d1->mes++; //incrementa o mês em 1 pra sair da enumeração que a matriz faz, e assim ficar na enumeração padrão dos meses
-    
-    return count-1;
-
-  }
-
+    else
+    {
+        while (comparaData(d1, d2) != 0)
+        {
+            d1 = somaDiasDatas(d1, 1);
+            dias++;
+        }
+    }
+    return dias;
+};
   //Função que imprime a data passada em uma formatação especifica
     char *imprimeData(Data d, char *formato)
     {

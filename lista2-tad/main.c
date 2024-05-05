@@ -174,7 +174,7 @@ int main(int argc, char *argv[])
 	 		puts("Índice inválido");
 	 	}
 	 	
-	 	printf("%s\n", imprimeData(*(achaData(contadorData)), "ddmmaaaa"));
+	 	printf("Nova data: %s\n", imprimeData(*(achaData(contadorData)), "ddmmaaaa"));
 	 	pausar();
 	 	
     procedimento = MENU_INICIAL;
@@ -279,21 +279,17 @@ int main(int argc, char *argv[])
 		scanf("%d", &indice2);
 
 		short resultado = comparaData(*(achaData(indice)), *(achaData(indice2)));
-		enum {
-			PRIMEIRA_MAIOR,
-			IGUAIS,
-			PRIMEIRA_MENOR
-		};
+  
 		switch(resultado) {
-			case PRIMEIRA_MAIOR:
+			case 1:
 				printf("A data %d é maior que a data %d\n", indice, indice2);
         pausar();
 				break;
-			case IGUAIS:
+			case 0:
 				printf("A data %d é igual à data %d\n", indice, indice2);
         pausar();
 				break;
-			case PRIMEIRA_MENOR:
+			case -1:
 				printf("A data %d é menor que a data %d\n", indice, indice2);
         pausar();
 				break;
@@ -308,7 +304,7 @@ int main(int argc, char *argv[])
     scanf("%d", &indice1);
     fputs("Digite o índice para selecionar outra data: ", stdout);
     scanf("%d", &indice2);
-    printf("O numero de dias entre as datas é: %d\n", numeroDiasData(achaData(indice1), achaData(indice2)));
+      printf("O numero de dias entre as datas é: %d\n", numeroDiasData(*achaData(indice1), *achaData(indice2)));
     limparBufferDeEntrada();
     pausar();
     
