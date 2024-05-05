@@ -186,17 +186,16 @@ int main(int argc, char *argv[])
 	 	fputs("Digite o índice para selecionar a data: ", stdout);
 	 	scanf("%d", &indice);
 		limparBufferDeEntrada();
-		indice--; // A indexagem do usuário começa em 1 e a implementado em código começa em zero
 	
-	 	if (indice < contadorData) {
+	 /* 	if (indice < contadorData) { */
 			unsigned int dias;
 	 		printf("Digite a quantidade de dias que deseja subtrair da data %s:", imprimeData(*(achaData(indice)), "ddmmaaaa"));	
 			scanf("%d", &dias);
 			limparBufferDeEntrada();
 			colocaData(subtrairDiasData(*(achaData(indice)), dias));
-	 	} else {
-	 		puts("Índice inválido");
-	 	}
+	 	// } else {
+	 	// 	puts("Índice inválido");
+	 	// }
 	
 	 	printf("%s\n", imprimeData(*(achaData(contadorData)), "ddmmaaaa"));
 	 	pausar();
@@ -214,6 +213,9 @@ int main(int argc, char *argv[])
 		scanf("%d %d %d", &dia, &mes, &ano);
 		
 		atribuirData(achaData(indice), dia, mes, ano);
+
+    printf("Nova data: %s\n",  imprimeData(*(achaData(indice)), "ddmmaaaa"));
+    pausar();
     procedimento = MENU_INICIAL;
 	 }
 	
@@ -223,7 +225,7 @@ int main(int argc, char *argv[])
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
 
-		printf("Dia da data selecionada: %d", achaData(indice)->dia);
+		printf("Dia da data selecionada: %d\n", achaData(indice)->dia);
     pausar();
     procedimento = MENU_INICIAL;
 	 }
@@ -234,7 +236,7 @@ int main(int argc, char *argv[])
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
 
-		printf("Mes da data selecionada: %d", achaData(indice)->mes);
+		printf("Mes da data selecionada: %d\n", achaData(indice)->mes);
     pausar();
     procedimento = MENU_INICIAL;
 	 }
@@ -245,7 +247,7 @@ int main(int argc, char *argv[])
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
 
-		printf("Ano da data selecionada: %d", achaData(indice)->ano);
+		printf("Ano da data selecionada: %d\n", achaData(indice)->ano);
     pausar();
     procedimento = MENU_INICIAL;
 	 }
@@ -352,8 +354,10 @@ int main(int argc, char *argv[])
 			futuroNode = &((*futuroNode)->proximo);
 			contadorData++;
 			puts("Data adicionada com sucesso");
+      pausar();
 		} else {
 			puts("Erro: memoria insuficiente");
+      pausar();
 		}
 	}
 
@@ -402,7 +406,7 @@ int main(int argc, char *argv[])
 	}
 
   void pausar() {
-    puts("Aperte enter para continuar...");
-    char lixo;
-    scanf("%c", &lixo);
+    printf("\nDigite 0 para voltar ao menu\n");
+    int lixo;
+    scanf("%d", &lixo);
 }
