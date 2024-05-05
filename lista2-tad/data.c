@@ -327,31 +327,22 @@ Data somaDiasDatas(Data d, unsigned int dias)
   }
 	
  //Função que retorna o número de dias entre as datas
- unsigned int numeroDiasData(Data d1, Data d2)
+unsigned int numeroDiasData(Data d1, Data d2)
 {
-    unsigned int dias = 0;
-    if (comparaData(d1, d2) == 0)
-    {
-        return dias;
-    }
-    else if (comparaData(d1, d2) == 1)
-    {
-        while (comparaData(d1, d2) != 0)
-        {
-            d2 = somaDiasDatas(d2, 1);
-            dias++;
-        }
-    }
-    else
-    {
-        while (comparaData(d1, d2) != 0)
-        {
-            d1 = somaDiasDatas(d1, 1);
-            dias++;
-        }
-    }
-    return dias;
-};
+    // Função que calcula o número de dias entre duas datas
+    unsigned int contador1, contador2;
+
+    contador1 = d1.dia - 32075 + 1461 * (d1.ano + 4800 + (d1.mes - 14) / 12) / 4 +
+               367 * (d1.mes - 2 - (d1.mes - 14) / 12 * 12) / 12 -
+               3 * ((d1.ano + 4900 + (d1.mes - 14) / 12) / 100) / 4;
+
+    contador2 = d2.dia - 32075 + 1461 * (d2.ano + 4800 + (d2.mes - 14) / 12) / 4 +
+               367 * (d2.mes - 2 - (d2.mes - 14) / 12 * 12) / 12 -
+               3 * ((d2.ano + 4900 + (d2.mes - 14) / 12) / 100) / 4;
+
+    
+    return abs(contador2 - contador1);
+}
   //Função que imprime a data passada em uma formatação especifica
     char *imprimeData(Data d, char *formato)
     {
