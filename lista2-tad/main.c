@@ -318,14 +318,13 @@ int main(int argc, char *argv[])
 		imprimirTodasDatas();
 		fputs("Digite o índice para selecionar a data: ", stdout);
 		scanf("%d", &indice);
+		limparBufferDeEntrada();
 
 		fputs("Digite a formatação da data: ", stdout);
-		limparBufferDeEntrada();
 		fgets(formato, tam, stdin);
-    limparBufferDeEntrada();
+		 
 		formato[strcspn(formato, "\n")] = '\0'; 
-    printf("DEBUG: %s\n", formato);
-
+    
 		printf("Data nessa formatação: %s\n", imprimeData(*(achaData(indice)), formato));
     pausar();
     procedimento = MENU_INICIAL;
