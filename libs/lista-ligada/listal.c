@@ -14,21 +14,15 @@ Node* head = NULL;
         puts("Error: Aloccation Memory fault");
       }
 
-      newNode -> data;
+      newNode -> data = data;
 
-      if (head == NULL) {
+      if (*head == NULL) {
         newNode -> nextNode = NULL;
-        head = &newNode;
+        *head = newNode;
+      } else {
+        newNode -> nextNode = *head;
+        *head = newNode;
       }
-      
-      if (head != NULL) {
-        Node* temp = head;
-        head = &newNode;
-        newNode -> nextNode = temp;
-      }
-}
-    //atEnd
-    void insertAtEnd (Node** head, int data) {
 
 }
     //atPosition
