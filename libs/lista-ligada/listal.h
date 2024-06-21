@@ -6,42 +6,45 @@
 //Definition Node
 typedef struct Node {
   int data;
-  Node *nextNode;
+  Node* nextNode;
 } Node;
+
+//Definition head
+extern Node* head;
 
 //Linked List Functions
   //Insert
     //atBeginnig
-    void insertAtBeginnig ();
+    void insertAtBeginnig (Node** head, int data);
     //atEnd
-    void insertAtEnd ();
+    void insertAtEnd (Node** head, int data);
     //atPosition
-    void insertAtPosition ();
+    void insertAtPosition (Node** head, int data, int position);
 
 
   //Removal
     //atBeginnig
-    void removalAtBeginnig ();
+    void removalAtBeginnig (Node** head);
     //atEnd
-    void removalAtEnd ();
+    void removalAtEnd (Node** head);
     //atPosition
-    void removalAtPosition ();
+    void removalAtPosition (Node** head, int position);
 
   //Search
     //Value
-    Node searchAtValue ();
+    Node searchAtValue (Node* head, int data);
     //atPosition
-    Node searchAtPosition ();
+    Node searchAtPosition (Node* head, int position);
   
 
   //Update
-    //Value
-    void updateValue ();
+    //atPosition
+    void updateAtPosition (Node* head, int data, int position);
 
   //Traversal
     //printList
-    void printList ();
+    void printList (Node* head);
     //printListInfo
-    void printListInfo ();
+    void printListInfo (Node* head);
 
 #endif 
