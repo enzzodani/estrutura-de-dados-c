@@ -41,10 +41,11 @@ void insertAtEnd(Node** head, int data) {
     *head = newNode;
   } else {
     Node* temp = head;
-    while (temp != NULL) {
+    while (temp->nextNode != NULL) {
       temp = temp -> nextNode;
     }
-    
+    temp->nextNode = newNode;
+    newNode -> nextNode = NULL;
   }
 }
 
