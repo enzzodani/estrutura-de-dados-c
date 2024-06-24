@@ -72,7 +72,7 @@
     }
 }
     //atPosition
-    void insertAtPosition (descriptionNode* dNode, int position);
+    void insertAtPosition (descriptionNode* dNode, int position, int data);
 
   //Removal
     //atBeginning
@@ -116,7 +116,7 @@
 
   //Update
     //atPosition
-    void updateAtPosition (int data, descriptionNode *dNode);
+    void updateAtPosition (descriptionNode *dNode, int data, int position);
 
   //Search
     //Value
