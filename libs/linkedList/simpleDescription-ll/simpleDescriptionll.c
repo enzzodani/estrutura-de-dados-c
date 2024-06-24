@@ -40,11 +40,27 @@
       return;
     }
     
-    newNode -> next = dNode -> start;
-    dNode -> start = newNode; 
+    if (dNode -> length = 0) {
+      dNode -> start = newNode;
+      dNode -> end = newNode;
+      newNode -> next = NULL;
+    } else {
+      newNode -> next = dNode -> start;
+      dNode -> start = newNode; 
+    }
 }
     //atEnd
-    void insertAtEnd (descriptionNode* dNode, int data);
+    void insertAtEnd (descriptionNode* dNode, int data) {
+    Node* newNode = createNode(data);
+
+    if (newNode == NULL) {
+      puts("Error in insert at End"); 
+      return;
+    }
+    
+    newNode -> next = NULL;
+    
+}
     //atPosition
     void insertAtPosition (descriptionNode* dNode, int position);
 
