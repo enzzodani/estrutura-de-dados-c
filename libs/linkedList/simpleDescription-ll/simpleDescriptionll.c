@@ -92,7 +92,25 @@
   }
 }
     //atEnd
-    void removalAtEnd (descriptionNode* dNode);
+    void removalAtEnd (descriptionNode* dNode) {
+    
+    if (dNode -> length == 0) {
+      puts("The List is already empty"); 
+      return;
+    } else if (dNode -> length == 1) {
+      free(dNode -> start);
+      dNode -> start = NULL;
+      dNode -> end = NULL;
+    } else {
+      Node* temp = dNode -> start;
+      while (temp -> next -> next =! NULL) {
+        temp = temp -> next;
+      }
+      dNode -> end = temp;
+      free(dNode -> end -> next);
+      dNode -> end -> next = NULL;
+  }
+}
     //atPosition
     void removalAtPosition (descriptionNode* dNode, int position);
 
