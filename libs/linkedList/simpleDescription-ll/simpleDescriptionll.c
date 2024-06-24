@@ -76,7 +76,21 @@
 
   //Removal
     //atBeginning
-    void removalAtBeginning (descriptionNode* dNode);
+    void removalAtBeginning (descriptionNode* dNode) {
+    
+    if (dNode -> length == 0) {
+      puts("The List is already empty"); 
+      return;
+    } else if (dNode -> length == 1) {
+      free(dNode -> start);
+      dNode -> start = NULL;
+      dNode -> end = NULL;
+    } else {
+      Node* temp = dNode -> start;
+      dNode -> start = dNode -> start -> next;
+      free(temp);
+  }
+}
     //atEnd
     void removalAtEnd (descriptionNode* dNode);
     //atPosition
