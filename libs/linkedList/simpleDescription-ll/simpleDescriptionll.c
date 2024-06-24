@@ -40,13 +40,14 @@
       return;
     }
     
-    if (dNode -> length = 0) {
+    if (dNode -> length == 0) {
       dNode -> start = newNode;
       dNode -> end = newNode;
-      newNode -> next = NULL;
+      dNode -> length = 1;
     } else {
       newNode -> next = dNode -> start;
       dNode -> start = newNode; 
+      dNode -> length += 1;
     }
 }
     //atEnd
@@ -60,6 +61,15 @@
     
     newNode -> next = NULL;
     
+    if (dNode -> length == 0) {
+      dNode -> start = newNode;
+      dNode -> end = newNode;
+      dNode -> length = 1;
+    } else {
+      dNode -> end -> next = newNode;
+      dNode -> end = newNode;
+      dNode -> length += 1;
+    }
 }
     //atPosition
     void insertAtPosition (descriptionNode* dNode, int position);
