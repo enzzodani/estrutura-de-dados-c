@@ -1,0 +1,8 @@
+Lista Linear Circular Simplesmente Encadeada
+(LLCSE);
+(2) Lista Linear Circular Duplamente Encadeada
+(LLCDE);
+(3) Lista Linear Circular Simplesmente Encadeada
+com Nó Descritor (LLCSEcD);
+(4) Lista Linear Circular Duplamente Encadeada com
+Nó Descritor (LLCSEcD);
