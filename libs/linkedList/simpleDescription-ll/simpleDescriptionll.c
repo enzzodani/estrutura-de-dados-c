@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 //Declaration Function
   //descriptionNode
@@ -126,7 +127,18 @@
 
   //Transversal
     //printList
-    void printList (descriptionNode* dNode);
+    void printList (descriptionNode* dNode) {
+      if (dNode -> length == 0) {
+        puts("The list is empty");
+      } else {
+        Node* temp = dNode -> start;
+        while (temp -> next != NULL) {
+        printf("Node data: %d\n", temp->data);
+        temp = temp -> next;
+        }
+        printf("Last Node data: %d\n", temp-> data);
+      }
+}
 
     //printListInfo
     void printListInfo (descriptionNode* dNode);
