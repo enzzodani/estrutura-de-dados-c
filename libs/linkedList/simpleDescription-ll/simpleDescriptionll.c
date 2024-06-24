@@ -141,4 +141,10 @@
 }
 
     //printListInfo
-    void printListInfo (descriptionNode* dNode);
+    void printListInfo (descriptionNode* dNode) {
+    if (dNode -> length == 0) {
+      puts("The list is empty");
+    } else {
+      printf("List's length: %d\n", dNode-> length);
+    }
+}
