@@ -18,21 +18,24 @@ typedef struct descriptionNode {
   //descriptionNode
   descriptionNode* createDNode ();
 
+  //Create Node
+  Node* createNode (int data);
+
   //Insert 
     //atBeginning
-    void insertAtBeginning (Node* newNode, descriptionNode* dNode);
+    void insertAtBeginning (descriptionNode* dNode, int data);
     //atEnd
-    void insertAtEnd (Node* newNode, descriptionNode* dNode);
+    void insertAtEnd (descriptionNode* dNode);
     //atPosition
-    void insertAtPosition (Node* newNode, descriptionNode* dNode, int position);
+    void insertAtPosition (descriptionNode* dNode, int position);
 
   //Removal
     //atBeginning
-    void removalAtBeginning (Node* newNode, descriptionNode* dNode);
+    void removalAtBeginning (descriptionNode* dNode);
     //atEnd
-    void removalAtEnd (Node* newNode, descriptionNode* dNode);
+    void removalAtEnd (descriptionNode* dNode);
     //atPosition
-    void removalAtPosition (Node* newNode, descriptionNode* dNode, int position);
+    void removalAtPosition (descriptionNode* dNode, int position);
 
   //Update
     //atPosition
@@ -40,9 +43,9 @@ typedef struct descriptionNode {
 
   //Search
     //Value
-    Node searchAtValue (descriptionNode* dNode, int data);
+    Node* searchAtValue (descriptionNode* dNode, int data);
     //atPosition
-    Node searchAtPosition (descriptionNode* dNode, int position);
+    Node* searchAtPosition (descriptionNode* dNode, int position);
 
   //Transversal
     //printList
