@@ -121,7 +121,25 @@
 
   //Search
     //Value
-    Node* searchAtValue (descriptionNode* dNode, int data);
+    Node* searchAtValue (descriptionNode* dNode, int data) {
+      if (dNode -> length == 0) {
+        puts("The list is empty");
+        return NULL;
+      } else {
+        Node* temp = dNode -> start;
+        
+        while (temp-> data != data || temp -> next != NULL) {
+          temp = temp -> next;
+        }
+        
+        if (temp -> next == NULL && temp-> data != data) {
+          puts("The data doesn't exist");
+          return NULL;
+        }
+        
+        return temp;
+      }
+}
     //atPosition
     Node* searchAtPosition (descriptionNode* dNode, int position);
 
