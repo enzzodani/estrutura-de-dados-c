@@ -4,7 +4,8 @@
 //Definition Node
 typedef struct Node {
   int data;
-  Node* nextNode;
+  Node* next;
+  Node* previous;
 } Node;
 
 //Definition head
@@ -46,3 +47,4 @@ extern Node* head;
     void printListInfo (Node* head);
 
 #endif 
+
