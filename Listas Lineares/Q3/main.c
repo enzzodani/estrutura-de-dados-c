@@ -31,9 +31,9 @@ Anao* CriaAnao(int cor)
     return nAnao;
 }
 
-void criaFilaAnao (FilaAnao* fila, int nAnoes, int i) {
+void criaFilaAnao (FilaAnao* fila, int nAnoes) {
     //criando a fila de anões
-    int k;
+    int k,i;
     for(k=0; k<nAnoes; k++)
     {
         scanf("%d", &i);
@@ -118,20 +118,20 @@ int CorPredominante(int start, int end, FilaAnao* fila, int cCores)
 int main()
 {
     //declarando as variáveis
-    int nAnoes, cCores, nDaCor, i, nFotos;
+    int nAnoes, cCores, nDaCor, nFotos;
     
     //recebendo o número de anões
     scanf("%d %d", &nAnoes, &cCores);
     
     while(nAnoes<3 || nAnoes>1000 || cCores<1 || cCores > nAnoes)
     {
-        scanf("%d", &nAnoes, &cCores);
+        scanf("%d %d", &nAnoes, &cCores);
     }
     
-    FilaAnao* fila;
+    FilaAnao* fila = (FilaAnao *) malloc(sizeof(FilaAnao));
     fila -> lenght = 0;
    
-    criaFilaAnao(fila, nAnoes, i); //Cria Fila de Anões
+    criaFilaAnao(fila, nAnoes); //Cria Fila de Anões
     
     //recebendo o numero de fotos
     scanf("%d", &nFotos);
