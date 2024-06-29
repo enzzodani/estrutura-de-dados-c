@@ -1,0 +1,7 @@
+1 2 bonita 3
+1 3 bonita 3
+1 4 bonita 3
+1 5 bonita 3
+2 5 feia
+6 9 feia
+7 10 bonita 3
