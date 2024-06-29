@@ -121,21 +121,12 @@ int main()
     int nAnoes, cCores, nDaCor, i, nFotos;
     
     //recebendo o número de anões
-    scanf("%d", &nAnoes);
+    scanf("%d %d", &nAnoes, &cCores);
     
-    while(nAnoes<3 || nAnoes>1000)
+    while(nAnoes<3 || nAnoes>1000 || cCores<1 || cCores > nAnoes)
     {
-        scanf("%d", &nAnoes);
+        scanf("%d", &nAnoes, &cCores);
     }
-    
-    //recebendo o número de cores possíveis
-    scanf("%d", &cCores);
-    
-    while(cCores<1 || cCores>nAnoes)
-    {
-        scanf("%d", &cCores);
-    }
-    
     
     FilaAnao* fila;
     fila -> lenght = 0;
