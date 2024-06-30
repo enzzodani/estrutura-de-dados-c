@@ -24,7 +24,7 @@ NodeQueue* createQueue();
 
 void captureID(int numOfPersons, NodeQueue* queue);
 
-void enqueue();
+void enqueue(Node* node, NodeQueue* queue);
 
 void dequeueAtId();
 
@@ -76,10 +76,7 @@ void captureID (int numOfPersons, NodeQueue* queue) {
   scanf("%d", &id);
   Node* newNode = createNode(id);
 
-  if (i==0) {
-    
-  }
-  
+  enqueue(newNode, queue);
 
   }
 }
