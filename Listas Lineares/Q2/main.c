@@ -26,7 +26,7 @@ void captureID(int numOfPersons, NodeQueue* queue); //Faz a captura de ids inici
 
 void enqueue(Node* node, NodeQueue* queue); //Adiciona Nó no final da fila
 
-void dequeueAtId(); //Remove Nó a partir de um id fornecido
+int dequeueAtId(int id, NodeQueue* queue); //Remove Nó a partir de um id fornecido, retorna 0 se funcionar, 1 se nao funcionar
 
 void printQueue(); //Printa os id em ordem da fila
 
@@ -108,4 +108,10 @@ void enqueue (Node* node, NodeQueue* queue) {
     node -> next = NULL; //Não existe ninguem depois do novo Nó, visto que ele é o novo último Nó agora
     queue -> lenght++; //Adiconamos 1 elemento na fila, logo ela cresce 1 de tamanho
   }
+}
+
+int dequeueAtId (int id, NodeQueue* queue) { //Remove Nó a partir de um id fornecido, retorna 0 se funcionar e 1 se não funcionar
+  
+  
+  
 }
