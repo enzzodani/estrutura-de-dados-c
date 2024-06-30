@@ -80,3 +80,20 @@ void captureID (int numOfPersons, NodeQueue* queue) {
 
   }
 }
+
+void enqueue (Node* node, NodeQueue* queue) {
+ 
+  if (queue -> lenght == 0) {
+    queue -> start = node;
+    queue -> end = node;
+    queue -> lenght = 1;
+    node -> next = NULL;
+    node -> back = NULL;
+  } else {
+    queue -> end -> next = node;
+    node -> back = queue -> end;
+    queue -> end = node;
+    node -> next = NULL;
+    queue -> lenght++;
+  }
+}
