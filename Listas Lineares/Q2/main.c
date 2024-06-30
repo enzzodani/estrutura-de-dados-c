@@ -51,6 +51,18 @@ int main(int argc, char *argv[])
 //Definition of functions
 Node* createNode (int id) { //Cria um Nó com um ID
 
+  Node* newNode = (Node *) malloc(sizeof(Node)); //Instancia um novo Nó
+
+  if (newNode == NULL) { //Verifica se houve erro durante a alocação de memória
+    puts("Error: Alocation Memory Failed (createNode)");
+    return NULL;
+  }
+
+  newNode -> id = id; //Adiciona o id ao Nó
+  newNode -> next = NULL; 
+  newNode -> back = NULL;
+
+  return newNode; //Retorna o novo Nó ligado ao seu id
 }
 
 NodeQueue* createQueue () { //Cria uma fila vazia
