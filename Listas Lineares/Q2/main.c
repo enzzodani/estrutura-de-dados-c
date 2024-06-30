@@ -22,17 +22,21 @@ Node* createNode(int id);
 
 NodeQueue* createQueue();
 
-void insertAtStart();
+void captureID(int numOfPersons, NodeQueue* queue);
 
-void removalAtID();
+void enqueue();
+
+void dequeueAtId();
 
 void printQueue();
 
 int main(int argc, char *argv[])
 {
   //Captura do numero de pessoas na fila
-
+  int numOfPersons;
+  scanf("%d", &numOfPersons)
   //Captura dos id por ordem
+  captureID(numOfPersons);
 
   //Captura da quantidade de desistentes
 
@@ -42,4 +46,40 @@ int main(int argc, char *argv[])
   printQueue();
 
   return 0;
+}
+
+//Definition of functions
+Node* createNode (int id) {
+
+}
+
+NodeQueue* createQueue () {
+  
+  NodeQueue* newQueue = (NodeQueue *) malloc(sizeof(NodeQueue));
+
+  if (newQueue == NULL) {
+    puts("Error: Alocation Memory Failed (createQueue)");
+    return NULL;
+  }
+
+  newQueue -> lenght = 0;
+  newQueue -> start = NULL;
+  newQueue -> end = NULL;
+
+  return newQueue;
+}
+
+void captureID (int numOfPersons, NodeQueue* queue) {
+  int i, id;
+  for (i = 0; i < numOfPersons; i++) {
+  
+  scanf("%d", &id);
+  Node* newNode = createNode(id);
+
+  if (i==0) {
+    
+  }
+  
+
+  }
 }
