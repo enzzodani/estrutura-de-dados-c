@@ -4,31 +4,31 @@
 //Definition of the Node
 typedef struct Node Node;
 struct Node {
-  int id;
-  Node* next;
-  Node* back;
+  int id; //ID de um Nó
+  Node* next; //Ponteiro para o próximo Nó
+  Node* back; //Ponteiro para o Nó anterior
 };
 
 //Definition of the Queue
 typedef struct NodeQueue NodeQueue;
 struct NodeQueue {
-  unsigned int lenght;
-  Node* start;
-  Node* end;
+  unsigned int lenght; //Tamanho da Fila de Nós
+  Node* start; //Ponteiro para o primeiro Nó da fila
+  Node* end; //Ponteiro para o último Nó da Fila
 };
 
 //Declaration of the functions
-Node* createNode(int id);
+Node* createNode(int id); //Cria um Nó com um ID
 
-NodeQueue* createQueue();
+NodeQueue* createQueue(); //Cria uma fila vazia
 
-void captureID(int numOfPersons, NodeQueue* queue);
+void captureID(int numOfPersons, NodeQueue* queue); //Faz a captura de ids iniciais
 
-void enqueue(Node* node, NodeQueue* queue);
+void enqueue(Node* node, NodeQueue* queue); //Adiciona Nó no final da fila
 
-void dequeueAtId();
+void dequeueAtId(); //Remove Nó a partir de um id fornecido
 
-void printQueue();
+void printQueue(); //Printa os id em ordem da fila
 
 int main(int argc, char *argv[])
 {
@@ -49,51 +49,51 @@ int main(int argc, char *argv[])
 }
 
 //Definition of functions
-Node* createNode (int id) {
+Node* createNode (int id) { //Cria um Nó com um ID
 
 }
 
-NodeQueue* createQueue () {
+NodeQueue* createQueue () { //Cria uma fila vazia
   
-  NodeQueue* newQueue = (NodeQueue *) malloc(sizeof(NodeQueue));
+  NodeQueue* newQueue = (NodeQueue *) malloc(sizeof(NodeQueue)); //Instancia uma Nova Fila
 
-  if (newQueue == NULL) {
+  if (newQueue == NULL) { //Verifica se houve erro na instanciação
     puts("Error: Alocation Memory Failed (createQueue)");
     return NULL;
   }
 
-  newQueue -> lenght = 0;
-  newQueue -> start = NULL;
-  newQueue -> end = NULL;
+  newQueue -> lenght = 0; //Uma nova fila começa com tamanho 0 visto que nao temos elementos dentro dela
+  newQueue -> start = NULL; //Sem elementos, não tem começo
+  newQueue -> end = NULL; //Nem final
 
-  return newQueue;
+  return newQueue; //Retorna a nova fila vazia
 }
 
 void captureID (int numOfPersons, NodeQueue* queue) {
   int i, id;
-  for (i = 0; i < numOfPersons; i++) {
+  for (i = 0; i < numOfPersons; i++) { //Loop de captura de id's
   
   scanf("%d", &id);
-  Node* newNode = createNode(id);
+  Node* newNode = createNode(id); //Cria um nó para o id passado
 
-  enqueue(newNode, queue);
+  enqueue(newNode, queue); //Enfileira o Nó no final da fila
 
   }
 }
 
 void enqueue (Node* node, NodeQueue* queue) {
  
-  if (queue -> lenght == 0) {
-    queue -> start = node;
-    queue -> end = node;
-    queue -> lenght = 1;
-    node -> next = NULL;
-    node -> back = NULL;
+  if (queue -> lenght == 0) { //Se a fila estiver vazia, ou seja, estamos add o primeiro Nó
+    queue -> start = node; //O começo da fila aponta para esse Nó
+    queue -> end = node; //O final da fila aponta para esse Nó
+    queue -> lenght = 1; //Agora temos 1 elemento na fila
+    node -> next = NULL; //não existe proximo elemento
+    node -> back = NULL; //não existe anterior ao primeiro
   } else {
-    queue -> end -> next = node;
-    node -> back = queue -> end;
-    queue -> end = node;
-    node -> next = NULL;
-    queue -> lenght++;
+    queue -> end -> next = node; //Fazemos o ultimo Nó da fila apontar para o novo Nó adicionado
+    node -> back = queue -> end; //Fazemos o novo Nó apontar para o último Nó da fila
+    queue -> end = node; //Fazemos o final da fila apontar para o Novo Nó
+    node -> next = NULL; //Não existe ninguem depois do novo Nó, visto que ele é o novo último Nó agora
+    queue -> lenght++; //Adiconamos 1 elemento na fila, logo ela cresce 1 de tamanho
   }
 }
