@@ -24,6 +24,8 @@ NodeQueue* createQueue(); //Cria uma fila vazia
 
 void captureID(int numOfPersons, NodeQueue* queue); //Faz a captura de ids iniciais
 
+void removeID (int numOfPersons, NodeQueue* queue);
+
 void enqueue(Node* node, NodeQueue* queue); //Adiciona Nó no final da fila
 
 int dequeueAtId(int id, NodeQueue* queue); //Remove Nó a partir de um id fornecido, retorna 0 se funcionar, 1 se nao funcionar
@@ -127,6 +129,16 @@ int dequeueAtId (int id, NodeQueue* queue) { //Remove Nó a partir de um id forn
   }
 
   return 1;
+}
+
+void removeID (int numOfPersons, NodeQueue* queue) {
+  int i, id;
+
+  for (i = 0; i < numOfPersons; i++) {
+    scanf("%d", &id);
+
+    dequeueAtId(id, queue);
+  }
 }
 
 void printQueue (NodeQueue* queue) {
