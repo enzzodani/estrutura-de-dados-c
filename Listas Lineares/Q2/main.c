@@ -112,6 +112,23 @@ void enqueue (Node* node, NodeQueue* queue) {
 
 int dequeueAtId (int id, NodeQueue* queue) { //Remove Nó a partir de um id fornecido, retorna 0 se funcionar e 1 se não funcionar
   
+  Node* temp = queue -> start; //Temporario = Serve para percorrer a lista
   
-  
+  while (temp -> next == NULL) { //Função para percorrer até o último
+    if (temp -> id == id) {
+      free(temp);
+      return 0;
+    }
+    temp = temp -> next;
+  }
+
+  if (temp -> id == id) {
+    return 0;
+  }
+
+  return 1;
+}
+
+void printQueue (NodeQueue* queue) {
+
 }
