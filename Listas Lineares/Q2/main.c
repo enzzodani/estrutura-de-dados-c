@@ -34,16 +34,22 @@ void printQueue(); //Printa os id em ordem da fila
 
 int main(int argc, char *argv[])
 {
+  // Criação da fila
+  NodeQueue* queue = createQueue();
+
   //Captura do numero de pessoas na fila
   int numOfPersons;
   scanf("%d", &numOfPersons)
+
   //Captura dos id por ordem
   captureID(numOfPersons);
 
   //Captura da quantidade de desistentes
+  scanf("%d", &numOfPersons);
 
   //Captura dos ids dos desistentes
-
+  removeID(numOfPersons, queue);
+  
   //Print do estado final da fila
   printQueue();
 
