@@ -116,7 +116,7 @@ int dequeueAtId (int id, NodeQueue* queue) { //Remove Nó a partir de um id forn
   
   Node* temp = queue -> start; //Temporario = Serve para percorrer a lista
   
-  while (temp -> next == NULL) { //Função para percorrer até o último
+  while (temp -> next != NULL) { //Função para percorrer até o último
     if (temp -> id == id) {
       free(temp);
       return 0;
@@ -142,5 +142,11 @@ void removeID (int numOfPersons, NodeQueue* queue) {
 }
 
 void printQueue (NodeQueue* queue) {
+  Node* temp = queue -> start;
 
+  while (temp -> next != NULL) {
+    printf("%d ", temp->id);
+    temp = temp -> next;
+  }
+  printf("%d ", temp -> id);
 }
