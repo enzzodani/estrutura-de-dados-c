@@ -159,7 +159,7 @@ void showFila(Fila *fila) {
 
 int main() {
     Fila *fila = criarFila();
-    char comando[20];
+    char comando[15];
     int qtInimigos = 0;
     char inimigos[100];
     int i = 0;
@@ -182,28 +182,39 @@ int main() {
 
     while  (comando[0] != 'F') {
         char tarefa;
+        int a = 0, b = 0;
         
         fgets (comando, 100, stdin);
         fflush(stdin);        
 
         char *token = strtok(comando, " "); // elimina os espaços da string de entrada
-        printf("\n%c", token[0]);
-        printf(", %c", token[1]);
-        printf(", %c\n", token[2]);
-
-        while (token != NULL) {
-
-            sscanf(token, "%c", &tarefa); // converte a string para um inteiro
-
-            token = strtok(NULL, " "); // avança para o próximo token
-        }
     
+        sscanf(token, "%c", &tarefa); // converte a string para um Char
+        token = strtok(NULL, " "); // avança para o próximo token
+        
+        if (token != NULL) {
+            sscanf(token, "%d", &a);
+            token = strtok(NULL, " "); // avança para o próximo token
 
-        // switch comando) {
-        //     case 'M':
-        //         showFila(fila);
-        //         break;
-        // }
+            if (token != NULL) {
+                sscanf(token, "%d", &b);
+            }
+        }
+
+
+        switch (tarefa) {
+            case 'I':
+                inserir(fila, a, b);
+                break;
+            case 'R':
+                remover(fila, a);
+                break;
+            case 'C':
+                printf("%d", inimigosRange(fila, a, b));
+            case 'M':
+                showFila(fila);
+                break;
+        }
     }
 
 
