@@ -71,6 +71,6 @@ int main() {
     char expressao[1001];
     fgets(expressao, 1001, stdin);
     expressao[strcspn(expressao, "\n")] = '\0';
-    printf("%s\n", verificarExpressao(expressao));
+    printf("Digite uma expressao: %s\n", verificarExpressao(expressao));
     return 0;
 }
