@@ -124,7 +124,7 @@ int pacientesCriticos(Fila *fila) {
                 tempoEspera = (h - p->hora)*60 + (m - p->minuto);
             }
 
-            if (tempoEspera > p->tRestante) { // caso o tempo de espera para o atendimento for maior que o tempo restante então o paciente entra em estado crítico
+            if (tempoEspera > p->tRestante && nPacientesAtendidos != 0) { // caso o tempo de espera para o atendimento for maior que o tempo restante então o paciente entra em estado crítico
                 nPacientesCriticos++;
             }
 
