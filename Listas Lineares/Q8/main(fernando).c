@@ -96,14 +96,17 @@ void insereLista(Contato* novoContato, ListaContato* lista)
     {
         lista->start = novoContato;
         lista->end = novoContato;
-        return;
     }
     
-    Contato* temp = lista-> start;
   
     //organizando a lista para quando temos 1 ou mais contatos ja salvos
-    else if () {
+    else if () 
+    {
+       lista->final->proximo = novoContato;
+       novoContato->anterior = lista->final;
+       novoContato = lista->final;
     } 
+    
     lista->lenght++;
 
 }
