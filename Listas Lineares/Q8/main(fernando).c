@@ -6,19 +6,19 @@
 #define MAX_PHONE_LEN 10
 
 //criando o tad para contato
-typedef struct contato 
+typedef struct Contato 
 {
     char* nome;
     int v;
     char* telefone;
-    struct contato* proximo;
-    struct contato* anterior;
+    struct Contato* proximo;
+    struct Contato* anterior;
     
     
 }Contato;
 
 //criando o tad para o nó descritivo
-typedef struct listaContato
+typedef struct ListaContato
 {
     unsigned int lenght = 0;
     Contato* inicial;
@@ -72,27 +72,39 @@ Contato* criaContato(char* nome, char* telefone, unsigned int v)
     return novoContato;
 }
 
-void organizaLista()
+ListaContato* criaLista() {
+
+  ListaContato* novaLista = (ListaContato *) malloc(sizeof(ListaContato));
+
+  if (novaLista == NULL) {
+    puts("Erro de alocacao de memoria (criaLista)");
+    return NULL;
+  }
+
+  novaLista -> lenght = 0;
+  novaLista -> start = NULL;
+  novaLista -> end = NULL;
+
+  return novaLista;
+}
+
+void insereLista(Contato* novoContato, ListaContato* lista)
 {
     
     //organizando a lista para quando nao temos nenhum contato ainda
-    if(ListaContato->lenght == 0)
+    if(lista->lenght == 0)
     {
-        ListaContato->start = novoContato;
-        ListaContato->end = novoContato;
-        
+        lista->start = novoContato;
+        lista->end = novoContato;
+        return;
     }
     
-    
+    Contato* temp = lista-> start;
+  
     //organizando a lista para quando temos 1 ou mais contatos ja salvos
-    else
-    {
-        novoContato->anterior = ListaContato->end;
-        novoContato->anterior->proximo = novoContato;
-        ListaContato->end = novoContato;
-    }
-    
-    ListaContato->lenght++;
+    else if () {
+    } 
+    lista->lenght++;
 
 }
 
