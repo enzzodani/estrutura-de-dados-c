@@ -1,5 +1,9 @@
 #include <stdio.h>
-#include <std.lib.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_NAME_LEN 21
+#define MAX_PHONE_LEN 10
 
 typedef struct contato 
 {
@@ -31,6 +35,38 @@ Contato* criaContato(char* nome, char* telefone, unsigned int v)
         return NULL;
     }
     
+    novoContato -> nome = (char *)malloc((strlen(nome) + 1)* sizeof(char));
+    if (novoContato -> nome == NULL) {
+     puts("Erro de alocacao de memoria para nome (criaContato)");
+     free(novoContato);
+     return NULL;
+    } 
+    
+    strcpy(novoContato->nome, nome);
+
+    novoContato -> telefone = (char *)malloc((strlen(telefone) + 1)* sizeof(char));
+    if (novoContato -> telefone == NULL) {
+     puts("Erro de alocacao de memoria para telefone (criaContato)");
+     free(novoContato -> nome);
+     free(novoContato);
+     return NULL;
+    } 
+    
+    strcpy(novoContato->telefone, telefone);
+  
+    novoContato -> v = v;
+    novoContato -> proximo == NULL;
+    novoContato -> anterior == NULL;
+
+    return novoContato;
+
+    
+    return novoContato;
+}
+
+void organizaLista()
+{
+    
     if(ListaContato->lenght == 0)
     {
         ListaContato->start = novoContato;
@@ -44,18 +80,6 @@ Contato* criaContato(char* nome, char* telefone, unsigned int v)
         novoContato->anterior->proximo = novoContato;
         ListaContato->end = novoContato;
     }
-    
-    //cuidar da questao do string (string copy?)
-    novoContato->nome = nome;
-    novoContato->telefone = telefone;
-    novoContato->v = v;
-    
-    return novoContato;
-}
-
-void organizaLista()
-{
-    
 }
 
 void removerContato(char* nome)
@@ -63,10 +87,38 @@ void removerContato(char* nome)
     Contato* temp = ListaContato->start;
 }
 
+void printContacts() {
 
+}
 
 int main()
 {
+  char operation;
+  char name[MAX_NAME_LEN];
+  char phone[MAX_PHONE_LEN];
+  int calls;
+
+  while (1) {
+    scanf(" %c", &operation);
+    if (operation == 'F') { 
+      break;
+    }
+
+    switch (operation) {
+      case 'I':
+        scanf("%s %s %d", name, phone, &calls);
+        criaContato(name, phone, calls);
+        break;
+      case 'R':
+
+        break;
+      case 'L':
+        
+        break;
+    }
+  }
+
+  printContacts();
     
 
     return 0;
