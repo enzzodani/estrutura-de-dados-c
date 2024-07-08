@@ -59,6 +59,10 @@ const char* verificarExpressao(char* expressao) {
             desempilhar(&pilha);
         }
     }
+// verificação p/ parentese no final
+    if (!estaVazia(pilha) && pilha->proximo == NULL && expressao[tamanho - 1] == '(') {
+        desempilhar(&pilha);
+    }
 
     if (estaVazia(pilha)) {
         return "correta";
