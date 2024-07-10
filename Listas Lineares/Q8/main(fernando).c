@@ -202,6 +202,9 @@ void funcaoLigacao(char* nome, ListaContato* lista)
     temp->v++;
 }
 
+//Funções para mergeSort
+
+
 int main()
 {
   char operation;
