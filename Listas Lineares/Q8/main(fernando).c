@@ -203,6 +203,27 @@ void funcaoLigacao(char* nome, ListaContato* lista)
 }
 
 //Funções para mergeSort
+Node* split(Node* head) {
+  Node* fast = head;
+  Node* slow = head;
+
+  while (fast != NULL && fast-> proximo != NULL) {
+    fast = fast -> proximo -> proximo;
+
+    if (fast != NULL) {
+      slow = slow -> proximo
+    }
+  }
+
+  Node* secondHalf = slow-> proximo;
+  slow->proximo = NULL;
+
+  if (secondHalf != NULL) {
+    secondHalf -> anterior = NULL;
+  }
+
+  return secondHalf;
+}
 
 
 int main()
