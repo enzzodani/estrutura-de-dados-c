@@ -238,6 +238,26 @@ Node* mergeSort(Node* head) {
   return merge(head, secondHalf);
 }
 
+Node* merge(Node* first, Node* second) {
+  if (first == NULL) {
+    return second;
+  } else if (second == NULL) {
+    return first;
+  }
+
+  if (first -> v <= second -> v) {
+    first -> proximo = merge(first->proximo, second);
+    first -> proximo -> anterior = first;
+    first -> anterior = NULL;
+    return first;
+  } else {
+    second -> proximo = merge(first, second-> proximo);
+    second -> proximo -> anterior = second;
+    second -> anterior = NULL;
+    return second;
+  }
+}
+
 
 int main()
 {
