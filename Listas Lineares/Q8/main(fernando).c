@@ -176,15 +176,15 @@ void removerContato(char* nome, ListaContato* lista)
 
 void printContacts(ListaContato* lista) 
 {
-    Contato* temp = lista->inicial;
+    Contato* temp = lista->final;
     
     int i = 0;
-    for(i=0; i<(lista->lenght); i++)
-    {
+  while (temp != NULL && temp -> anterior != NULL) {
+
         printf("%s - %s %d", temp->nome, temp->telefone, temp->v);
         printf("\n");
         
-        temp = temp->proximo;
+        temp = temp->anterior;
     }
 }
 
