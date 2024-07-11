@@ -190,7 +190,6 @@ void printContacts(ListaContato* lista)
       return;
     }
     Contato* temp = lista->final;
-    printf("%s - %s %d", temp->nome, temp->telefone, temp->v);
     
     while (temp != NULL) {
 
