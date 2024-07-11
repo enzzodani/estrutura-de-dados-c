@@ -82,8 +82,8 @@ ListaContato* criaLista() {
   }
 
   novaLista -> lenght = 0;
-  novaLista -> start = NULL;
-  novaLista -> end = NULL;
+  novaLista -> inicial = NULL;
+  novaLista -> final = NULL;
 
   return novaLista;
 }
