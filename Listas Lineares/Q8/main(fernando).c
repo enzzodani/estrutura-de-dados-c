@@ -278,6 +278,8 @@ int main()
   char phone[MAX_PHONE_LEN];
   int calls;
 
+  ListaContato* lista = criaLista;
+
   while (1) {
     scanf(" %c", &operation);
     if (operation == 'F') { 
@@ -287,18 +289,22 @@ int main()
     switch (operation) {
       case 'I':
         scanf("%s %s %d", name, phone, &calls);
-        criaContato(name, phone, calls);
+        Contato* novoContato = criaContato(name, phone, calls);
+        insereLista(novoContato, lista);
         break;
       case 'R':
-
+        scanf("%s", name);
+        removerContato(name, lista);
         break;
       case 'L':
-        
+        scanf("%s", name);
+        funcaoLigacao(name, lista);
         break;
     }
   }
 
-  printContacts();
+  sortLinkedList(lista);
+  printContacts(lista);
     
 
     return 0;
