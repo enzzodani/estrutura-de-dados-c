@@ -203,9 +203,9 @@ void funcaoLigacao(char* nome, ListaContato* lista)
 }
 
 //Funções para mergeSort
-Node* split(Node* head) {
-  Node* fast = head;
-  Node* slow = head;
+Contato* split(Contato* head) {
+  Contato* fast = head;
+  Contato* slow = head;
 
   while (fast != NULL && fast-> proximo != NULL) {
     fast = fast -> proximo -> proximo;
@@ -215,7 +215,7 @@ Node* split(Node* head) {
     }
   }
 
-  Node* secondHalf = slow-> proximo;
+  Contato* secondHalf = slow-> proximo;
   slow->proximo = NULL;
 
   if (secondHalf != NULL) {
@@ -225,12 +225,12 @@ Node* split(Node* head) {
   return secondHalf;
 }
 
-Node* mergeSort(Node* head) {
-  if (head == NULL || head -> next == NULL) {
+Contato* mergeSort(Contato* head) {
+  if (head == NULL || head -> proximo == NULL) {
     return head;
   }
 
-  Node* secondHalf = split(head);
+  Contato* secondHalf = split(head);
 
   head = mergeSort(head);
   secondHalf = mergeSort(secondHalf);
@@ -238,7 +238,7 @@ Node* mergeSort(Node* head) {
   return merge(head, secondHalf);
 }
 
-Node* merge(Node* first, Node* second) {
+Contato* merge(Contato* first, Contato* second) {
   if (first == NULL) {
     return second;
   } else if (second == NULL) {
@@ -256,6 +256,18 @@ Node* merge(Node* first, Node* second) {
     second -> anterior = NULL;
     return second;
   }
+}
+
+void sortLinkedList (ListaContato* lista) {
+  lista->inicial = mergeSort(lista-> inicial)
+
+  Node* temp = lista->inicial;
+
+  while (temp != NULL && temp -> proximo != NULL) {
+    temp = temp -> proximo;
+  }
+
+  lista -> final = temp;
 }
 
 
