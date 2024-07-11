@@ -7,16 +7,16 @@ Repositório para códigos da matéria de Estrutura de Dados 1 da turma 2023/1.
 </div>
 
 ## TO-DO - Lista Lineares
-- [ ] Questão 1 - Gabryel
-- [ ] Questão 2 - Rafael e Enzo
-- [ ] Questão 3 - Fernando e Enzo
-- [ ] Questão 4 - Itamar e Vinícius
+- [x] Questão 1 - Gabryel
+- [x] Questão 2 - Rafael e Enzo
+- [x] Questão 3 - Fernando e Enzo
+- [x] Questão 4 - Itamar e Vinícius
 - [x] Questão 5 - Carlos e Itamar (100%)
-- [ ] Questão 6 - Pedro e Rafael
+- [x] Questão 6 - Pedro e Rafael
 - [ ] Questão 7 - Gabryel e Pedro
-- [ ] Questão 8 - Carlos e Fernando
-- [ ] Questão 9 - Itamar e Gabryel
-- [ ] Questão 10 - Fernando e Vinícius
+- [ ] Questão 8 - Enzo e Fernando
+- [x] Questão 9 - Itamar e Gabryel
+- [x] Questão 10 - Fernando e Vinícius
 
 ## Estrutura de Diretório
 ```
