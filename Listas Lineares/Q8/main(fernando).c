@@ -127,7 +127,7 @@ void removerContato(char* nome, ListaContato* lista)
     if(lista->lenght == 0)
     {
         printf("Não existe nenhum contato para ser removido");
-        return -1;
+        return;
     }
     
     
@@ -142,7 +142,7 @@ void removerContato(char* nome, ListaContato* lista)
     }
     
     //caso para quando o contato removido for o primeiro da lista
-    else if(temp == ListaContato->inicial)
+    else if(temp == lista->inicial)
     {
         temp->proximo->anterior = NULL;
         lista->inicial = temp->proximo;
@@ -200,6 +200,55 @@ void funcaoLigacao(char* nome, ListaContato* lista)
     }
     
     temp->v++;
+}
+
+//Funções de mergeSort declaração 
+Contato* split(Contato* head);
+
+Contato* merge(Contato* first, Contato* second);
+
+Contato* mergeSort(Contato* head);
+
+void sortLinkedList(ListaContato* lista);
+
+
+int main()
+{
+  char operation;
+  char name[MAX_NAME_LEN];
+  char phone[MAX_PHONE_LEN];
+  int calls;
+
+  ListaContato* lista = criaLista();
+
+  while (1) {
+    scanf(" %c", &operation);
+    if (operation == 'F') { 
+      break;
+    }
+
+    switch (operation) {
+      case 'I':
+        scanf("%s %s %d", name, phone, &calls);
+        Contato* novoContato = criaContato(name, phone, calls);
+        insereLista(novoContato, lista);
+        break;
+      case 'R':
+        scanf("%s", name);
+        removerContato(name, lista);
+        break;
+      case 'L':
+        scanf("%s", name);
+        funcaoLigacao(name, lista);
+        break;
+    }
+  }
+
+  sortLinkedList(lista);
+  printContacts(lista);
+    
+
+    return 0;
 }
 
 //Funções para mergeSort
@@ -268,44 +317,4 @@ void sortLinkedList (ListaContato* lista) {
   }
 
   lista -> final = temp;
-}
-
-
-int main()
-{
-  char operation;
-  char name[MAX_NAME_LEN];
-  char phone[MAX_PHONE_LEN];
-  int calls;
-
-  ListaContato* lista = criaLista;
-
-  while (1) {
-    scanf(" %c", &operation);
-    if (operation == 'F') { 
-      break;
-    }
-
-    switch (operation) {
-      case 'I':
-        scanf("%s %s %d", name, phone, &calls);
-        Contato* novoContato = criaContato(name, phone, calls);
-        insereLista(novoContato, lista);
-        break;
-      case 'R':
-        scanf("%s", name);
-        removerContato(name, lista);
-        break;
-      case 'L':
-        scanf("%s", name);
-        funcaoLigacao(name, lista);
-        break;
-    }
-  }
-
-  sortLinkedList(lista);
-  printContacts(lista);
-    
-
-    return 0;
 }
