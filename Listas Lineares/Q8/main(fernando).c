@@ -225,6 +225,19 @@ Node* split(Node* head) {
   return secondHalf;
 }
 
+Node* mergeSort(Node* head) {
+  if (head == NULL || head -> next == NULL) {
+    return head;
+  }
+
+  Node* secondHalf = split(head);
+
+  head = mergeSort(head);
+  secondHalf = mergeSort(secondHalf);
+
+  return merge(head, secondHalf);
+}
+
 
 int main()
 {
