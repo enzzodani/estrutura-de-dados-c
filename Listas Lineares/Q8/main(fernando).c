@@ -28,8 +28,18 @@ typedef struct ListaContato
 
 
 //função para adicionar um novo contato na lista
-Contato* criaContato(char* nome, char* telefone, unsigned int v)
-{
+Contato* criaContato(char* nome, char* telefone, unsigned int v) {
+
+    if (nome == NULL) {
+      puts("Error nome (criaContato)");
+      return NULL;
+    }  
+
+    if (telefone == NULL) {
+      puts("Error telefone (criaContato)");
+      return NULL;
+    }
+
     Contato* novoContato = (Contato*) malloc(sizeof(Contato)); 
     
     //testando um eventual erro de alocação de memoria
@@ -115,24 +125,23 @@ void insereLista(Contato* novoContato, ListaContato* lista)
 //usaremos um nó temporario para achar, por meio do nome, o contato que se deseja excluir
 void removerContato(char* nome, ListaContato* lista)
 {
-    Contato* temp = lista->inicial;
-    
-    //colocando o nó temporario para andar ate que ele encontre o nome do contato que se quer apagar
-    while(strcmp(temp->nome, nome)!=0)
-    {
-        temp = temp->proximo;
-    }
-    
     //caso para quando se tenta remover um contato inexistente
     if(lista->lenght == 0)
     {
         printf("Não existe nenhum contato para ser removido");
         return;
     }
+
+    Contato* temp = lista->inicial;
     
+    //colocando o nó temporario para andar ate que ele encontre o nome do contato que se quer apagar
+    while(strcmp(temp->nome, nome)!=0)
+    {
+        temp = temp->proximo;
+    } 
     
     //caso para quando só existe 1 contato
-    else if(temp == lista->inicial && temp == lista->final)
+    if(temp == lista->inicial && temp == lista->final)
     {
         lista->inicial = NULL;
         lista->final = NULL;
@@ -176,10 +185,14 @@ void removerContato(char* nome, ListaContato* lista)
 
 void printContacts(ListaContato* lista) 
 {
+    if (lista -> lenght == 0) {
+      puts("LIsta de contatos vazia");
+      return;
+    }
     Contato* temp = lista->final;
     printf("%s - %s %d", temp->nome, temp->telefone, temp->v);
     
-    while (temp != NULL && temp -> anterior != NULL) {
+    while (temp != NULL) {
 
         printf("%s - %s %d", temp->nome, temp->telefone, temp->v);
         printf("\n");
