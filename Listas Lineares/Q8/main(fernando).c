@@ -94,8 +94,8 @@ void insereLista(Contato* novoContato, ListaContato* lista)
     //organizando a lista para quando nao temos nenhum contato ainda
     if(lista->lenght == 0)
     {
-        lista->start = novoContato;
-        lista->end = novoContato;
+        lista->inicial = novoContato;
+        lista->final = novoContato;
     }
     
   
