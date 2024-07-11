@@ -234,6 +234,14 @@ int main()
 
   ListaContato* lista = criaLista();
 
+  //Ja existe 2 numeros na lista
+  Contato* hermanoteu = criaContato("Hermanoteu", "4523-2248", 300);
+  insereLista(hermanoteu, lista);
+
+  Contato* ooloneia = criaContato("Ooloneia", "4523-4887", 299);
+  insereLista(ooloneia, lista);
+
+
   while (1) {
     scanf(" %c", &operation);
     if (operation == 'F') { 
