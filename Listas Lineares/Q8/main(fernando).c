@@ -20,7 +20,7 @@ typedef struct Contato
 //criando o tad para o nó descritivo
 typedef struct ListaContato
 {
-    unsigned int lenght = 0;
+    unsigned int lenght;
     Contato* inicial;
     Contato* final;
     
@@ -100,11 +100,11 @@ void insereLista(Contato* novoContato, ListaContato* lista)
     
   
     //organizando a lista para quando temos 1 ou mais contatos ja salvos
-    else if () 
+    else
     {
        lista->final->proximo = novoContato;
        novoContato->anterior = lista->final;
-       novoContato = lista->final;
+       lista->final = novoContato;
     } 
     
     lista->lenght++;
@@ -115,7 +115,7 @@ void insereLista(Contato* novoContato, ListaContato* lista)
 //usaremos um nó temporario para achar, por meio do nome, o contato que se deseja excluir
 void removerContato(char* nome, ListaContato* lista)
 {
-    Contato* temp = ListaContato->start;
+    Contato* temp = lista->inicial;
     
     //colocando o nó temporario para andar ate que ele encontre o nome do contato que se quer apagar
     while(strcmp(temp->nome, nome)!=0)
@@ -177,9 +177,9 @@ void removerContato(char* nome, ListaContato* lista)
 void printContacts(ListaContato* lista) 
 {
     Contato* temp = lista->final;
+    printf("%s - %s %d", temp->nome, temp->telefone, temp->v);
     
-    int i = 0;
-  while (temp != NULL && temp -> anterior != NULL) {
+    while (temp != NULL && temp -> anterior != NULL) {
 
         printf("%s - %s %d", temp->nome, temp->telefone, temp->v);
         printf("\n");
@@ -191,7 +191,7 @@ void printContacts(ListaContato* lista)
 //essa função ira identificar o nome de um contato e adicionar 1 ao numero de ligações
 void funcaoLigacao(char* nome, ListaContato* lista)
 {
-    Contato* temp = ListaContato->start;
+    Contato* temp = lista->inicial;
     
     //colocando o nó temporario para andar ate que ele encontre o nome do contato que se quer apagar
     while(strcmp(temp->nome, nome)!=0)
@@ -211,7 +211,7 @@ Contato* split(Contato* head) {
     fast = fast -> proximo -> proximo;
 
     if (fast != NULL) {
-      slow = slow -> proximo
+      slow = slow -> proximo;
     }
   }
 
@@ -259,9 +259,9 @@ Contato* merge(Contato* first, Contato* second) {
 }
 
 void sortLinkedList (ListaContato* lista) {
-  lista->inicial = mergeSort(lista-> inicial)
+  lista->inicial = mergeSort(lista-> inicial);
 
-  Node* temp = lista->inicial;
+  Contato* temp = lista->inicial;
 
   while (temp != NULL && temp -> proximo != NULL) {
     temp = temp -> proximo;
