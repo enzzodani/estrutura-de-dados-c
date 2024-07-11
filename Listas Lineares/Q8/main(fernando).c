@@ -65,8 +65,8 @@ Contato* criaContato(char* nome, char* telefone, unsigned int v)
     strcpy(novoContato->telefone, telefone);
   
     novoContato -> v = v;
-    novoContato -> proximo == NULL;
-    novoContato -> anterior == NULL;
+    novoContato -> proximo = NULL;
+    novoContato -> anterior = NULL;
     
     
     return novoContato;
