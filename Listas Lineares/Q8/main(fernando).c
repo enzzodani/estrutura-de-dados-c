@@ -124,7 +124,7 @@ void removerContato(char* nome, ListaContato* lista)
     }
     
     //caso para quando se tenta remover um contato inexistente
-    if(ListaContato->lenght == 0)
+    if(lista->lenght == 0)
     {
         printf("Não existe nenhum contato para ser removido");
         return -1;
@@ -132,12 +132,12 @@ void removerContato(char* nome, ListaContato* lista)
     
     
     //caso para quando só existe 1 contato
-    else if(temp == ListaContato->inicial && temp == ListaContato->final)
+    else if(temp == lista->inicial && temp == lista->final)
     {
-        ListaContato->inicial = NULL;
-        ListaContato->final = NULL;
+        lista->inicial = NULL;
+        lista->final = NULL;
         
-        ListaContato->lenght--;
+        lista->lenght--;
         
     }
     
@@ -145,18 +145,18 @@ void removerContato(char* nome, ListaContato* lista)
     else if(temp == ListaContato->inicial)
     {
         temp->proximo->anterior = NULL;
-        ListaContato->inicial = temp->proximo;
+        lista->inicial = temp->proximo;
         temp->proximo = NULL;
-        ListaContato->lenght--;
+        lista->lenght--;
     }
     
     //caso para quando o contato removido for o ultimo da lista
-    else if(temp == ListaContato->final)
+    else if(temp == lista->final)
     {
         temp->anterior->proximo = NULL;
-        ListaContato->final = temp->anterior;
+        lista->final = temp->anterior;
         temp->anterior = NULL;
-        ListaContato->lenght--;
+        lista->lenght--;
     }
     
     //caso para quando o contato removido nao for nem o ultimo nem o primeiro da lista
@@ -166,7 +166,7 @@ void removerContato(char* nome, ListaContato* lista)
         temp->proximo->anterior = temp->anterior;
         temp->proximo = NULL;
         temp->anterior = NULL;
-        ListaContato->lenght--;
+        lista->lenght--;
     }
     
     free(temp->nome);
