@@ -9,6 +9,7 @@
 typedef struct Contato 
 {
     char* nome;
+    int id;
     int v;
     char* telefone;
     struct Contato* proximo;
@@ -106,6 +107,7 @@ void insereLista(Contato* novoContato, ListaContato* lista)
     {
         lista->inicial = novoContato;
         lista->final = novoContato;
+        novoContato -> id = 0;
     }
     
   
@@ -115,6 +117,7 @@ void insereLista(Contato* novoContato, ListaContato* lista)
        lista->final->proximo = novoContato;
        novoContato->anterior = lista->final;
        lista->final = novoContato;
+       novoContato->id = novoContato->anterior->id++;
     } 
     
     lista->lenght++;
@@ -314,16 +317,29 @@ Contato* merge(Contato* first, Contato* second) {
     return first;
   }
 
-  if (first -> v <= second -> v) {
+  if (first -> v < second -> v) {
     first -> proximo = merge(first->proximo, second);
     first -> proximo -> anterior = first;
     first -> anterior = NULL;
     return first;
-  } else {
+  } else if (first-> v > second -> v) {
     second -> proximo = merge(first, second-> proximo);
     second -> proximo -> anterior = second;
     second -> anterior = NULL;
     return second;
+  } else {
+    if (first -> id > second-> id) {
+      first -> proximo = merge(first->proximo, second);
+      first -> proximo -> anterior = first;
+      first -> anterior = NULL;
+      return first;
+    } else {
+      second -> proximo = merge(first, second-> proximo);
+      second -> proximo -> anterior = second;
+      second -> anterior = NULL;
+      return second;
+
+    }
   }
 }
 
