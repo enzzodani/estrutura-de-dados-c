@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct crianca
 {
@@ -19,11 +20,12 @@ typedef struct rodacrianca
     
 }rodaCrianca;
 
+int cont;
 
 //função que ira criar o "box" criança
 Crianca* addCrianca(int n, char* nome)
 {
-    Crianca novaCrianca = (Crianca*) malloc(sizeof(Crianca));
+    Crianca *novaCrianca = (Crianca*) malloc(sizeof(Crianca));
     
     if(novaCrianca == NULL)
     {
@@ -93,11 +95,14 @@ void organizaRodaSoma(Crianca* novaCrianca, rodaCrianca* rodaCrianca)
         novaCrianca->anterior = rodaCrianca->final;
         novaCrianca->proximo = rodaCrianca->inicial;
         rodaCrianca->final = novaCrianca;
+        rodaCrianca->length++;
     }
 }
 
 void organizaRodaSubtracao(Crianca* temp, rodaCrianca* rodaCrianca)
 {
+    cont = temp->n;
+    
     if(rodaCrianca->length == 0)
     {
         printf("Não há nenhuma criança na roda para ser retirada!");
@@ -150,9 +155,16 @@ void organizaRodaSubtracao(Crianca* temp, rodaCrianca* rodaCrianca)
 }
 
 //definira se o numero da crianca é par ou impar
-funcaoParImpar(int n)
+int funcaoParImpar(int n)
 {
-    
+    if (n % 2 == 0) 
+    {
+        return 2;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 void clearString(char* str, int size)
@@ -164,23 +176,39 @@ void clearString(char* str, int size)
     }
 }
 
-
+Crianca *rodaRoda(rodaCrianca *roda) {
+    Crianca *temp = roda->inicial;
+    int aux = funcaoParImpar(temp->n);
+    int i;
+    for (i = 0; i < cont; i++) {
+        if (aux == 2)
+        {
+            temp = temp->anterior;
+        } 
+        else 
+        {
+            temp = temp->proximo;
+        }
+    }
+    return temp;
+}
 
 
 int main()
 {
     int n, valorCrianca;
+    rodaCrianca *roda = criaRoda();
     
     //nesse caso estou usando um vetor estatico, mas talvez seja mais interessante o uso de um malloc
     char str[31];
     
     //recebendo a quantidade de crianças que participarao
-    printf("Insira a quantidade de criancas");
+    //printf("Insira a quantidade de criancas");
     scanf("%d", &n);
     
     while(n<1 || n>100)
     {
-        printf("Insira uma quantidade valida de criancas");
+        //printf("Insira uma quantidade valida de criancas");
         scanf("%d", &n);
     }
     
@@ -193,17 +221,23 @@ int main()
     {
         
         //testar o funcionamento isso
-        scanf("%31s %d", str, valorCrianca);
+        scanf("%31s %d", str, &valorCrianca);
         
         //como colocar a criança criada dentro da função organizaRodaSoma
-        addCrianca(valorCrianca, str);
-        organizaRodaSoma();
+        Crianca *aux = addCrianca(valorCrianca, str);
+        organizaRodaSoma(aux, roda);
         
         //limpando o vetor para que possamos usá-lo novamente na proxima repetição
         clearString(str, sizeof(str));
         
     }
-    
+
+    cont = roda->inicial->n;
+    while(roda->length > 1) {
+        organizaRodaSubtracao(rodaRoda(roda), roda);
+    }
+
+    printf("%s", roda->inicial->nome);
 
     return 0;
 }
