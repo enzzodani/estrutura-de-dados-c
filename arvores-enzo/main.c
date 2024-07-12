@@ -13,6 +13,7 @@ struct Node {
 Node* Root = NULL;
 
 //Functions Declaration
+Node* createNode(int data);
 
 void insertNode(Node* newNode);
 
@@ -32,6 +33,8 @@ Node* minNode();
 
 int treeLenght();
 
+Node* cleanTree();
+
 //Main
 int main(int argc, char *argv[])
 {
@@ -40,4 +43,10 @@ int main(int argc, char *argv[])
 }
 
 //Functions Definitions
+Node* createNode(int data) {
 
+}
+
+void insertNode(Node* newNode) {
+
+}
