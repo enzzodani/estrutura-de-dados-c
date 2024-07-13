@@ -4,36 +4,36 @@
 //Node structure
 typedef struct Node Node;
 struct Node {
-  int data;
-  Node* left;
-  Node* right;
+  int chave;
+  Node* esquerda;
+  Node* direita;
 };
 
 //Node structure
 Node* Root = NULL;
 
 //Functions Declaration
-Node* createNode(int data);
+Node* criarArvore(int chave);
 
-void insertNode(Node* newNode);
+void inserirNoArvore(Node* newNode);
 
-void removeNode(int data);
+void removerNoArvore(int chave);
 
-Node* searchNode(int data);
+Node* obterNovalor(int chave);
 
-void inOrder();
+void listarArvoreOrdem();
 
-void preOrder();
+void listarArvorePreOrdem();
 
-void postOrder();
+void listarArvorePosOrdem();
 
-Node* maxNode();
+Node* obtervalorMaximoArvore();
 
-Node* minNode();
+Node* obtervalorMinimoArvore();
 
-int treeLenght();
+Node* obterSucessorNo();
 
-Node* cleanTree();
+Node* obterAntecessorNo();
 
 //Main
 int main(int argc, char *argv[])
@@ -43,10 +43,28 @@ int main(int argc, char *argv[])
 }
 
 //Functions Definitions
-Node* createNode(int data) {
+Node* criarArvore(int chave) {
+  Node* raiz = (Node *) malloc(sizeof(Node));
 
+  if (raiz == NULL) {
+    free(raiz);
+    return NULL;
+  }
+
+  raiz -> chave = chave;
+  raiz -> esquerda = NULL;
+  raiz -> direita = NULL;
+
+  return raiz;
 }
 
-void insertNode(Node* newNode) {
+void inserirNoArvore(int chave) {
+  Node* novoNo = (Node *) malloc(sizeof(Node));
 
+  if (novoNo == NULL) {
+    free(novoNo);
+    return;
+  }
+
+  
 }
