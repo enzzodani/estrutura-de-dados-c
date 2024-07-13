@@ -28,6 +28,7 @@
     }
 
     newNode -> next = NULL;
+    newNode -> data = data;
     
     return newNode;
   }
