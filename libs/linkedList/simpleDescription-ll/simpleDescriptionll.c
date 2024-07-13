@@ -198,7 +198,7 @@
       } else {
         Node* temp = dNode -> start;
         
-        while (temp-> data != data || temp -> next != NULL) {
+        while (temp-> data != data && temp -> next != NULL) {
           temp = temp -> next;
         }
         
