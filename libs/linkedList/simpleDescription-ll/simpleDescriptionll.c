@@ -177,7 +177,17 @@
 
   //Update
     //atPosition
-    void updateAtPosition (descriptionNode *dNode, int data, int position);
+    void updateAtPosition (descriptionNode *dNode, int data, int position) {
+
+      Node* temp = dNode -> start;
+      int count = 1;
+
+      while (count != position) {
+        temp = temp -> next;
+      }
+       
+      temp -> data = data;
+    }
 
   //Search
     //Value
