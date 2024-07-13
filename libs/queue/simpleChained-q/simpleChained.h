@@ -11,16 +11,16 @@ typedef Node* Start;
 //Functions
 Node* createNode(int data);
 
-int isEmpty(Node* start);
+int isEmpty(Node** start);
 
-void enqueue(Node* start);
+void enqueue(Node** start);
 
-void dequeue(Node* start);
+void dequeue(Node** start);
 
-void clearQueue(Node* start);
+void clearQueue(Node** start);
 
-void printQueue(Node* start);
+void printQueue(Node** start);
 
-void printQueueInfo(Node* start);
+void printQueueInfo(Node** start);
 
 #endif
