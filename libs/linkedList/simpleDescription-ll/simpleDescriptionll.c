@@ -154,22 +154,17 @@
       } else if (position == dNode -> length) { 
         removalAtEnd(dNode);
       } else {
-
-        Node* past = dNode -> start;
-        Node* future = dNode ->start;
-        int count = 1;
-
-        while (count != position) {
-          future = future -> next;
-          
-          while (count != position - 1) {
-            past = past -> next;
-          }
-          count++;
+        
+        Node* temp = dNode->start;
+        
+        for (int i = 0;i < position - 1; i++) {
+          temp = temp -> next;
         }
-
-        past -> next = future -> next;
-        free(future);
+        
+        Node* toDelete = temp->next;
+        temp -> next = toDelete -> next;
+        free(toDelete);
+        
         dNode->length--;
       }
     }
