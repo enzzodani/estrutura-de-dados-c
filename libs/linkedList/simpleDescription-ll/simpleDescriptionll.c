@@ -165,5 +165,7 @@
         puts("The list is empty");
       } else {
         printf("List's length: %d\n", dNode-> length);
+        printf("First Node: %d\n", dNode->start->data);
+        printf("Last Node: %d\n", dNode->end->data);
       }
     }
