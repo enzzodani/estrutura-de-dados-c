@@ -179,6 +179,11 @@
     //atPosition
     void updateAtPosition (descriptionNode *dNode, int data, int position) {
 
+      if(position < 1 || position > dNode->start) {
+        puts("The position doesn't exist");
+        return; 
+      }
+
       Node* temp = dNode -> start;
       int count = 1;
 
@@ -211,7 +216,23 @@
       }
     }
     //atPosition
-    Node* searchAtPosition (descriptionNode* dNode, int position);
+    Node* searchAtPosition (descriptionNode* dNode, int position) {
+    
+      if (position < 0 || position > dNode -> length) {
+        puts("The position doesn't exist");
+        return NULL;
+      }
+      
+      Node* temp = dNode -> start;
+      int count = 1;
+
+      while(count != position) {
+        temp = temp -> next;
+      }
+
+      return temp;
+
+    }
 
   //Transversal
     //printList
