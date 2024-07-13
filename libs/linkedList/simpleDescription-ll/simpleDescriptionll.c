@@ -74,7 +74,34 @@
       }
     }
     //atPosition
-    void insertAtPosition (descriptionNode* dNode, int position, int data);
+    void insertAtPosition (descriptionNode* dNode, int position, int data) {
+
+      Node* newNode = createNode(data);
+
+      if (newNode==NULL) {
+        puts("Error in insert at position");
+        return;
+      }
+
+      if (position < 1 || position > dNode->length) {
+        puts("The position doesn't exist");
+        return;
+      } else if (position == 1) {
+        insertAtBeginning(dNode, data);
+      } else {
+        Node* temp= dNode->start;
+        int count = 1;
+
+        while (count != position - 1) {
+          temp = temp -> next;
+          count++;
+        }
+
+        newNode -> next = temp-> next;
+        temp -> next = newNode;
+      }
+
+    }
 
   //Removal
     //atBeginning
@@ -114,7 +141,39 @@
        }
     }
     //atPosition
-    void removalAtPosition (descriptionNode* dNode, int position);
+    void removalAtPosition (descriptionNode* dNode, int position) {
+
+      Node* newNode = createNode(data);
+
+      if (newNode==NULL) {
+        puts("Error in insert at position");
+        return;
+      }
+
+      if (position < 1 || position > dNode->length) {
+        puts("The position doesn't exist");
+        return;
+      } else if (position == 1) {
+        removalAtBeginning(dNode);
+      } else if (position == dNode -> length) { 
+        removalAtEnd(dNode);
+      } else {
+
+        Node* past = dNode -> start;
+        Node* future = dNode ->start;
+        int count = 1;
+
+        while (count != position) {
+          future = future -> next;
+        }
+        while (count != position - 1) {
+          past = past -> next;
+        }
+
+        past -> next = future -> next;
+        free(future);
+      }
+}
 
   //Update
     //atPosition
