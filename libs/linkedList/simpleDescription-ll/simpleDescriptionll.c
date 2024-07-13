@@ -4,74 +4,75 @@
 //Declaration Function
   //descriptionNode
   descriptionNode* createDNode () {
-  createDNode* newDNode = (descriptionNode *) malloc(sizeof(descriptionNode));
+    createDNode* newDNode = (descriptionNode *) malloc(sizeof(descriptionNode));
 
-  if (newDNode == NULL) {
-    puts("Allocation Memory Failed (Create descriptionNode)");
-    return NULL;
+    if (newDNode == NULL) {
+      puts("Allocation Memory Failed (Create descriptionNode)");
+      return NULL;
+    }
+
+    newDNode -> length = 0;
+    newDNode -> start = NULL;
+    newDNode -> end = NULL;
+
+    return newDNode;
   }
 
-  newDNode -> length = 0;
-  newDNode -> start = NULL;
-  newDNode -> end = NULL;
-
-  return newDNode;
-}
   //Create Node
   Node* createNode (int data) {
-  Node* newNode = (Node *) malloc(sizeof(Node));
+    Node* newNode = (Node *) malloc(sizeof(Node));
 
-  if (newNode = NULL) {
-    puts("Allocation Memory Failed (Create Node)");
-    return NULL;
+    if (newNode = NULL) {
+      puts("Allocation Memory Failed (Create Node)");
+      return NULL;
+    }
+
+    newNode -> next = NULL;
+    
+    return newNode;
   }
-
-  newNode -> next = NULL;
-  
-  return newNode;
-}
 
   //Insert 
     //atBeginning
     void insertAtBeginning (descriptionNode* dNode, int data) {
-    Node* newNode = createNode(data); 
+      Node* newNode = createNode(data); 
 
-    if (newNode == NULL) {
-      puts("Error in insert at Beginning"); 
-      return;
+      if (newNode == NULL) {
+        puts("Error in insert at Beginning"); 
+        return;
+      }
+      
+      if (dNode -> length == 0) {
+        dNode -> start = newNode;
+        dNode -> end = newNode;
+        dNode -> length = 1;
+      } else {
+        newNode -> next = dNode -> start;
+        dNode -> start = newNode; 
+        dNode -> length += 1;
+      }
     }
-    
-    if (dNode -> length == 0) {
-      dNode -> start = newNode;
-      dNode -> end = newNode;
-      dNode -> length = 1;
-    } else {
-      newNode -> next = dNode -> start;
-      dNode -> start = newNode; 
-      dNode -> length += 1;
-    }
-}
     //atEnd
     void insertAtEnd (descriptionNode* dNode, int data) {
-    Node* newNode = createNode(data);
+      Node* newNode = createNode(data);
 
-    if (newNode == NULL) {
-      puts("Error in insert at End"); 
-      return;
+      if (newNode == NULL) {
+        puts("Error in insert at End"); 
+        return;
+      }
+      
+      newNode -> next = NULL;
+      
+      if (dNode -> length == 0) {
+        dNode -> start = newNode;
+        dNode -> end = newNode;
+        dNode -> length = 1;
+      } else {
+        dNode -> end -> next = newNode;
+        dNode -> end = newNode;
+        dNode -> length += 1;
+      }
     }
-    
-    newNode -> next = NULL;
-    
-    if (dNode -> length == 0) {
-      dNode -> start = newNode;
-      dNode -> end = newNode;
-      dNode -> length = 1;
-    } else {
-      dNode -> end -> next = newNode;
-      dNode -> end = newNode;
-      dNode -> length += 1;
-    }
-}
     //atPosition
     void insertAtPosition (descriptionNode* dNode, int position, int data);
 
@@ -79,39 +80,39 @@
     //atBeginning
     void removalAtBeginning (descriptionNode* dNode) {
     
-    if (dNode -> length == 0) {
-      puts("The List is already empty"); 
-      return;
-    } else if (dNode -> length == 1) {
-      free(dNode -> start);
-      dNode -> start = NULL;
-      dNode -> end = NULL;
-    } else {
-      Node* temp = dNode -> start;
-      dNode -> start = dNode -> start -> next;
-      free(temp);
-  }
-}
+      if (dNode -> length == 0) {
+        puts("The List is already empty"); 
+        return;
+      } else if (dNode -> length == 1) {
+        free(dNode -> start);
+        dNode -> start = NULL;
+        dNode -> end = NULL;
+      } else {
+        Node* temp = dNode -> start;
+        dNode -> start = dNode -> start -> next;
+        free(temp);
+    }
+    }
     //atEnd
     void removalAtEnd (descriptionNode* dNode) {
-    
-    if (dNode -> length == 0) {
-      puts("The List is already empty"); 
-      return;
-    } else if (dNode -> length == 1) {
-      free(dNode -> start);
-      dNode -> start = NULL;
-      dNode -> end = NULL;
-    } else {
-      Node* temp = dNode -> start;
-      while (temp -> next -> next =! NULL) {
-        temp = temp -> next;
-      }
-      dNode -> end = temp;
-      free(dNode -> end -> next);
-      dNode -> end -> next = NULL;
-  }
-}
+      
+      if (dNode -> length == 0) {
+        puts("The List is already empty"); 
+        return;
+      } else if (dNode -> length == 1) {
+        free(dNode -> start);
+        dNode -> start = NULL;
+        dNode -> end = NULL;
+      } else {
+        Node* temp = dNode -> start;
+        while (temp -> next -> next =! NULL) {
+          temp = temp -> next;
+        }
+        dNode -> end = temp;
+        free(dNode -> end -> next);
+        dNode -> end -> next = NULL;
+       }
+    }
     //atPosition
     void removalAtPosition (descriptionNode* dNode, int position);
 
@@ -139,7 +140,7 @@
         
         return temp;
       }
-}
+    }
     //atPosition
     Node* searchAtPosition (descriptionNode* dNode, int position);
 
@@ -156,13 +157,13 @@
         }
         printf("Last Node data: %d\n", temp-> data);
       }
-}
+    }
 
     //printListInfo
     void printListInfo (descriptionNode* dNode) {
-    if (dNode -> length == 0) {
-      puts("The list is empty");
-    } else {
-      printf("List's length: %d\n", dNode-> length);
+      if (dNode -> length == 0) {
+        puts("The list is empty");
+      } else {
+        printf("List's length: %d\n", dNode-> length);
+      }
     }
-}
