@@ -4,7 +4,7 @@
 //Definition of Node
 typedef struct Node {
     int data;
-    Node *next;
+    struct Node *next;
 } Node;
 
 //Definition of description Node

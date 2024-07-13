@@ -4,7 +4,7 @@
 //Declaration Function
   //descriptionNode
   descriptionNode* createDNode () {
-    createDNode* newDNode = (descriptionNode *) malloc(sizeof(descriptionNode));
+    descriptionNode* newDNode = (descriptionNode *) malloc(sizeof(descriptionNode));
 
     if (newDNode == NULL) {
       puts("Allocation Memory Failed (Create descriptionNode)");
@@ -22,7 +22,7 @@
   Node* createNode (int data) {
     Node* newNode = (Node *) malloc(sizeof(Node));
 
-    if (newNode = NULL) {
+    if (newNode == NULL) {
       puts("Allocation Memory Failed (Create Node)");
       return NULL;
     }
@@ -99,6 +99,7 @@
 
         newNode -> next = temp-> next;
         temp -> next = newNode;
+        dNode->length++;
       }
 
     }
@@ -119,6 +120,7 @@
         dNode -> start = dNode -> start -> next;
         free(temp);
     }
+      dNode -> length--;
     }
     //atEnd
     void removalAtEnd (descriptionNode* dNode) {
@@ -132,23 +134,17 @@
         dNode -> end = NULL;
       } else {
         Node* temp = dNode -> start;
-        while (temp -> next -> next =! NULL) {
+        while (temp -> next -> next != NULL) {
           temp = temp -> next;
         }
         dNode -> end = temp;
         free(dNode -> end -> next);
         dNode -> end -> next = NULL;
        }
+      dNode->length--;
     }
     //atPosition
     void removalAtPosition (descriptionNode* dNode, int position) {
-
-      Node* newNode = createNode(data);
-
-      if (newNode==NULL) {
-        puts("Error in insert at position");
-        return;
-      }
 
       if (position < 1 || position > dNode->length) {
         puts("The position doesn't exist");
@@ -165,21 +161,24 @@
 
         while (count != position) {
           future = future -> next;
-        }
-        while (count != position - 1) {
-          past = past -> next;
+          
+          while (count != position - 1) {
+            past = past -> next;
+          }
+          count++;
         }
 
         past -> next = future -> next;
         free(future);
+        dNode->length--;
       }
-}
+    }
 
   //Update
     //atPosition
     void updateAtPosition (descriptionNode *dNode, int data, int position) {
 
-      if(position < 1 || position > dNode->start) {
+      if(position < 1 || position > dNode->length) {
         puts("The position doesn't exist");
         return; 
       }
@@ -189,6 +188,7 @@
 
       while (count != position) {
         temp = temp -> next;
+        count++;
       }
        
       temp -> data = data;
@@ -205,6 +205,11 @@
         
         while (temp-> data != data || temp -> next != NULL) {
           temp = temp -> next;
+        }
+        
+        if(temp -> data != data && temp -> next == NULL) {
+          puts("The data doesn't exist");
+          return NULL;
         }
         
         if (temp -> next == NULL && temp-> data != data) {
@@ -228,6 +233,7 @@
 
       while(count != position) {
         temp = temp -> next;
+        count++;
       }
 
       return temp;
