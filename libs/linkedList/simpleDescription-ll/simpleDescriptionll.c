@@ -84,12 +84,15 @@
         return;
       }
 
-      if (position < 1 || position > dNode->length) {
+      if (position < 1 || position > dNode->length + 1) {
         puts("The position doesn't exist");
         return;
       } else if (position == 1) {
         insertAtBeginning(dNode, data);
+      } else if (position == dNode->length + 1) { 
+        insertAtEnd(dNode, data);
       } else {
+        
         Node* temp= dNode->start;
         int count = 1;
 
