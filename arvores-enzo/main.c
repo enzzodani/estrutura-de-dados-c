@@ -32,9 +32,6 @@ Node* obterSucessorNo(int chaveSucessora);
 
 Node* obterAntecessorNo(Node* raiz);
 
-//Auxliar Functions
-Node* inserirRecursivo(Node* noAtual, int chave);
-
 //Root of the Tree (must to be a global variable)
 Node* raizArvore = NULL;
 
