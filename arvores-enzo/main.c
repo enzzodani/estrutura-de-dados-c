@@ -12,9 +12,9 @@ struct Node {
 //Functions Declaration
 Node* criarArvore(int chave);
 
-void inserirNoArvore(int chave);
+void inserirNoArvore(Node* raiz, int chave);
 
-void removerNoArvore(int chave);
+void removerNoArvore(Node* raiz, int chave);
 
 Node* obterNovalor(Node* raiz, int chave);
 
