@@ -32,8 +32,6 @@ Node* obterSucessorNo(int chaveSucessora);
 
 Node* obterAntecessorNo(Node* raiz);
 
-//Root of the Tree (must to be a global variable)
-Node* raizArvore = NULL;
 
 //Main
 int main(int argc, char *argv[])
@@ -42,7 +40,7 @@ int main(int argc, char *argv[])
 
   switch (operacao) {
     case 1:
-    raizArvore = criarArvore(chave);
+    Node* raizArvore = criarArvore(chave);
     break;
 
     case 2:
@@ -102,34 +100,49 @@ Node* criarArvore(int chave) {
 
 }
 
-void inserirNoArvore(int chave) {
-  Node* novoNo = (Node *) malloc(sizeof(Node));
+void inserirNoArvore(Node* raiz, int chave) {
 
-  if (novoNo == NULL) {
-    free(novoNo);
+  if (raiz->chave == chave) {
+    
+    puts("A chave ja existe");
     return;
-  }
 
-  Node* noAtual = raizArvore;
+  } else if (raiz->chave > chave) {
+      if (raiz->esquerda == NULL) {
+        Node* novoNo = (Node *) malloc(sizeof(Node));
 
-  while(1) {
-    if (novoNo < noAtual) { 
-      if (noAtual -> esquerda == NULL) {
-        noAtual -> esquerda = novoNo;
+        if (novoNo == NULL) {
+          free(novoNo);
+          return;
+        }
+
+        novoNo -> chave = chave;
+        raiz->esquerda = novoNo;
         return;
+
       } else {
-        noAtual = noAtual -> esquerda;
+        inserirNoArvore(raiz->esquerda, chave);
       }
-    } else if (novoNo > noAtual) {
-      if (noAtual -> direita == NULL) {
-        noAtual -> direita = novoNo;
-        return;
-      } else {
-        noAtual = noAtual -> direita;
-      }
+  } else {
+      if (raiz->direita == NULL) {
+          Node* novoNo = (Node *) malloc(sizeof(Node));
+
+          if (novoNo == NULL) {
+            free(novoNo);
+            return;
+          }
+
+          novoNo -> chave = chave;
+          raiz->direita = novoNo;
+          return;
+
     } else {
-      return;
+      inserirNoArvore(raiz->direita, chave);
     }
-  }
-  
+  } 
+
+}
+
+void removerNoArvore(Node* raiz, int chave) {
+
 }
