@@ -46,12 +46,43 @@ int senhaAtual = 0;
 int main(int argc, char *argv[])
 {
   char operacao;
+  char grupo;
+  int caixa;
+
+
+while(1) {
+  scanf("%c", &operacao);
 
   switch (operacao) {
+  case 'I':
+  scanf("%c", &grupo);
+  inserirCliente(grupo);
+  break;
 
+  case 'C':
+  scanf("%d",&caixa);
+  chamarCliente(caixa);
+  break;
+
+  case 'M':
+  configuracaoAtual();
+  break;
+
+  case 'E':
+  if (tamanhoNormal != 0 || tamanhoPreferencial != 0) {
+    puts("fila ainda cheia");
+  } else {
+    encerrarAtendimento();
+    return 0;
   }
+  break;
 
+  default:
+  puts("Operador invalido");
+    }
+  }
   return 0;
+
 }
 
 //Definição das Funções Principais
@@ -80,10 +111,17 @@ void inserirCliente (char g) {
   } else if (g = 'P') {
     fila->tamanhoPreferencial++;
   }
+
+  senhaAtual++;
 }
 
-void chamarCliente () {
+void chamarCliente (int nc) {
 
+  if (nc == 1) {
+    if (tamanhoPreferencial != 0) {
+      
+    }
+  }
 }
 
 void configuracaoAtual () {
@@ -91,7 +129,7 @@ void configuracaoAtual () {
 }
 
 void encerrarAtendimento () {
-  
+  puts("fim atendimento");  
 }
 
 //Declaração das Funções auxiliares
