@@ -1,0 +1,205 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// lista duplamente encadeada
+typedef struct Empregado {
+    int matricula;
+    int salario;
+    struct Empregado* anterior;
+    struct Empregado* proximo;
+} Empregado;
+
+// nó da árvore de busca binaria
+typedef struct NoArvore {
+    int matricula;
+    Empregado* noEmpregado;
+    struct NoArvore* esquerda;
+    struct NoArvore* direita;
+} NoArvore;
+
+Empregado* criarEmpregado(int matricula, int salario) {
+    Empregado* novoEmp = (Empregado*)malloc(sizeof(Empregado));
+    novoEmp->matricula = matricula;
+    novoEmp->salario = salario;
+    novoEmp->anterior = NULL;
+    novoEmp->proximo = NULL;
+    return novoEmp;
+}
+
+// funcao para adicionar empregado
+void adicionarEmpregado(Empregado** cima, Empregado** baixo, int matricula, int salario) {
+    Empregado* novoEmp = criarEmpregado(matricula, salario);
+    if (*baixo) {
+        (*baixo)->proximo = novoEmp;
+        novoEmp->anterior = *baixo;
+        *baixo = novoEmp;
+    } else {
+        *cima = *baixo = novoEmp;
+    }
+}
+
+Empregado* encontrarEmpregado(Empregado* cima, int matricula) {
+    Empregado* atual = cima;
+    while (atual) {
+        if (atual->matricula == matricula) return atual;
+        atual = atual->proximo;
+    }
+    return NULL;
+}
+
+// funcao para remover empregado
+void removerEmpregado(Empregado** cima, Empregado** baixo, int matricula) {
+    Empregado* emp = encontrarEmpregado(*cima, matricula);
+    if (!emp) return;
+
+    if (emp->anterior) emp->anterior->proximo = emp->proximo;
+    if (emp->proximo) emp->proximo->anterior = emp->anterior;
+    if (*cima == emp) *cima = emp->proximo;
+    if (*baixo == emp) *baixo = emp->anterior;
+
+    free(emp);
+}
+
+// funcao para a árvore de busca binária
+NoArvore* criarNoArvore(int matricula, Empregado* noEmpregado) {
+    NoArvore* novoNo = (NoArvore*)malloc(sizeof(NoArvore));
+    novoNo->matricula = matricula;
+    novoNo->noEmpregado = noEmpregado;
+    novoNo->esquerda = novoNo->direita = NULL;
+    return novoNo;
+}
+
+NoArvore* inserirNoArvore(NoArvore* raiz, int matricula, Empregado* noEmpregado) {
+    if (!raiz) return criarNoArvore(matricula, noEmpregado);
+
+    if (matricula < raiz->matricula)
+        raiz->esquerda = inserirNoArvore(raiz->esquerda, matricula, noEmpregado);
+    else if (matricula > raiz->matricula)
+        raiz->direita = inserirNoArvore(raiz->direita, matricula, noEmpregado);
+
+    return raiz;
+}
+
+NoArvore* encontrarNoArvore(NoArvore* raiz, int matricula) {
+    if (!raiz || raiz->matricula == matricula) return raiz;
+
+    if (matricula < raiz->matricula)
+        return encontrarNoArvore(raiz->esquerda, matricula);
+    else
+        return encontrarNoArvore(raiz->direita, matricula);
+}
+
+NoArvore* encontrarMinimo(NoArvore* raiz) {
+    while (raiz && raiz->esquerda) raiz = raiz->esquerda;
+    return raiz;
+}
+
+NoArvore* removerNoArvore(NoArvore* raiz, int matricula) {
+    if (!raiz) return NULL;
+
+    if (matricula < raiz->matricula)
+        raiz->esquerda = removerNoArvore(raiz->esquerda, matricula);
+    else if (matricula > raiz->matricula)
+        raiz->direita = removerNoArvore(raiz->direita, matricula);
+    else {
+        if (!raiz->esquerda) {
+            NoArvore* temp = raiz->direita;
+            free(raiz);
+            return temp;
+        } else if (!raiz->direita) {
+            NoArvore* temp = raiz->esquerda;
+            free(raiz);
+            return temp;
+        }
+
+        NoArvore* temp = encontrarMinimo(raiz->direita);
+        raiz->matricula = temp->matricula;
+        raiz->noEmpregado = temp->noEmpregado;
+        raiz->direita = removerNoArvore(raiz->direita, temp->matricula);
+    }
+
+    return raiz;
+}
+
+void listarEmpregadosEmOrdem(NoArvore* raiz) {
+    if (raiz) {
+        listarEmpregadosEmOrdem(raiz->esquerda);
+        printf("%d %d\n", raiz->noEmpregado->matricula, raiz->noEmpregado->salario);
+        listarEmpregadosEmOrdem(raiz->direita);
+    }
+}
+
+int main() {
+    Empregado* cima = NULL;
+    Empregado* baixo = NULL;
+    NoArvore* indice = NULL;
+    int operacao, matricula, salario;
+
+    while (1) {
+        scanf("%d", &operacao);
+        if (operacao == 0) {
+            printf("fim\n");
+            break;
+        }
+
+        switch (operacao) {
+            case 1: // incluir empregado
+                scanf("%d %d", &matricula, &salario);
+                if (encontrarNoArvore(indice, matricula)) {
+                    printf("empregado repetido\n");
+                } else {
+                    adicionarEmpregado(&cima, &baixo, matricula, salario);
+                    indice = inserirNoArvore(indice, matricula, encontrarEmpregado(cima, matricula));
+                    printf("empregado inserido\n");
+                }
+                break;
+                
+            case 2: // remover empregado
+                scanf("%d", &matricula);
+                if (!encontrarNoArvore(indice, matricula)) {
+                    printf("empregado inexistente\n");
+                } else {
+                    Empregado* emp = encontrarEmpregado(cima, matricula);
+                    removerEmpregado(&cima, &baixo, matricula);
+                    indice = removerNoArvore(indice, matricula);
+                    printf("empregado removido\n");
+                }
+                break;
+
+            case 3: // alterar salário
+                scanf("%d %d", &matricula, &salario);
+                NoArvore* no = encontrarNoArvore(indice, matricula);
+                if (!no) {
+                    printf("empregado inexistente\n");
+                } else {
+                    no->noEmpregado->salario = salario;
+                    printf("empregado alterado\n");
+                }
+                break;
+
+            case 4: // consultar empregado
+                scanf("%d", &matricula);
+                Empregado* emp = encontrarEmpregado(cima, matricula);
+                if (!emp) {
+                    printf("empregado inexistente\n");
+                } else {
+                    printf("%d\n", emp->salario);
+                }
+                break;
+
+            case 5: // listar empregados
+                if (!cima) {
+                    printf("nao existem empregados cadastrados\n");
+                } else {
+                    listarEmpregadosEmOrdem(indice);
+                }
+                break;
+
+            default:
+                printf("Operacao invalida\n");
+                break;
+        }
+    }
+
+    return 0;
+}
