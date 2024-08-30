@@ -14,11 +14,10 @@ do
     
     # Crie o arquivo main.c dentro da pasta
     cat <<EOL > "$pasta/main.c"
-// Arquivo main.c criado dentro da pasta $pasta
 #include <stdio.h>
 
 int main() {
-    printf("Hello, World from $pasta!\\n");
+
     return 0;
 }
 EOL
